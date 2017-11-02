@@ -15,7 +15,7 @@ Objetivos : Lectura de archivos, Descarga de archivos
 
 Fecha de entrega : 3/11
 
-*Santiago Ortiz
+* Santiago Ortiz
 
 Objetivos : Administracion de los perfiles
 
