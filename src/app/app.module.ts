@@ -1,3 +1,6 @@
+import { EstadisticasPage } from '../pages/estadisticas/estadisticas';
+import { EncuestasPage } from '../pages/encuestas/encuestas';
+import { AsistenciaPage } from '../pages/asistencia/asistencia';
 import { LoginPage } from '../pages/login/login';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -19,7 +22,10 @@ import { Facebook } from '@ionic-native/facebook'
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    AsistenciaPage,
+    EncuestasPage,
+    EstadisticasPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,10 @@ import { Facebook } from '@ionic-native/facebook'
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    AsistenciaPage,
+    EncuestasPage,
+    EstadisticasPage
   ],
   providers: [
     StatusBar,

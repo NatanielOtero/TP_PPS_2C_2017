@@ -1,11 +1,19 @@
-<ion-header>
-    <ion-navbar>
-        <ion-title>
-            Ionic Blank
-        </ion-title>
-    </ion-navbar>
-</ion-header>
+<ion-content padding class="botones">
 
-<ion-content padding>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolores incidunt impedit obcaecati, consequuntur recusandae aliquam dolore, atque corrupti earum minima consectetur quidem. Eveniet tempora iste dolore laboriosam dignissimos quae veritatis!
+    <ion-fab top right>
+        <button ion-fab color="light">  <ion-icon name="menu"></ion-icon></button>
+        <ion-fab-list side="bottom">
+            <button ion-fab color="primary">  <ion-icon name="contact"></ion-icon></button>
+            <button ion-fab color="secondary">QR</button>
+
+        </ion-fab-list>
+    </ion-fab>
+    <button class="animated slideInDown imgbtn" (click)="ruteo('asist')" ion-button> Tomar Asistencia </button>
+    <button class="animated slideInRight imgbtn2" (click)="ruteo('enc')" ion-button> Encuesta </button>
+    <button class="animated slideInUp imgbtn3" (click)="ruteo('est')" ion-button> Estadisticas </button>
+
+
+
+
+
 </ion-content>

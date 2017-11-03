@@ -34,7 +34,11 @@ export class LoginPage {
     this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3'); 
      
   }
-
+  rapido()
+  {
+     this.email = "admin@admin.com";
+     this.pw = "administrador";
+  }
 
   async login() {
 
@@ -51,6 +55,7 @@ export class LoginPage {
       try {
         var result = this.aute.auth.signInWithEmailAndPassword(this.email, this.pw).then(result => {
 
+         
           this.navCtrl.setRoot(HomePage);
 
         }).catch(error => {
@@ -97,6 +102,7 @@ export class LoginPage {
       }).catch(err => alert("Error: " + err));
   }
 
+ 
   facebookLogin(){
     this.facebook.login(['email']).then( (response) => {
         const facebookCredential = firebase.auth.FacebookAuthProvider
