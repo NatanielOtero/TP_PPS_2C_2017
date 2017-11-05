@@ -1,3 +1,4 @@
+import { ArchivosPage } from '../archivos/archivos';
 import { EstadisticasPage } from '../estadisticas/estadisticas';
 import { EncuestasPage } from '../encuestas/encuestas';
 import { AsistenciaPage } from '../asistencia/asistencia';
@@ -27,7 +28,8 @@ export class HomePage {
           case "est":
             this.navCtrl.push(EstadisticasPage);
             break;
-        
+          case "arch":
+            this.navCtrl.push(ArchivosPage);
           default:
             break;
         }

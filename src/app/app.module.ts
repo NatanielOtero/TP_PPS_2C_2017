@@ -1,3 +1,6 @@
+import { File } from '@ionic-native/file';
+import { HttpModule } from '@angular/http';
+import { ArchivosPage } from '../pages/archivos/archivos';
 import { EstadisticasPage } from '../pages/estadisticas/estadisticas';
 import { EncuestasPage } from '../pages/encuestas/encuestas';
 import { AsistenciaPage } from '../pages/asistencia/asistencia';
@@ -16,7 +19,8 @@ import { AngularFireAuthModule } from "angularfire2/auth";
 import { NativeAudio } from '@ionic-native/native-audio';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { Facebook } from '@ionic-native/facebook'
+import { Facebook } from '@ionic-native/facebook';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +29,8 @@ import { Facebook } from '@ionic-native/facebook'
     LoginPage,
     AsistenciaPage,
     EncuestasPage,
-    EstadisticasPage
+    EstadisticasPage,
+    ArchivosPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +38,7 @@ import { Facebook } from '@ionic-native/facebook'
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -42,7 +47,8 @@ import { Facebook } from '@ionic-native/facebook'
     LoginPage,
     AsistenciaPage,
     EncuestasPage,
-    EstadisticasPage
+    EstadisticasPage,
+    ArchivosPage
   ],
   providers: [
     StatusBar,
@@ -50,7 +56,7 @@ import { Facebook } from '@ionic-native/facebook'
     NativeAudio,
     GooglePlus,
     Facebook,
-
+    File,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
