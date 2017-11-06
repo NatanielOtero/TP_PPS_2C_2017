@@ -6,7 +6,12 @@ page-archivos {
         left: 0;
         right: 0;
     }
-    /*.data-table {
-        min-width: 800px;
-    }*/
+    .data-table {
+        width: 100%;
+        font-size: 10px;
+        text-align: justify; 
+        td,th{
+            padding: 5 5 5 5;
+        }
+    }
 }
