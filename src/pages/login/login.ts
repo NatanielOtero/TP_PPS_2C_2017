@@ -9,6 +9,8 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
+import { usuario } from '../../clases/usuario';
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -23,6 +25,7 @@ import { Facebook } from '@ionic-native/facebook';
 })
 export class LoginPage {
 
+  usuario = {} as usuario;  
   email: string;
   pw: string;
   userProfile: any = null;
@@ -36,14 +39,14 @@ export class LoginPage {
   }
   rapido()
   {
-     this.email = "admin@admin.com";
-     this.pw = "administrador";
+     this.usuario.mail = "admin@admin.com";
+     this.usuario.password = "administrador";
   }
 
   async login() {
 
     this.audio.play('btn');
-    if (this.email == null || this.pw == null) {
+    if (this.usuario.mail == null || this.usuario.password == null) {
       let tost = this.toastCtr.create({
         message: 'Error, complete los campos',
         duration: 3000,
@@ -53,10 +56,13 @@ export class LoginPage {
     }
     else {
       try {
-        var result = this.aute.auth.signInWithEmailAndPassword(this.email, this.pw).then(result => {
+        var result = this.aute.auth.signInWithEmailAndPassword(this.usuario.mail, this.usuario.password).then(result => {
 
-         
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(HomePage, {
+            mail: this.usuario.mail,
+            pass: this.usuario.password
+            
+          });
 
         }).catch(error => {
           console.error(error);
@@ -85,7 +91,6 @@ export class LoginPage {
 
     }
   } 
-
 
   google(): void {
     this.googlePlus.login({

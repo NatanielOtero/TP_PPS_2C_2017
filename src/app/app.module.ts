@@ -13,6 +13,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { FIREBASE_CONFIG } from "./app.firebase.config";
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { PerfilPage } from "../pages/perfil/perfil";
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -30,6 +31,7 @@ import { Facebook } from '@ionic-native/facebook';
     AsistenciaPage,
     EncuestasPage,
     EstadisticasPage,
+    PerfilPage,
     ArchivosPage
   ],
   imports: [
@@ -45,6 +47,7 @@ import { Facebook } from '@ionic-native/facebook';
     MyApp,
     HomePage,
     LoginPage,
+    PerfilPage,
     AsistenciaPage,
     EncuestasPage,
     EstadisticasPage,
