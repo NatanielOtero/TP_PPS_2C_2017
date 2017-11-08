@@ -4,6 +4,10 @@ import { NavController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import * as baby from 'babyparse';
 import 'rxjs/add/operator/map';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase,AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
+import firebase from "firebase";
 
 @Component({
   selector: 'page-archivos',
@@ -15,9 +19,21 @@ export class ArchivosPage {
   headerRow: any[] = [];
   col1 : any[][] = [];
   col2 : any[][] = [];
+  public cant : Array<any> = new Array<any>();
 
-  constructor(public navCtrl: NavController, private http: Http) {
-    this.readCsvData();
+  public Items: AngularFireList<any>;
+  public items: Observable<any>;
+
+  constructor(public navCtrl: NavController, private http: Http,public afDB: AngularFireDatabase) {
+    this.leerDB();
+    
+    /*this.Items = afDB.list('prueba');
+    this.items = this.Items.valueChanges();
+    this.items.subscribe(
+        quest => this.cant = quest
+    );*/
+    
+    
   }
 
   formatParsedObject(arr, hasTitles) {
@@ -26,21 +42,16 @@ export class ArchivosPage {
       nom,
       cursa,
       obj = [];
-
+      
     for (var j = 0; j < arr.length-1; j++) {
       var items = arr[j][0];
       var items1 = arr[j][1];
       let array = items.split(";");
       let array1 = items1.split(";");
-       /*if (items.indexOf("") === -1) {
-        obj.push({
-          legajo: items[0],
-          nom: items[1]
-        });
-      }*/
-      /*console.log(arr[j][0].indexOf(";"));
-      console.log(arr[j][1].indexOf(";"));*/
       
+      this.Items = this.afDB.list("/prueba/" + j);
+      this.Items.set("/pass", array[0]);
+      this.Items.set("/usuario", array[0]);
       obj.push({
         legajo: array[0],
         ape: array[1],
@@ -49,15 +60,17 @@ export class ArchivosPage {
       });
     }
     this.csvItem = obj;
-    console.log(this.csvItem);
+    console.log("hola",this.cant);
+  }
+  
+  async leerDB()
+  {
+    this.Items = this.afDB.list('/prueba');
+    this.items = this.Items.valueChanges();
+    await this.items.subscribe(cantidad => this.cant = cantidad);
+    console.log('cantidad', JSON.stringify(this.cant));
   }
 
-
-  //#region Gustavo
-  
-  
-  
-  
   private readCsvData() {
     this.http.get('assets/PPS -4A-2c2017.csv')
     .subscribe(
