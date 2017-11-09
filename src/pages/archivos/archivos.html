@@ -14,5 +14,7 @@
           legajo: {{ item.legajo }}, alumno: {{ item.nom }} {{ item.ape }}, dia: {{ item.dia }}
         </ion-item>
      </ion-item-group>
+     <input type="file" (change)="handleUpload($event)">
      <button ion-button (click)="readCsvData()"></button>
+     <button ion-button (click)="prueba()">prueba</button>
 </ion-content>

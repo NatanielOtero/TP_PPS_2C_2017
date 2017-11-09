@@ -19,13 +19,19 @@ export class ArchivosPage {
   headerRow: any[] = [];
   col1 : any[][] = [];
   col2 : any[][] = [];
+  band : boolean = true;
+  bandera : boolean = true;
   public cant : Array<any> = new Array<any>();
 
   public Items: AngularFireList<any>;
   public items: Observable<any>;
 
+  public pruebaArray : Array<any> = new Array<any>();
+  public pruebaLista: AngularFireList<any>;
+  public pruebaObs: Observable<any>;
+
   constructor(public navCtrl: NavController, private http: Http,public afDB: AngularFireDatabase) {
-    this.leerDB();
+    //this.leerDB();
     
     /*this.Items = afDB.list('prueba');
     this.items = this.Items.valueChanges();
@@ -34,6 +40,14 @@ export class ArchivosPage {
     );*/
     
     
+  }
+
+  prueba()
+  {
+    this.Items = this.afDB.list('/prueba/' + 18);
+    this.items = this.Items.valueChanges();
+    this.items.subscribe(cantidad =>{ this.cant = cantidad, console.log('hola',this.cant)});
+    console.log(this.cant);
   }
 
   formatParsedObject(arr, hasTitles) {
@@ -48,10 +62,29 @@ export class ArchivosPage {
       var items1 = arr[j][1];
       let array = items.split(";");
       let array1 = items1.split(";");
-      
-      this.Items = this.afDB.list("/prueba/" + j);
-      this.Items.set("/pass", array[0]);
-      this.Items.set("/usuario", array[0]);
+
+      for (var i = 0; i < this.cant.length; i++) {
+        if(array[0] == this.cant[i].legajo)     
+          this.band = false;
+      }
+
+      if(this.band)
+      {
+        this.Items = this.afDB.list("/prueba/" + (j + arr.length));
+        this.Items.set("/pass", array[0]);
+        this.Items.set("/legajo", array[0]);
+        this.Items.set("/tipo","alumno");
+        this.Items.set("/sexo", "sin definir");
+        this.Items.set("/edad", "sin definir");
+        this.Items.set("/email", "sin definir");
+        this.Items.set("/usuario", "sin definir");
+        console.log("este usuario no existia");
+      }
+      else
+      {
+        this.band = true;
+        console.log("este usuario existe");
+      }
       obj.push({
         legajo: array[0],
         ape: array[1],
@@ -65,10 +98,9 @@ export class ArchivosPage {
   
   async leerDB()
   {
-    this.Items = this.afDB.list('/prueba');
+    this.Items = this.afDB.list('/prueba/');
     this.items = this.Items.valueChanges();
-    await this.items.subscribe(cantidad => this.cant = cantidad);
-    console.log('cantidad', JSON.stringify(this.cant));
+    this.items.subscribe(cantidad => this.cant = cantidad);
   }
 
   private readCsvData() {
@@ -116,7 +148,5 @@ export class ArchivosPage {
   trackByFn(index: any, item: any) {
     return index;
   }
-  
   //#endregion
-
 }
