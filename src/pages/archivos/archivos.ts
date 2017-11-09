@@ -22,7 +22,7 @@ export class ArchivosPage {
   band : boolean = true;
   bandera : boolean = true;
   public cant : Array<any> = new Array<any>();
-
+  logo :any;
   public Items: AngularFireList<any>;
   public items: Observable<any>;
 
@@ -31,7 +31,7 @@ export class ArchivosPage {
   public pruebaObs: Observable<any>;
 
   constructor(public navCtrl: NavController, private http: Http,public afDB: AngularFireDatabase) {
-    //this.leerDB();
+    this.leerDB();
     
     /*this.Items = afDB.list('prueba');
     this.items = this.Items.valueChanges();
@@ -41,7 +41,18 @@ export class ArchivosPage {
     
     
   }
+  handleUpload(e):void{
+    if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+  
+      reader.onload = (e:any) => {
+        this.logo = e.target.result;
+      }
 
+      reader.readAsDataURL(e.target.files[0]);
+    }
+    
+ }
   prueba()
   {
     this.Items = this.afDB.list('/prueba/' + 18);
@@ -67,10 +78,10 @@ export class ArchivosPage {
         if(array[0] == this.cant[i].legajo)     
           this.band = false;
       }
-
+      console.log(this.cant.length);
       if(this.band)
       {
-        this.Items = this.afDB.list("/prueba/" + (j + arr.length));
+        this.Items = this.afDB.list("/prueba/" + (j + this.cant.length));
         this.Items.set("/pass", array[0]);
         this.Items.set("/legajo", array[0]);
         this.Items.set("/tipo","alumno");
@@ -104,7 +115,7 @@ export class ArchivosPage {
   }
 
   private readCsvData() {
-    this.http.get('assets/PPS -4A-2c2017.csv')
+    this.http.get(this.logo)
     .subscribe(
     data => this.extractData(data),
     err => this.handleError(err)
@@ -148,5 +159,7 @@ export class ArchivosPage {
   trackByFn(index: any, item: any) {
     return index;
   }
+
+  
   //#endregion
 }
