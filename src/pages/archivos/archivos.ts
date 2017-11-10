@@ -88,7 +88,8 @@ export class ArchivosPage {
         this.Items.set("/sexo", "sin definir");
         this.Items.set("/edad", "sin definir");
         this.Items.set("/email", "sin definir");
-        this.Items.set("/usuario", "sin definir");
+        this.Items.set("/usuario", array[1] + array1[0]);
+        this.Items.set("/id", (j+this.cant.length));
         console.log("este usuario no existia");
       }
       else
