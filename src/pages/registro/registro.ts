@@ -21,19 +21,20 @@ import { Datos } from '../../entidades/datos';
 })
 export class RegistroPage {
 
-  legajo : any;
-  pw : any;
-  public usuariosList : AngularFireList<any>;
-  public usuariosObs : Observable<any>;
-  public usuarios : Array<any>;
-  mostrar : boolean = false;
+  legajo: any;
+  pw: any;
+  public usuariosList: AngularFireList<any>;
+  public usuariosObs: Observable<any>;
+  public usuarios: Array<any>;
+  mostrar: boolean = false;
 
   us = {} as Datos;
+  valitadi: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtr: ToastController, public ActCtr: ActionSheetController,
     private aute: AngularFireAuth, private alert: AlertController, public audio: NativeAudio,
-   public afDB: AngularFireDatabase) {
+    public afDB: AngularFireDatabase) {
   }
 
 
@@ -41,57 +42,84 @@ export class RegistroPage {
     this.usuariosList = this.afDB.list('/prueba');
     this.usuariosObs = this.usuariosList.valueChanges();
     this.usuariosObs.subscribe(
-        user => this.usuarios = user,
-      );
-      console.log("inicio"+  JSON.stringify( this.usuarios));
+      user => this.usuarios = user,
+    );
+    console.log("inicio" + JSON.stringify(this.usuarios));
   }
 
-  reg()
-  {
-  for (var i = 0; i < this.usuarios.length; i++) {
-    if(this.legajo == this.usuarios[i].legajo && this.pw == this.usuarios[i].legajo)
-    {
-        if(this.usuarios[i].email == "sin definir" || this.usuarios[i].usuario == "sin definir"  || this.usuarios[i].sexo == "sin definir" || this.usuarios[i].edad == "sin definir" )
-        {
-            this.mostrar = true;
+  reg() {
+    for (var i = 0; i < this.usuarios.length; i++) {
+      if (this.legajo == this.usuarios[i].legajo && this.pw == this.usuarios[i].legajo) {
+        if (this.usuarios[i].email == "sin definir" || this.usuarios[i].usuario == "sin definir" || this.usuarios[i].sexo == "sin definir" || this.usuarios[i].edad == "sin definir") {
+          this.mostrar = true;
         }
-        else
-        {   
-            alert("error, usuario ya activo");
-            
+        else {
+          let tost = this.toastCtr.create({
+            message: "El usuario ya esta activo",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+
         }
+      }
+
     }
-    
   }
-  }
-  enviar()
-  {
-    if(this.us == null || this.us.mail == null || this.us.pw == null)
-    {
-        alert("error");
+  enviar() {
+    this.usuariosList = this.afDB.list('/prueba');
+    this.usuariosObs = this.usuariosList.valueChanges();
+    this.usuariosObs.subscribe(
+      user => console.log(user),
+    );
+    console.log("inicio" + JSON.stringify(this.usuarios));
+
+    if (this.us == null || this.us.mail == null || this.us.pw == null || this.us.usuario == null)  {
+      let tost = this.toastCtr.create({
+        message: "Complete los campos",
+        duration: 3000,
+        position: 'middle'
+      });
+      tost.present();
     }
-    else
-    {
-      console.log(this.us);
-      for (var i = 0; i < this.usuarios.length; i++) {
-        if(this.legajo == this.usuarios[i].legajo)
-        {
+    else {
+      if (this.us.pw == this.valitadi) {
+        console.log(this.us);
+        for (var i = 0; i < this.usuarios.length; i++) {
+          if (this.legajo == this.usuarios[i].legajo) {
             try {
               this.usuarios[i].edad = this.us.edad;
               this.usuarios[i].email = this.us.mail;
               this.usuarios[i].pass = this.us.pw;
               this.usuarios[i].sexo = this.us.sexo;
-             
+              this.usuarios[i].usuario = this.us.usuario;
+              const itemRef = this.afDB.object('prueba/' + i + "/");
+              itemRef.update({ edad: this.us.edad, email: this.us.mail, pass: this.us.pw, sexo: this.us.sexo, usuario : this.us.usuario });
+
+              const result = this.aute.auth.createUserWithEmailAndPassword(this.us.mail, this.us.pw).then(result => console.log(result)).catch(error => console.error(error));
+              console.log(result);
             } catch (error) {
-             
+
             }
-          
-            
-            
+          }
+
         }
+
+
+
+      }
+      else
+      {
+        let tost = this.toastCtr.create({
+          message: "Las constraseñas no coinciden",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
       }
     }
-   
-
   }
+
+
 }
+

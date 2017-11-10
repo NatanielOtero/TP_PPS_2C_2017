@@ -38,6 +38,10 @@
     <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
         <form class="login active">
             <h3>Ingrese sus datos</h3>
+            <div>
+                <label>   <ion-icon name="mail"></ion-icon> | Nombre:</label>
+                <input type="mail" [(ngModel)]="us.usuario" name="nombre" />
+            </div>
 
             <div>
                 <label>   <ion-icon name="mail"></ion-icon> | Correo:</label>
@@ -46,7 +50,12 @@
             <div>
                 <label>   <ion-icon name="lock"></ion-icon> | Contraseña:                 
                     </label>
-                <input type="password" [(ngModel)]="us.pw" name="pw" />
+                <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+            </div>
+            <div>
+                <label>   <ion-icon name="lock"></ion-icon> | Repetir Contraseña:                 
+                    </label>
+                <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
             </div>
             <div>
                 <label>

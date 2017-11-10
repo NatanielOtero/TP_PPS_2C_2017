@@ -53,30 +53,6 @@ export class PerfilPage {
 
 
 
-
-obtenerFoto(e)
-{
-  this.foto = e.target.files[0];
-}
-
-  editar() {
-
-    var storageRef = storage().ref(); 
-
-    storageRef.child('/fotos/' + this.perfil.mail + '/' + this.foto.name)
-    .put(this.foto)
-    .then((snapshot) =>{
-      console.log("FILE: " + this.foto.name);
-    });
-
-    this.afAuth.authState.subscribe(auth => {
-      this.miFbase.object(`usuarios/${auth.uid}`).set(this.perfil)
-        .then(() => this.navCtrl.setRoot(HomePage,{
-          mail: this.user.mail,
-          pass: this.user.password}));
-  });
-}
-
   ionViewDidLoad() {
 
   }

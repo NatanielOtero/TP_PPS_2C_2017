@@ -28,19 +28,20 @@
 
             <div>
                 <label class="animated shake">   <ion-icon name="mail"></ion-icon> | Legajo:</label>
-                <input class="animated shake" type="text" name="mail" />
+                <input class="animated shake" [(ngModel)]="alta.legajo" type="text" name="mail" />
             </div>
             <div>
                 <label class="animated shake">   <ion-icon name="mail"></ion-icon> | Nombre:</label>
-                <input class="animated shake" type="text"  name="nombre" />
+                <input class="animated shake" [(ngModel)]="alta.nombre" type="text" name="nombre" />
             </div>
             <div>
-                <select>
+                <select name="tipo" [(ngModel)]="alta.tipo">
                             <option value="masculino"> Profesor       </option>
-                            <option value="femenino">  Administrativo</option>                 
+                            <option value="femenino">  Administrativo </option>                 
                  </select>
             </div>
             <div class="bottom">
+                <button ion-button (click)="enviar()">  <ion-icon name="contact"></ion-icon>  |  Agregar </button>
 
             </div>
         </form>

@@ -1,12 +1,7 @@
-<<<<<<< HEAD
+import { HttpModule } from '@angular/http';
 import { InicioPage } from '../pages/inicio/inicio';
 import { RegistroPage } from '../pages/registro/registro';
 import { EmpleadosPage } from '../pages/empleados/empleados';
-=======
-import { File } from '@ionic-native/file';
-import { HttpModule } from '@angular/http';
-import { ArchivosPage } from '../pages/archivos/archivos';
->>>>>>> origin/master
 import { EstadisticasPage } from '../pages/estadisticas/estadisticas';
 import { EncuestasPage } from '../pages/encuestas/encuestas';
 import { AsistenciaPage } from '../pages/asistencia/asistencia';
@@ -19,11 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { FIREBASE_CONFIG } from "./app.firebase.config";
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-<<<<<<< HEAD
 import { PerfilPage } from '../pages/perfil/perfil';
-=======
-import { PerfilPage } from "../pages/perfil/perfil";
->>>>>>> origin/master
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from "angularfire2/auth";
@@ -43,13 +34,9 @@ import { Facebook } from '@ionic-native/facebook';
     EncuestasPage,
     EstadisticasPage,
     PerfilPage,
-<<<<<<< HEAD
     EmpleadosPage,
     RegistroPage,
     InicioPage,
-=======
-    ArchivosPage
->>>>>>> origin/master
   ],
   imports: [
     BrowserModule,
@@ -57,7 +44,7 @@ import { Facebook } from '@ionic-native/facebook';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    HttpModule
+     HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,15 +55,11 @@ import { Facebook } from '@ionic-native/facebook';
     AsistenciaPage,
     EncuestasPage,
     EstadisticasPage,
-<<<<<<< HEAD
     PerfilPage,
     EmpleadosPage,
     RegistroPage,
     InicioPage,
     
-=======
-    ArchivosPage
->>>>>>> origin/master
   ],
   providers: [
     StatusBar,
@@ -84,7 +67,8 @@ import { Facebook } from '@ionic-native/facebook';
     NativeAudio,
     GooglePlus,
     Facebook,
-    File,
+    
+    
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

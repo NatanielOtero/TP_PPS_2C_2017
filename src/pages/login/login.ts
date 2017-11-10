@@ -11,12 +11,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
-<<<<<<< HEAD
 import { Observable } from 'rxjs/Rx';
-=======
-import { usuario } from '../../clases/usuario';
-
->>>>>>> origin/master
 /**
  * Generated class for the LoginPage page.
  *
@@ -31,12 +26,7 @@ import { usuario } from '../../clases/usuario';
 })
 export class LoginPage {
 
-<<<<<<< HEAD
   email: any;
-=======
-  usuario = {} as usuario;  
-  email: string;
->>>>>>> origin/master
   pw: string;
   userProfile: any = null;
   public usuariosList : AngularFireList<any>;
@@ -52,19 +42,15 @@ export class LoginPage {
   }
   rapido()
   {
-     this.usuario.mail = "admin@admin.com";
-     this.usuario.password = "administrador";
+     this.email = "admin@admin.com";
+     this.pw = "administrador";
   }
 
   async login() {    
     this.audio.play('btn');
-<<<<<<< HEAD
 
     
     if (this.email == null || this.pw == null) {
-=======
-    if (this.usuario.mail == null || this.usuario.password == null) {
->>>>>>> origin/master
       let tost = this.toastCtr.create({
         message: 'Error, complete los campos',
         duration: 3000,
@@ -72,7 +58,6 @@ export class LoginPage {
       });
       tost.present();
     }
-<<<<<<< HEAD
     else {     
         try {
           var result = this.aute.auth.signInWithEmailAndPassword(this.email, this.pw).then(result => {
@@ -111,19 +96,6 @@ export class LoginPage {
           console.log(result);
         }
         catch (error) {
-=======
-    else {
-      try {
-        var result = this.aute.auth.signInWithEmailAndPassword(this.usuario.mail, this.usuario.password).then(result => {
-
-          this.navCtrl.setRoot(HomePage, {
-            mail: this.usuario.mail,
-            pass: this.usuario.password
-            
-          });
-
-        }).catch(error => {
->>>>>>> origin/master
           console.error(error);
           let tost = this.toastCtr.create({
             message: error.message,

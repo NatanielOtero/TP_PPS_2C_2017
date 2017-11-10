@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import { EmpleadosPage } from '../empleados/empleados';
-=======
-import { ArchivosPage } from '../archivos/archivos';
->>>>>>> origin/master
 import { EstadisticasPage } from '../estadisticas/estadisticas';
 import { EncuestasPage } from '../encuestas/encuestas';
 import { AsistenciaPage } from '../asistencia/asistencia';
@@ -10,7 +6,7 @@ import { PerfilPage } from '../perfil/perfil';
 import { usuario } from "../../clases/usuario";
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { PerfilPage } from '../perfil/perfil';
+
 
 @Component({
   selector: 'page-home',
@@ -18,7 +14,6 @@ import { PerfilPage } from '../perfil/perfil';
 })
 export class HomePage {
 
-<<<<<<< HEAD
   adm: boolean = true;
   ad : boolean = true;
   alum : boolean = true;
@@ -49,19 +44,6 @@ export class HomePage {
   }
   verificarPrivilegios()
   {
-=======
-  user = {} as usuario;
-
-  constructor(
-    public navCtrl   : NavController,
-    public navParams : NavParams
-             )
-  {
-   
-    this.user.mail = this.navParams.get('mail');
-    this.user.password = this.navParams.get('pass');
-    console.log(this.user.mail +"  -  "+ this.user.password);
->>>>>>> origin/master
 
   }
 
@@ -77,24 +59,12 @@ export class HomePage {
           case "est":
             this.navCtrl.push(EstadisticasPage);
             break;
-<<<<<<< HEAD
           case "perfil":
           this.navCtrl.push(PerfilPage);
           break;
           case "alt":
           this.navCtrl.push(EmpleadosPage);
           break;
-=======
-          case "edit":
-            this.navCtrl.push(PerfilPage, {
-              mail: this.user.mail,
-              pass: this.user.password
-              
-            });
-            break;
-          case "arch":
-            this.navCtrl.push(ArchivosPage);
->>>>>>> origin/master
           default:
             break;
         }
