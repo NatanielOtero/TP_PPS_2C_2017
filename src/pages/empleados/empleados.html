@@ -24,20 +24,22 @@
     <div id="form_wrapper" class="form_wrapper">
 
         <form class="login active">
-            <h3 class="animated shake">Ingrese los datos</h3>
+            <h3>Ingrese los datos</h3>
 
             <div>
-                <label class="animated shake">   <ion-icon name="mail"></ion-icon> | Legajo:</label>
-                <input class="animated shake" [(ngModel)]="alta.legajo" type="text" name="mail" />
+                <label>   <ion-icon name="mail"></ion-icon> | Legajo:</label>
+                <input [(ngModel)]="alta.legajo" type="number" name="mail" />
             </div>
             <div>
-                <label class="animated shake">   <ion-icon name="mail"></ion-icon> | Nombre:</label>
-                <input class="animated shake" [(ngModel)]="alta.nombre" type="text" name="nombre" />
+                <label>   <ion-icon name="mail"></ion-icon> | Nombre:</label>
+                <input [(ngModel)]="alta.nombre" type="text" name="nombre" />
             </div>
+
             <div>
+                <label>   <ion-icon name="mail"></ion-icon> | Tipo:</label>
                 <select name="tipo" [(ngModel)]="alta.tipo">
-                            <option value="masculino"> Profesor       </option>
-                            <option value="femenino">  Administrativo </option>                 
+                            <option value="profesor"> Profesor       </option>
+                            <option value="administrativo">  Administrativo </option>                 
                  </select>
             </div>
             <div class="bottom">

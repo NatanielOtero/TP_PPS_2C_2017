@@ -23,18 +23,40 @@ export class EmpleadosPage {
   public usuariosList: AngularFireList<any>;
   public usuariosObs: Observable<any>;
   public usuarios: Array<any>;
+  id : number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase) {
   }
 
-  enviar(){
-   for (var i = 0; i < this.usuarios.length; i++) {
-     var id = this.usuarios[i].id;    
-   }  
-   var lastId = id + 1;
+  enviar(){   
+ 
+
+    for (var index = 0; index < this.usuarios.length; index++) {
+      var element = this.usuarios[index].id;
+      this.id = element;
+      console.log(element);
+      console.log(this.id);
+    }
+
+   var lastId = (this.id + 1);
    this.alta.id = lastId;
-   const itemRef = this.afDB.object('prueba/' + lastId  + "/");
-   itemRef.set(this.alta);
+   console.log(this.id);
+   console.log(lastId);   
+   console.log(this.alta);
+   console.log("inicio" + JSON.stringify(this.usuarios));
+   try {
+    const itemRef = this.afDB.object('/prueba/' + lastId  + "/");
+    itemRef.set(this.alta);
+   } catch (error) {
+     console.log(error);
+     console.log(this.id);
+     console.log(lastId);   
+     console.log(this.alta);
+     console.log("inicio" + JSON.stringify(this.usuarios));
+    
+   }
+   
+   
   }
 
   ionViewDidLoad() {
