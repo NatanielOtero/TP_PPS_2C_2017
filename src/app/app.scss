@@ -93,8 +93,11 @@ form.forgot_password {
     margin: 10px 0px 0px 0px;
 }
 
+.form_wrapper input[type="text"],
+.form_wrapper input[type="password"],
+.form_wrapper input[type="number"],
 .form_wrapper input[type="mail"],
-.form_wrapper input[type="password"] {
+.form_wrapper select {
     border: solid 1px #E5E5E5;
     margin: 5px 30px 0px 30px;
     padding: 9px;
@@ -109,13 +112,19 @@ form.forgot_password {
     box-shadow: 0px 0px 8px #f0f0f0;
 }
 
-.form_wrapper input[type="mail"]:focus,
-.form_wrapper input[type="password"]:focus {
+.form_wrapper input[type="text"],
+.form_wrapper input[type="password"],
+.form_wrapper input[type="number"],
+.form_wrapper input[type="mail"],
+.form_wrapper select {
     background: #b4ceff;
 }
 
-.form_wrapper input[type="mail"]:hover,
-.form_wrapper input[type="password"]:hover {
+.form_wrapper input[type="text"],
+.form_wrapper input[type="password"],
+.form_wrapper input[type="number"],
+.form_wrapper input[type="mail"],
+.form_wrapper select {
     background: #b4ceff;
 }
 
