@@ -1,3 +1,4 @@
+import { ArchivosPage } from '../pages/archivos/archivos';
 import { InicioPage } from '../pages/inicio/inicio';
 
 import { Component } from '@angular/core';

@@ -9,11 +9,17 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import firebase from "firebase";
 
+
+declare var jquery:any;
+declare var $ :any;
+
 @Component({
   selector: 'page-archivos',
   templateUrl: 'archivos.html',
 })
 export class ArchivosPage {
+  mostrar :boolean = true;
+  opcion : string;
   public csvItem: any[] = [];
   csvData: any[] = [];
   headerRow: any[] = [];
@@ -45,6 +51,13 @@ export class ArchivosPage {
 
 
   }
+  f()
+  {
+    this.mostrar = false;
+  }
+
+  
+
   handleUpload(e) {
     if (e.target.files && e.target.files[0]) {
       var reader = new FileReader();
@@ -118,7 +131,7 @@ export class ArchivosPage {
       }
 
       if (!this.band) {
-        this.Items = this.afDB.list("/prueba/" + (j + this.cant.length));
+        this.Items = this.afDB.list("/" + this.opcion +"/" + (j + this.cant.length));
         this.Items.set("/pass", array[0]);
         this.Items.set("/legajo", array[0]);
         this.Items.set("/tipo", "alumno");

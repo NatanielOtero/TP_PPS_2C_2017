@@ -1,38 +1,63 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Excel
-    </ion-title>
-  </ion-navbar>
+    <ion-navbar color="dark">
+
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <br>
-  <input type="file" (change)="handleUpload($event)">
-  <button ion-button (click)="readCsvData()">leer csv</button>
-  <a href='#' (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
-  <thead>
-    <th>Legajo</th>
-    <th>e-mail</th>
-    <th>Usuario</th>
-    <th>ID</th>
-    <th>Borrar</th>
-  </thead>
-  <tbody *ngFor="let item of cant">
-    <td *ngIf="item.actividad == 'activo'">
-      {{item.legajo}}
-    </td>
-    <td *ngIf="item.actividad == 'activo'">
-      {{item.email}}
-    </td>
-    <td *ngIf="item.actividad == 'activo'">
-      {{item.usuario}}
-    </td>
-    <td *ngIf="item.actividad == 'activo'">
-      {{item.id}}
-    </td>
-    <td *ngIf="item.actividad == 'activo'">
-      <button ion-button danger (click)="delete(item.legajo)">borrar</button>
-    </td>
-  </tbody>
+<ion-content padding class="bg-image">
+    <div class="form_wrapper animated slideInLeft">
+        <h3>Cargar Listado
+        </h3>
+
+
+        <label style="color:white; font-size:15px">Elija la materia</label>
+
+
+        <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+
+
+
+
+
+        <br>
+    </div>
+
+    <div [hidden]="mostrar" class="animated bounceInRight form_wrapper down">
+        <form class="register active">
+
+            <input id="file" type="file" (change)="handleUpload($event)">
+
+
+            <button ion-button (click)="readCsvData()">leer csv</button>
+            <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</button>
+        </form>
+        <!-- <thead>
+            <th>Legajo</th>
+            <th>e-mail</th>
+            <th>Usuario</th>
+            <th>ID</th>
+            <th>Borrar</th>
+        </thead>
+        <tbody *ngFor="let item of cant">
+            <td *ngIf="item.actividad == 'activo'">
+                {{item.legajo}}
+            </td>
+            <td *ngIf="item.actividad == 'activo'">
+                {{item.email}}
+            </td>
+            <td *ngIf="item.actividad == 'activo'">
+                {{item.usuario}}
+            </td>
+            <td *ngIf="item.actividad == 'activo'">
+                {{item.id}}
+            </td>
+            <td *ngIf="item.actividad == 'activo'">
+                <button ion-button danger (click)="delete(item.legajo)">borrar</button>
+            </td>
+        </tbody>-->
+    </div>
+
 </ion-content>
