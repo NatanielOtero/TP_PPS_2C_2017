@@ -8,18 +8,9 @@
 
 <ion-content padding>
   <br>
-  <!--<ion-item-group>
-        <ion-item-divider color="light">Datos</ion-item-divider>
-        <ion-item *ngFor="let item of csvItem">
-          legajo: {{ item.legajo }}, alumno: {{ item.nom }} {{ item.ape }}, dia: {{ item.dia }}
-        </ion-item>
-     </ion-item-group>-->
   <input type="file" (change)="handleUpload($event)">
   <button ion-button (click)="readCsvData()">leer csv</button>
-  <button ion-button (click)="prueba()">prueba</button>
   <a href='#' (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
-  <!--<img [src]="logo" alt="">
-     <ng2-smart-table [settings]="settings" [source]="cant" (delete)="delete($event)"></ng2-smart-table>-->
   <thead>
     <th>Legajo</th>
     <th>e-mail</th>

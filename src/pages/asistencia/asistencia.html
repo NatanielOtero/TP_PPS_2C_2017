@@ -1,25 +1,20 @@
-<!--
-  Generated template for the AsistenciaPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
     <ion-navbar color="dark">
         <ion-title>Asistencia</ion-title>
     </ion-navbar>
     <ion-fab top right>
-        <button ion-fab color="light">  <ion-icon name="menu"></ion-icon></button>
+        <button ion-fab color="light">
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-fab-list side="bottom">
-            <button ion-fab color="primary">  <ion-icon name="contact"></ion-icon></button>
+            <button ion-fab color="primary">
+                <ion-icon name="contact"></ion-icon>
+            </button>
             <button ion-fab color="secondary">QR</button>
-
         </ion-fab-list>
     </ion-fab>
 </ion-header>
 <ion-content padding class="bg-image">
-
     <table class="table">
         <thead>
             <tr>
@@ -29,35 +24,21 @@
                 <th>Turno</th>
             </tr>
         </thead>
-        <tbody *ngFor="let item of alumnos">
-
-            <tr>
-
-
-
-                <td>
-
+        <tbody *ngFor="let item of cant">
+            <tr *ngIf="item.tipo == 'alumno'">
+                <td *ngIf="item.actividad == 'activo'">
                     <ion-toggle color="secondary" [(ngModel)]="item.vino"></ion-toggle>
-
-
                 </td>
-                <td>
-                    {{item.apellido}}
+                <td *ngIf="item.actividad == 'activo'">
+                    {{item.legajo}}
                 </td>
-                <td>
-                    {{item.nombre}}
+                <td *ngIf="item.actividad == 'activo'">
+                    {{item.usuario}}
                 </td>
-                <td>
-                    {{item.turno}}
+                <td *ngIf="item.actividad == 'activo'">
+                    {{item.id}}
                 </td>
-
-
             </tr>
-
-
-
         </tbody>
-
     </table>
-
 </ion-content>
