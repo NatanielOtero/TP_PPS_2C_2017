@@ -50,7 +50,7 @@ export class RegistroPage {
   reg() {
     for (var i = 0; i < this.usuarios.length; i++) {
       if (this.legajo == this.usuarios[i].legajo && this.pw == this.usuarios[i].legajo) {
-        if (this.usuarios[i].email == "sin definir" || this.usuarios[i].usuario == "sin definir" || this.usuarios[i].sexo == "sin definir" || this.usuarios[i].edad == "sin definir") {
+        if (this.usuarios[i].email == "sin definir" || this.usuarios[i].sexo == "sin definir" || this.usuarios[i].edad == "sin definir") {
           this.mostrar = true;
         }
         else {
@@ -92,9 +92,9 @@ export class RegistroPage {
               this.usuarios[i].email = this.us.mail;
               this.usuarios[i].pass = this.us.pw;
               this.usuarios[i].sexo = this.us.sexo;
-              this.usuarios[i].usuario = this.us.usuario;
+             
               const itemRef = this.afDB.object('prueba/' + i + "/");
-              itemRef.update({ edad: this.us.edad, email: this.us.mail, pass: this.us.pw, sexo: this.us.sexo, usuario : this.us.usuario });
+              itemRef.update({ edad: this.us.edad, email: this.us.mail, pass: this.us.pw, sexo: this.us.sexo });
 
               const result = this.aute.auth.createUserWithEmailAndPassword(this.us.mail, this.us.pw).then(result => console.log(result)).catch(error => console.error(error));
               console.log(result);

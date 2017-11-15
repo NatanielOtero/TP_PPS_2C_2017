@@ -32,8 +32,7 @@ export class AlumnosPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase) {
     this.alta.edad = "sin definir";
     this.alta.email = "sin definir";    
-    this.alta.sexo = "sin definir";
-    this.alta.usuario = "sin definir";
+    this.alta.sexo = "sin definir";    
     this.alta.tipo = "alumno";
   }
 

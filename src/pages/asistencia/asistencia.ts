@@ -20,17 +20,26 @@ import { Http } from '@angular/http';
 export class AsistenciaPage {
   public cant: Array<any> = new Array<any>();
   logo: any;
+  opcion : string;
+  fecha : string;
   public Items: AngularFireList<any>;
   public items: Observable<any>;
   
   constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase) {
-    this.leerDB();
+    
+    this.fecha = new Date().toLocaleDateString().toString();
   }
 
   async leerDB() {
-    this.Items = this.afDB.list('/prueba/');
+    this.Items = this.afDB.list('/' + this.opcion + "/");
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
+  }
+
+  f()
+  {
+    this.leerDB();
+    console.log(this.cant);
   }
 
   ionViewDidLoad() {

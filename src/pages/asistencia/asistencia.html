@@ -15,6 +15,25 @@
     </ion-fab>
 </ion-header>
 <ion-content padding class="bg-image">
+    <div class="form_wrapper animated slideInLeft" [hidden]="mostrar">
+
+        <div>
+            <label style="color:white; font-size:15px">Elija el metodo</label>
+
+
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+
+
+
+
+
+
+            <br>
+        </div>
+    </div>
     <!-- <table class="table">
         <thead>
             <tr>
