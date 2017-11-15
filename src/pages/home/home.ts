@@ -1,3 +1,4 @@
+import { AlumnosPage } from '../alumnos/alumnos';
 import { ArchivosPage } from '../archivos/archivos';
 import { EmpleadosPage } from '../empleados/empleados';
 import { EstadisticasPage } from '../estadisticas/estadisticas';
@@ -68,6 +69,9 @@ export class HomePage {
           break;
           case "arch":
           this.navCtrl.push(ArchivosPage);
+          case "al":
+          this.navCtrl.push(AlumnosPage);
+          break;
           default:
             break;
         }

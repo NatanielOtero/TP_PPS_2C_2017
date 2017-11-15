@@ -1,5 +1,5 @@
 <!--
-  Generated template for the EmpleadosPage page.
+  Generated template for the AlumnosPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -28,9 +28,9 @@
 
 
             <select [(ngModel)]="opcion" (ngModelChange)='f()'>
-                                        <option value="uno">Cargar 1</option>
-                                        <option value="var">Cargar Listado</option>
-                                    </select>
+                                            <option value="uno">Cargar 1</option>
+                                            <option value="var">Cargar Listado</option>
+                                        </select>
 
 
 
@@ -47,18 +47,7 @@
                     <label>   <ion-icon name="mail"></ion-icon> | Legajo:</label>
                     <input [(ngModel)]="alta.legajo" type="number" name="mail" />
                 </div>
-                <div>
-                    <label>   <ion-icon name="mail"></ion-icon> | Nombre:</label>
-                    <input [(ngModel)]="alta.nombre" type="text" name="nombre" />
-                </div>
 
-                <div>
-                    <label>   <ion-icon name="mail"></ion-icon> | Tipo:</label>
-                    <select name="tipo" [(ngModel)]="alta.tipo">
-                                            <option value="profesor"> Profesor       </option>
-                                            <option value="administrativo">  Administrativo </option>                 
-                                 </select>
-                </div>
                 <div class="bottom">
                     <button ion-button (click)="enviar()">  <ion-icon name="contact"></ion-icon>  |  Agregar </button>
 

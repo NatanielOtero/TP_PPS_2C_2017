@@ -24,10 +24,31 @@ export class EmpleadosPage {
   public usuariosObs: Observable<any>;
   public usuarios: Array<any>;
   id : number;
-
+  opcion :string;
+  mostrar : boolean = false;
+  uno : boolean = true;
+  varios : boolean = true;
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase) {
+    this.alta.edad = "sin definir";
+    this.alta.email = "sin definir";    
+    this.alta.sexo = "sin definir";
+    this.alta.usuario = "sin definir";
   }
-
+  f()
+  {
+    switch (this.opcion) {
+      case "uno":
+        this.uno = false;
+        this.varios = true;
+        break;
+      case "var":
+      this.uno = true;
+      this.varios = false;
+      break;
+      default:
+        break;
+    }
+  }
   enviar(){   
  
 
@@ -39,7 +60,7 @@ export class EmpleadosPage {
     }
 
    var lastId = (this.id + 1);
-   this.alta.id = lastId;
+   this.alta.id = lastId;  
    console.log(this.id);
    console.log(lastId);   
    console.log(this.alta);
@@ -67,5 +88,9 @@ export class EmpleadosPage {
     );
     console.log("inicio" + JSON.stringify(this.usuarios));
   }
+
+
+  
+
 
 }

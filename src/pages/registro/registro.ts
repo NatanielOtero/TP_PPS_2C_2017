@@ -29,7 +29,7 @@ export class RegistroPage {
   mostrar: boolean = false;
 
   us = {} as Datos;
-  valitadi: string;
+  validati: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtr: ToastController, public ActCtr: ActionSheetController,
@@ -83,7 +83,7 @@ export class RegistroPage {
       tost.present();
     }
     else {
-      if (this.us.pw == this.valitadi) {
+      if (this.us.pw == this.validati) {
         console.log(this.us);
         for (var i = 0; i < this.usuarios.length; i++) {
           if (this.legajo == this.usuarios[i].legajo) {

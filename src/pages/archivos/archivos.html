@@ -25,15 +25,15 @@
         <br>
     </div>
 
-    <div [hidden]="mostrar" class="animated bounceInRight form_wrapper down">
-        <form class="register active">
-
-            <input id="file" type="file" (change)="handleUpload($event)">
+    <div [hidden]="mostrar" class="animated bounceInRight form_wrapper down bottom">
 
 
-            <button ion-button (click)="readCsvData()">leer csv</button>
-            <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</button>
-        </form>
+
+
+        <input id="file" type="file" (change)="handleUpload($event)">
+        <button ion-button (click)="readCsvData()">leer csv</button>
+        <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</button>
+
         <!-- <thead>
             <th>Legajo</th>
             <th>e-mail</th>

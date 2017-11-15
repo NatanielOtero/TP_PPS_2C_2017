@@ -2,8 +2,13 @@
 
 export interface Alta {
     legajo : number,
-    nombre : string,
+    usuario : string,
     tipo : string,
-    id:number,
+    id : number,
+    email : any ,
+    edad : any,
+    sexo : any,
+    pass : any,
+    
     
 }
