@@ -1,12 +1,14 @@
 import { HomePage } from '../home/home';
 import { Component, Input } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { usuario } from "../../clases/usuario";
-import { perfil } from "../../clases/perfil";
-import { AngularFireDatabase, AngularFireObject } from "angularfire2/database";
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Alta } from '../../entidades/alta';
+import { Datos } from "../../entidades/datos";
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
 import { AngularFireAuth, AngularFireAuthProvider, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { storage, initializeApp } from "firebase";
+import { Observable } from 'rxjs/Observable';
+
 
 
 
@@ -27,55 +29,61 @@ import { storage, initializeApp } from "firebase";
 
 export class PerfilPage {
 
-  user = {} as usuario;
-  perfil = {} as perfil;
+  user = {} as Alta;
+  perfil = {} as Datos;
   foto = {} as any;
-  perfilData: AngularFireObject<perfil>
+  fotos = {} as any;
+  perfilList = {} as AngularFireList<any>;
+  perfilObs = {} as Observable<any>;  
+  hide = false;
+  hide1 = false;
+  hide2 = false;
+  
 
 
 
   constructor(
-    public navCtrl: NavController,
-    public navParams: NavParams,
-    private miFbase: AngularFireDatabase,
-    private afAuth: AngularFireAuth
+    public navCtrl   : NavController,
+    public navParams : NavParams,
+    private miFbase  : AngularFireDatabase,
+    private afAuth   : AngularFireAuth,
+    public toast     : ToastController
+    
 
   ) {
-    this.user.mail = this.navParams.get('mail');
-    this.user.password = this.navParams.get('pass');
-    this.perfil.mail = this.user.mail;
-    this.perfil.password = this.user.password;
+    this.user.email = this.navParams.get('mail');
+    this.user.pass = this.navParams.get('pass');
+    this.perfil.mail = this.user.email;
+    this.perfil.pw = this.user.pass;
     
 
 
-    console.log(this.user.mail + "  -  " + this.user.password);
+    console.log(this.user.email + "  -  " + this.user.pass);
   }
 
 
+  mostrar(op : string)
+  {    
 
+      switch (op) {
+        case "usuario":
+          this.hide = true;
+          break;
 
-obtenerFoto(e)
-{
-  this.foto = e.target.files[0];
-}
+        case "edad":
+          this.hide1 = true;        
+          break;
 
-  editar() {
+        case "sexo":
+          this.hide2 = true;
+          break;
+      
+        default:
+          break;
+      }
 
-    var storageRef = storage().ref(); 
+  }
 
-    storageRef.child('/fotos/' + this.perfil.mail + '/' + this.foto.name)
-    .put(this.foto)
-    .then((snapshot) =>{
-      console.log("FILE: " + this.foto.name);
-    });
-
-    this.afAuth.authState.subscribe(auth => {
-      this.miFbase.object(`usuarios/${auth.uid}`).set(this.perfil)
-        .then(() => this.navCtrl.setRoot(HomePage,{
-          mail: this.user.mail,
-          pass: this.user.password}));
-  });
-}
 
   ionViewDidLoad() {
 
