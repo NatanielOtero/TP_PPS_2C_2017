@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EmpleadosPage } from './empleados';
@@ -12,18 +11,3 @@ import { EmpleadosPage } from './empleados';
   ],
 })
 export class EmpleadosPageModule {}
-=======
-import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
-import { EmpleadosPage } from './empleados';
-
-@NgModule({
-  declarations: [
-    EmpleadosPage,
-  ],
-  imports: [
-    IonicPageModule.forChild(EmpleadosPage),
-  ],
-})
-export class EmpleadosPageModule {}
->>>>>>> origin/master

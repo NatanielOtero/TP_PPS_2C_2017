@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Alta } from '../../entidades/alta';
 import { Datos } from "../../entidades/datos";
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { AngularFireDatabase, AngularFireList , AngularFireObject} from "angularfire2/database";
 import { AngularFireAuth, AngularFireAuthProvider, AngularFireAuthModule } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { storage, initializeApp } from "firebase";
@@ -31,10 +31,9 @@ export class PerfilPage {
 
   user = {} as Alta;
   perfil = {} as Datos;
-  foto = {} as any;
-  fotos = {} as any;
-  perfilList = {} as AngularFireList<any>;
-  perfilObs = {} as Observable<any>;  
+  usuarios = [];
+  perfilDaa = {} as AngularFireObject<any>;
+  perfilData = {} as Observable<any>;  
   hide = false;
   hide1 = false;
   hide2 = false;
@@ -51,21 +50,25 @@ export class PerfilPage {
     
 
   ) {
-    this.user.email = this.navParams.get('mail');
-    this.user.pass = this.navParams.get('pass');
+    this.user = this.navParams.get('usuario');
     this.perfil.mail = this.user.email;
     this.perfil.pw = this.user.pass;
+    this.perfil.usuario = this.user.usuario; 
+    this.perfil.edad = this.user.edad;
+    this.perfil.sexo = this.user.sexo;
+    
     
 
 
     console.log(this.user.email + "  -  " + this.user.pass);
+
+    this.perfilData = miFbase.object('usuarios/'+ this.user.legajo).valueChanges();
   }
 
 
   mostrar(op : string)
   {    
 
-<<<<<<< HEAD
       switch (op) {
         case "usuario":
           this.hide = true;
@@ -85,9 +88,53 @@ export class PerfilPage {
 
   }
 
+  editar(op : string)
+  {
+    switch (op) {
+      case "usuario":
+         this.editarPerfil("usuario", this.perfil.usuario);
+        break;
+  
+      case "edad":
+         this.editarPerfil("edad", this.perfil.edad);       
+        break;
+  
+      case "sexo":
+      this.editarPerfil("sexo", this.perfil.sexo);    
+        break;
+    
+      default:
+        break;
+    }
+  }
 
-=======
->>>>>>> origin/master
+  editarPerfil(path : string, dato : any)
+  {
+    if(dato != null && dato != "")
+    {
+      this.miFbase.object('usuarios/' + this.user.legajo + "/" + path).set(dato)
+            .then(() => { 
+              this.hide = false;
+              this.hide1 = false;
+              this.hide2 = false;        
+              
+            });
+    }
+    else
+    {
+      let tost = this.toast.create({
+        message: 'No ingresaste nada.',
+        duration: 2000,
+        position: 'bottom'
+      });
+      tost.present();
+  
+      this.hide = false;
+      this.hide1 = false;
+      this.hide2 = false;    
+    }
+  }
+
   ionViewDidLoad() {
 
   }
