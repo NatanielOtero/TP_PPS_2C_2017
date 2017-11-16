@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ion-content padding class="botones">
 
 
@@ -41,4 +42,49 @@
 
 
 
+=======
+<ion-content padding class="botones">
+
+
+    <ion-fab top right>
+        <button ion-fab color="light">  <ion-icon name="menu"></ion-icon></button>
+        <ion-fab-list side="bottom">
+            <button ion-fab color="primary" (click)="ruteo('perfil')">  <ion-icon name="contact"></ion-icon></button>
+            <button ion-fab color="secondary">QR</button>
+
+        </ion-fab-list>
+    </ion-fab>
+
+    <div [hidden]="alum" padding class="botones">
+        <button class="animated slideInRight imgbtn2" (click)="ruteo('enc')" ion-button> Encuesta </button>
+    </div>
+    <div [hidden]="prof" padding class="botones">
+
+        <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 25%;" (click)="ruteo('enc')" ion-button> Encuesta </button>
+        <button class="animated slideInUp imgbtn3" style=" width: 100%;height: 25%;" (click)="ruteo('est')" ion-button> Estadisticas </button>
+        <button class="animated slideInUp imgbtn2" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> archivos </button>
+        <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> Tomar Asistencia </button>
+
+    </div>
+    <div [hidden]="ad" padding class="botones">
+        <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> Tomar Asistencia </button>
+        <button class="animated slideInUp imgbtn3" style=" width: 100%;height: 25%;" (click)="ruteo('est')" ion-button> Estadisticas </button>
+        <button class="animated slideInUp imgbtn2" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> Archivos </button>
+        <button class="animated slideInDown imgbtn2" style=" width: 100%;height: 25%;" ion-button> Alta alumnos <br> (soon) </button>
+
+    </div>
+    <div [hidden]="adm" padding class="botones">
+        <button class="animated slideInDown imgbtn2" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> Alta alumnos </button>
+        <button class="animated slideInUp imgbtn4" style=" width: 100%;height: 25%;" (click)="ruteo('alt')" ion-button> Alta empleados </button>
+        <button class="animated slideInUp imgbtn2" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> archivos </button>
+        <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> Tomar Asistencia </button>
+    </div>
+    <div>
+
+    </div>
+
+
+
+
+>>>>>>> origin/master
 </ion-content>
