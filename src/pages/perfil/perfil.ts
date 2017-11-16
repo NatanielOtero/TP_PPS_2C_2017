@@ -65,6 +65,7 @@ export class PerfilPage {
   mostrar(op : string)
   {    
 
+<<<<<<< HEAD
       switch (op) {
         case "usuario":
           this.hide = true;
@@ -85,6 +86,8 @@ export class PerfilPage {
   }
 
 
+=======
+>>>>>>> origin/master
   ionViewDidLoad() {
 
   }
