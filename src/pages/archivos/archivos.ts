@@ -10,16 +10,18 @@ import { Observable } from 'rxjs/Observable';
 import firebase from "firebase";
 
 
-declare var jquery:any;
-declare var $ :any;
+declare var jquery: any;
+declare var $: any;
 
 @Component({
   selector: 'page-archivos',
   templateUrl: 'archivos.html',
 })
 export class ArchivosPage {
-  mostrar :boolean = true;
-  opcion : string;
+  mostrar: boolean = true;
+  mostrar1: boolean = true;
+  opcion: string;
+  opcion1: string;
   public csvItem: any[] = [];
   csvData: any[] = [];
   headerRow: any[] = [];
@@ -40,23 +42,19 @@ export class ArchivosPage {
   public mat1: string;
   public mat2: string;
   public materias: any[];
+
   constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase) {
     this.leerDB();
     this.materias = new Array<any>();
-    /*this.Items = afDB.list('prueba');
-    this.items = this.Items.valueChanges();
-    this.items.subscribe(
-        quest => this.cant = quest
-    );*/
-
-
   }
-  f()
-  {
+
+  f() {
     this.mostrar = false;
   }
 
-  
+  g() {
+    this.mostrar1 = false;
+  }
 
   handleUpload(e) {
     if (e.target.files && e.target.files[0]) {
@@ -75,7 +73,7 @@ export class ArchivosPage {
   }
 
   formatParsedObject(arr, hasTitles) {
-    //console.log("array",arr);
+    console.log("array",arr);
     let legajo,
       nom,
       cursa,
@@ -87,51 +85,25 @@ export class ArchivosPage {
       let array = items.split(";");
       let array1 = items1.split(";");
 
-      for (var i = 0; i < this.materia[0].name.length; i++) {
-        if (this.materia[0].name[i] == "-" || this.materia[0].name[i] == " ") {
-          if (this.materia[0].name[i] == "-") {
-            this.mat = this.materia[0].name.split("-", 1);
-          }
-          else {
-            this.mat = this.materia[0].name.split(" ", 1);
-          }
-        }
-      }
-
       console.log(this.mat);
-      for (var i = 0; i < this.cant.length; i++) {
+      /*for (var i = 0; i < this.cant.length; i++) {
         if (this.cant[i].tipo == 'alumno') {
 
 
           if (array[0] == this.cant[i].legajo) {
             if (this.cant[i].actividad == "inactivo") {
-              this.Items = this.afDB.list("/prueba/" + i);
+              this.Items = this.afDB.list('/' + this.opcion + '/' + i);
               this.Items.set("/actividad", "activo");
             }
 
             this.band = true;
             //this.materias = this.cant[i].materias;
-            for (var z = 0; z < array.length; z++) {
-              
-              this.materias.push(this.cant[i].materias[z]);
-            }
-            for (var x = 0; x < this.materias.length; x++) {
-              if (this.mat == this.cant[i].materias.x) {
-                this.band1 = true;
-              }
-            }
-            if (!this.band1) {
-              this.Items.set("/materias/", this.mat);
-            }
-            else {
-              this.band = false;
-            }
           }
         }
-      }
+      }*/
 
       if (!this.band) {
-        this.Items = this.afDB.list("/" + this.opcion +"/" + (j + this.cant.length));
+        this.Items = this.afDB.list("/" + this.opcion + "/" + this.opcion1 + '/' + (j + this.cant.length));
         this.Items.set("/pass", array[0]);
         this.Items.set("/legajo", array[0]);
         this.Items.set("/tipo", "alumno");
@@ -141,7 +113,7 @@ export class ArchivosPage {
         this.Items.set("/usuario", array[1] + array1[0]);
         this.Items.set("/id", (j + this.cant.length));
         this.Items.set("/actividad", "activo");
-        this.Items.set("/materias/", this.mat);
+        this.Items.set("/vino",false);
         console.log("este usuario no existia");
       }
       else {
@@ -162,7 +134,7 @@ export class ArchivosPage {
   }
 
   async leerDB() {
-    this.Items = this.afDB.list('/prueba/');
+    this.Items = this.afDB.list('/' + this.opcion + '/');
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
   }
@@ -186,18 +158,6 @@ export class ArchivosPage {
     this.csvData = parsedData;
 
     console.log("despues CSV", this.formatParsedObject(this.csvData, false));
-  }
-
-  delete(e) {
-    console.log(e);
-    for (var i = 0; i < this.cant.length; i++) {
-      if (e == this.cant[i].legajo) {
-        this.cant.splice(i, 1);
-        this.Items = this.afDB.list("/prueba/" + i);
-        this.Items.set("/actividad", "inactivo");
-      }
-    }
-    console.log(this.cant);
   }
 
   private handleError(err) {

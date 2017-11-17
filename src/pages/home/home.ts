@@ -73,6 +73,7 @@ export class HomePage {
           break;
           case "arch":
           this.navCtrl.push(ArchivosPage);
+          break;
           case "al":
           this.navCtrl.push(AlumnosPage);
           break;

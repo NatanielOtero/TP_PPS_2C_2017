@@ -8,28 +8,22 @@
     <div class="form_wrapper animated slideInLeft">
         <h3>Cargar Listado
         </h3>
-
-
         <label style="color:white; font-size:15px">Elija la materia</label>
-
-
         <select [(ngModel)]="opcion" (ngModelChange)='f()'>
-                <option value="PPS">PPS</option>
-                <option value="LAB4">LAB4</option>
-            </select>
-
-
-
-
-
+            <option value="PPS">PPS</option>
+            <option value="LAB4">LAB4</option>
+        </select>
+        <br>
+        <label style="color:white; font-size:15px">Elija el curso</label>
+        <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+            <option value="4A">4A</option>
+            <option value="4B">4B</option>
+        </select>
         <br>
     </div>
 
-    <div [hidden]="mostrar" class="animated bounceInRight form_wrapper down bottom">
-
-
-
-
+    <div [hidden]="mostrar">
+        <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
         <input id="file" type="file" (change)="handleUpload($event)">
         <button ion-button (click)="readCsvData()">leer csv</button>
         <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</button>
@@ -57,7 +51,9 @@
             <td *ngIf="item.actividad == 'activo'">
                 <button ion-button danger (click)="delete(item.legajo)">borrar</button>
             </td>
+
         </tbody>-->
+         </div>
     </div>
 
 </ion-content>
