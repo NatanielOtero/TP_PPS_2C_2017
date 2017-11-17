@@ -67,12 +67,14 @@ export class LoginPage {
            console.log(" login " + JSON.stringify( this.usuarios));
            try {
             let privilegio = this.verificarPrivilegio(result.email);
+            let user = this.obtenerUsuario(result.email);
             console.log("es :" + privilegio);
             console.log(result);
-            console.log("nombre :" + result.displayName);           
+            console.log("nombre :" + result.displayName); 
+            console.log(user);                      
             this.navCtrl.setRoot(HomePage,{
               tipo: privilegio,
-              usuario: this.user
+              usuario: user
             });
            } catch (error ) {
             let tost = this.toastCtr.create({
@@ -123,9 +125,11 @@ export class LoginPage {
       firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
         .then( success => { 
           try {
+            let user = this.obtenerUsuario(success.email);
             let privilegio = this.verificarPrivilegio(success.email);
             this.navCtrl.setRoot(HomePage,{
-              tipo : privilegio
+              tipo : privilegio,
+              usuario : user
             });
           } catch (error) {
             let tost = this.toastCtr.create({
@@ -150,9 +154,11 @@ export class LoginPage {
         firebase.auth().signInWithCredential(facebookCredential)
         .then((success) => {            
           try {
+            let user = this.obtenerUsuario(success.email);
             let privilegio = this.verificarPrivilegio(success.email);
             this.navCtrl.setRoot(HomePage,{
-              tipo : privilegio
+              tipo : privilegio,
+              usuario : user
             });
           } catch (error) {
             let tost = this.toastCtr.create({
@@ -181,6 +187,17 @@ ionViewDidLoad() {
       user => this.usuarios = user,
     );
     console.log("inicio"+  JSON.stringify( this.usuarios));
+}
+obtenerUsuario(email : string)
+{
+  for (var i = 0; i < this.usuarios.length; i++) {
+    if(email == this.usuarios[i].email)
+    {
+      return this.usuarios[i];
+    }
+    
+  }
+  throw new Error("Usuario invalido");
 }
 
 verificarPrivilegio(email : string)

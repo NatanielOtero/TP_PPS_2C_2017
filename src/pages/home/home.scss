@@ -15,7 +15,8 @@ page-home {
     .imgbtn {
         background-image: url("../assets/imgs/asist.png");
         background-position: center;
-        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         color: rgb(12, 27, 196);
         font-size: 32px;
         font-family: 'Segoe UI';
@@ -23,7 +24,8 @@ page-home {
     .imgbtn2 {
         background-image: url("../assets/imgs/enc.png");
         background-position: center;
-        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         color: rgb(12, 27, 196);
         font-size: 32px;
         font-family: 'Segoe UI';
@@ -31,7 +33,8 @@ page-home {
     .imgbtn3 {
         background-image: url("../assets/imgs/est.png");
         background-position: center;
-        background-size: cover;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         color: rgb(12, 27, 196);
         font-size: 32px;
         font-family: 'Segoe UI';
@@ -39,7 +42,35 @@ page-home {
     .imgbtn4 {
         background-image: url("../assets/imgs/alta.png");
         background-position: center;
-        background-size: cover;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        color: rgb(12, 27, 196);
+        font-size: 32px;
+        font-family: 'Segoe UI';
+    }
+    .imgbtn5 {
+        background-image: url("../assets/imgs/alum.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        color: rgb(12, 27, 196);
+        font-size: 32px;
+        font-family: 'Segoe UI';
+    }
+    .imgbtn6 {
+        background-image: url("../assets/imgs/adm.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        color: rgb(12, 27, 196);
+        font-size: 32px;
+        font-family: 'Segoe UI';
+    }
+    .imgbtn7 {
+        background-image: url("../assets/imgs/arch.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
         color: rgb(12, 27, 196);
         font-size: 32px;
         font-family: 'Segoe UI';

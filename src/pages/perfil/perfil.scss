@@ -1,6 +1,10 @@
 page-perfil {
-
-    button{
+    .down {
+        position: relative;
+        top: 30%;
+        transform: translateY(-5%);
+    }
+    button {
         width: 70px !important;
     }
     input:focus {

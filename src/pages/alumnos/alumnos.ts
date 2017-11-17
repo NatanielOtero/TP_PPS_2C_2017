@@ -43,6 +43,7 @@ export class AlumnosPage {
     this.alta.email = "sin definir";
     this.alta.sexo = "sin definir";
     this.alta.tipo = "alumno";
+    this.alta.actividad = "activo";
     this.leerDB();
   }
 
@@ -92,7 +93,7 @@ export class AlumnosPage {
     console.log("inicio" + JSON.stringify(this.usuarios));
     try {
       const itemRef = this.afDB.object('/prueba/' + lastId + "/");
-      itemRef.set(this.alta);
+      itemRef.set(this.alta).then(success => {this.leerDB()}).catch(er => console.error(er));
     } catch (error) {
       console.log(error);
       console.log(this.id);

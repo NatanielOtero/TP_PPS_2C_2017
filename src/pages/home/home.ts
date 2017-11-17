@@ -1,3 +1,4 @@
+import { AdministracionPage } from '../administracion/administracion';
 
 
 import { AlumnosPage } from '../alumnos/alumnos';
@@ -76,6 +77,9 @@ export class HomePage {
           break;
           case "al":
           this.navCtrl.push(AlumnosPage);
+          break;
+          case "adm":
+          this.navCtrl.push(AdministracionPage);
           break;
           default:
             break;

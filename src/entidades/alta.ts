@@ -9,6 +9,7 @@ export interface Alta {
     edad : any,
     sexo : any,
     pass : any,
+    actividad : any
     
     
 }

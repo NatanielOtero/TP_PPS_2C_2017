@@ -1,3 +1,4 @@
+import { AdministracionPage } from '../pages/administracion/administracion';
 import { AlumnosPage } from '../pages/alumnos/alumnos';
 import { ArchivosPage } from '../pages/archivos/archivos';
 import { HttpModule } from '@angular/http';
@@ -40,7 +41,8 @@ import { Facebook } from '@ionic-native/facebook';
     RegistroPage,
     InicioPage,
     ArchivosPage,
-    AlumnosPage
+    AlumnosPage,
+    AdministracionPage
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { Facebook } from '@ionic-native/facebook';
     RegistroPage,
     InicioPage,
     ArchivosPage,
-    AlumnosPage
+    AlumnosPage,
+    AdministracionPage
   ],
   providers: [
     StatusBar,

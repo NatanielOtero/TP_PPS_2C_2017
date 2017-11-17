@@ -42,7 +42,7 @@ export class AsistenciaPage {
 
   async leerDB() {
 
-    this.Items = this.afDB.list('/lista/' + this.opcion + '-' + this.fecha[1] + '-' + this.fecha[0] + '-' + this.fecha[2] + '/' + this.opcion1);
+    this.Items = this.afDB.list('/lista/' + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
     this.leerMateria();
@@ -94,7 +94,7 @@ export class AsistenciaPage {
 
   guardar() {
     const itemsRef = this.afDB.list('/lista/');
-    itemsRef.set(this.opcion + '-' + this.fecha[1] + '-' + this.fecha[0] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
+    itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
     for (var i = 0; i < this.cant1.length; i++) {
       if(this.cant[i].vino == false)
       {

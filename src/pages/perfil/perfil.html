@@ -6,16 +6,16 @@
 -->
 <ion-header>
 
-  <ion-navbar color="dark">
-    <ion-title>PERFIL</ion-title>
-  </ion-navbar>
+    <ion-navbar color="dark">
+        <ion-title>PERFIL</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding class="bg-image">
-    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
-        
+    <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+
         <form class="login active">
 
 
@@ -25,50 +25,50 @@
                 <div><label> Legajo:  {{(perfilData | async)?.legajo}}</label></div>
                 <div><label> Correo:  {{(perfilData | async)?.correo}}</label></div>
                 <div><label> Contraseña:  {{(perfilData | async)?.password}}</label></div>
-                <div><label> Tipo:  {{(perfilData | async)?.tipo}}</label></div>               
+                <div><label> Tipo:  {{(perfilData | async)?.tipo}}</label></div>
                 <div>
                     <label> Usuario:  {{(perfilData | async)?.usuario}}</label>
                     <ion-buttons end [hidden]="hide">
-                      <button ion-button (click)="mostrar('usuario')">Editar</button>
+                        <button ion-button (click)="mostrar('usuario')">Editar</button>
                     </ion-buttons>
-                      <div [hidden]="!hide">
+                    <div [hidden]="!hide">
                         <input type="text" placeholder="Maximo 15 caracteres." [attr.maxlength]="15" [(ngModel)]="perfil.usuario" name="perfil" />
                         <ion-buttons end>
-                          <button ion-button (click)="editar('usuario')">Ok</button>
+                            <button ion-button (click)="editar('usuario')">Ok</button>
                         </ion-buttons>
                     </div>
                 </div>
                 <div>
                     <label> Edad:  {{(perfilData | async)?.edad}}</label>
                     <ion-buttons end [hidden]="hide1">
-                      <button ion-button (click)="mostrar('edad')">Editar</button>
+                        <button ion-button (click)="mostrar('edad')">Editar</button>
                     </ion-buttons>
-                      <div [hidden]="!hide1">
-                        <input type="number" placeholder="Maximo 2 digitos." [attr.maxlength]="2"[attr.minlength]="1" [(ngModel)]="perfil.edad" name="perfil" />
+                    <div [hidden]="!hide1">
+                        <input type="number" placeholder="Maximo 2 digitos." [attr.maxlength]="2" [attr.minlength]="1" [(ngModel)]="perfil.edad" name="perfil" />
                         <ion-buttons end>
-                          <button ion-button (click)="editar('edad')">Ok</button>
+                            <button ion-button (click)="editar('edad')">Ok</button>
                         </ion-buttons>
                     </div>
                 </div>
                 <div>
                     <label> Sexo:  {{(perfilData | async)?.sexo}}</label>
                     <ion-buttons end [hidden]="hide2">
-                      <button ion-button (click)="mostrar('sexo')">Editar</button>
+                        <button ion-button (click)="mostrar('sexo')">Editar</button>
                     </ion-buttons>
-                      <div [hidden]="!hide2">
-                        
-                          <select [(ngModel)]="perfil.sexo" name="perfil">
+                    <div [hidden]="!hide2">
+
+                        <select [(ngModel)]="perfil.sexo" name="perfil">
                               <option value="femenino">Femenino</option>
                               <option value="masculino">Masculino</option>
                               <option value="indefinido">Indefinido</option>                        
                             </select>
-                          
+
                         <ion-buttons end>
-                          <button ion-button (click)="editar('sexo')">Ok</button>
+                            <button ion-button (click)="editar('sexo')">Ok</button>
                         </ion-buttons>
                     </div>
                 </div>
-                
+
             </div>
         </form>
     </div>
@@ -79,7 +79,7 @@
     </div>
 
 
- <!--   <ion-card>
+    <!--   <ion-card>
         <ion-card-header text-center>
             
           Datos de usuario
