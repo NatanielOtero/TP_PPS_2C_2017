@@ -21,6 +21,7 @@ import { Http } from '@angular/http';
 })
 export class AsistenciaPage {
   public cant: Array<any> = new Array<any>();
+  public cant1: Array<any> = new Array<any>();
   logo: any;
   opcion: string;
   opcion1: string;
@@ -41,15 +42,17 @@ export class AsistenciaPage {
 
   async leerDB() {
 
-    this.Items = this.afDB.list('/lista/' + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
+    this.Items = this.afDB.list('/lista/' + this.opcion + '-' + this.fecha[1] + '-' + this.fecha[0] + '-' + this.fecha[2] + '/' + this.opcion1);
     this.items = this.Items.valueChanges();
-    this.items.subscribe(cantidad => this.cant = cantidad);  
+    this.items.subscribe(cantidad => this.cant = cantidad);
+    this.leerMateria();
     setTimeout(() => {
-     if(this.cant.length==0)
-     {
-       this.leer();
-     }
-    }, 500);   
+      
+      if (this.cant.length == 0) {
+        this.leer();
+      }
+      
+    }, 500);
 
   }
 
@@ -57,20 +60,23 @@ export class AsistenciaPage {
     this.Items = this.afDB.list('/' + this.opcion + "/" + this.opcion1 + "/");
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
-    
   }
 
- 
+  leerMateria() {
+    this.Items = this.afDB.list('/' + this.opcion + "/" + this.opcion1 + "/");
+    this.items = this.Items.valueChanges();
+    this.items.subscribe(cantidad => this.cant1 = cantidad);
+  }
 
   f() {
-    this.leer(); 
-    this.mostrar = false;     
+    this.leer();
+    this.mostrar = false;
   }
   g() {
-    this.crearLista(); 
-   
+    this.crearLista();
+
     this.mostrar1 = false;
-    
+
   }
 
   crearLista() {
@@ -80,16 +86,22 @@ export class AsistenciaPage {
 
       //this.asist[i] = this.cant[i];
       this.cant[i].vino = false;
-
     }
-   
+
     console.log(this.asist);
   }
- 
+
 
   guardar() {
     const itemsRef = this.afDB.list('/lista/');
-    itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
+    itemsRef.set(this.opcion + '-' + this.fecha[1] + '-' + this.fecha[0] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
+    for (var i = 0; i < this.cant1.length; i++) {
+      if(this.cant[i].vino == false)
+      {
+        this.Items = this.afDB.list('/' + this.opcion + "/" + this.opcion1 + "/" + i);
+        this.Items.set("/faltas", (this.cant1[i].faltas + 1));
+      }
+    }
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AsistenciaPage');

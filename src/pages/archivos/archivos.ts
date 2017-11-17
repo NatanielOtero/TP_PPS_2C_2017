@@ -114,6 +114,7 @@ export class ArchivosPage {
         this.Items.set("/id", (j + this.cant.length));
         this.Items.set("/actividad", "activo");
         this.Items.set("/vino",false);
+        this.Items.set("/faltas",0);
         console.log("este usuario no existia");
       }
       else {

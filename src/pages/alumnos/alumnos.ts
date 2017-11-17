@@ -37,12 +37,13 @@ export class AlumnosPage {
   public items: Observable<any>;
   band: boolean = false;
   public csvItem: any[] = [];
-
+  public materia: any[];
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
     this.alta.edad = "sin definir";
     this.alta.email = "sin definir";
     this.alta.sexo = "sin definir";
     this.alta.tipo = "alumno";
+    this.leerDB();
   }
 
   f() {
@@ -57,6 +58,18 @@ export class AlumnosPage {
         break;
       default:
         break;
+    }
+  }
+
+  handleUpload(e) {
+    if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      this.materia = e.target.files;
+
+      reader.onload = (e: any) => {
+        this.logo = e.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);
     }
   }
   enviar() {
@@ -188,5 +201,21 @@ export class AlumnosPage {
     this.Items = this.afDB.list('/prueba/');
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
+  }
+
+  delete(id)
+  {
+    if(this.cant[id].actividad == "activo")
+    {
+      this.Items = this.afDB.list("/prueba/" + id);
+      this.Items.set("/actividad", "inactivo");
+      this.leerDB();
+    }
+    else
+    {
+      this.Items = this.afDB.list("/prueba/" + id);
+      this.Items.set("/actividad", "activo");
+      this.leerDB();
+    }
   }
 }
