@@ -12,6 +12,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Observable } from 'rxjs/Rx';
+import { Alta } from '../../entidades/alta';
 /**
  * Generated class for the LoginPage page.
  *
@@ -28,6 +29,7 @@ export class LoginPage {
 
   email: any;
   pw: string;
+  user: Alta;
   userProfile: any = null;
   public usuariosList : AngularFireList<any>;
   public usuariosObs : Observable<any>;
@@ -69,7 +71,8 @@ export class LoginPage {
             console.log(result);
             console.log("nombre :" + result.displayName);           
             this.navCtrl.setRoot(HomePage,{
-              tipo: privilegio
+              tipo: privilegio,
+              usuario: this.user
             });
            } catch (error ) {
             let tost = this.toastCtr.create({
