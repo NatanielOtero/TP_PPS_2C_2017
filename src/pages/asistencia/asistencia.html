@@ -21,12 +21,19 @@
             <label style="color:white; font-size:15px">Elija la materia</label>
 
 
-            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
-                    <option value="PPS">PPS</option>
-                    <option value="LAB4">LAB4</option>
-                </select>
+            <select [(ngModel)]="opcion" (change)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
 
 
+            <div [hidden]="mostrar">
+                <label style="color:white; font-size:15px">Elija el curso</label>
+                <select [(ngModel)]="opcion1" (change)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            </div>
 
 
 
@@ -34,7 +41,10 @@
             <br>
         </div>
     </div>
-    <div class="animated slideInLeft left" [hidden]="mostrar">
+
+    <div class="animated slideInLeft left" [hidden]="mostrar1">
+
+
         <table class="table">
             <thead>
                 <tr>
@@ -45,10 +55,10 @@
 
                 </tr>
             </thead>
-            <tbody *ngFor="let item of asist">
+            <tbody *ngFor="let item of cant">
                 <tr *ngIf="item.tipo == 'alumno'">
                     <td *ngIf="item.actividad == 'activo'">
-                        <ion-toggle color="secondary" (ngModelChange)="c()" [(ngModel)]="item.vino"></ion-toggle>
+                        <ion-toggle color="secondary" [(ngModel)]="item.vino"></ion-toggle>
                     </td>
                     <td *ngIf="item.actividad == 'activo'">
                         {{item.legajo}}
@@ -60,5 +70,8 @@
             </tbody>
         </table>
         <button ion-button (click)="guardar()"> Guardar Datos </button>
+
     </div>
+
+
 </ion-content>
