@@ -74,7 +74,7 @@ export class RegistroPage {
     );
     console.log("inicio" + JSON.stringify(this.usuarios));
 
-    if (this.us == null || this.us.mail == null || this.us.pw == null || this.us.usuario == null)  {
+    if (this.us == null || this.us.mail == null || this.us.pw == null)  {
       let tost = this.toastCtr.create({
         message: "Complete los campos",
         duration: 3000,
