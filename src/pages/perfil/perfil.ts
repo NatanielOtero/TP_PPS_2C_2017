@@ -10,10 +10,6 @@ import * as firebase from 'firebase';
 import { storage, initializeApp } from "firebase";
 import { Observable } from 'rxjs/Observable';
 
-
-
-
-
 /**
  * Generated class for the PerfilPage page.
  *

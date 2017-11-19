@@ -25,7 +25,7 @@ import { NativeAudio } from '@ionic-native/native-audio';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
-
+import { Camera } from "@ionic-native/camera";
 
 
 @NgModule({
@@ -75,7 +75,7 @@ import { Facebook } from '@ionic-native/facebook';
     NativeAudio,
     GooglePlus,
     Facebook,
-    
+    Camera,
     
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
