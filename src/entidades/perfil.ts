@@ -1,4 +1,6 @@
-export interface perfil{
+
+
+export interface Perfil{
     
     legajo : number,
     usuario : string,

@@ -7,7 +7,6 @@
 <ion-header>
 
     <ion-navbar color="dark">
-        <ion-title>PERFIL</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -16,66 +15,50 @@
 <ion-content padding class="bg-image">
     <div id="form_wrapper" class="form_wrapper animated bounceInUp">
 
-        <form class="login active">
+        <div class="bottom">
+            <div [hidden]="!modificar">
 
 
-            <div class="bottom">
-                <h3 style="text-align: center">Datos del usuario</h3>
-
-                <div><label> Legajo:  {{(perfilData | async)?.legajo}}</label></div>
-                <div><label> Correo:  {{(perfilData | async)?.correo}}</label></div>
-                <div><label> Contraseña:  {{(perfilData | async)?.password}}</label></div>
-                <div><label> Tipo:  {{(perfilData | async)?.tipo}}</label></div>
-                <div>
-                    <label> Usuario:  {{(perfilData | async)?.usuario}}</label>
-                    <ion-buttons end [hidden]="hide">
-                        <button ion-button (click)="mostrar('usuario')">Editar</button>
-                    </ion-buttons>
-                    <div [hidden]="!hide">
-                        <input type="text" placeholder="Maximo 15 caracteres." [attr.maxlength]="15" [(ngModel)]="perfil.usuario" name="perfil" />
-                        <ion-buttons end>
-                            <button ion-button (click)="editar('usuario')">Ok</button>
-                        </ion-buttons>
+                <h3>
+                    Datos : {{alum.usuario}}
+                </h3>
+                <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                    <div style="text-align:center">
+                        <img src="{{alum.foto}}" width="70%" height="70%">
                     </div>
                 </div>
-                <div>
-                    <label> Edad:  {{(perfilData | async)?.edad}}</label>
-                    <ion-buttons end [hidden]="hide1">
-                        <button ion-button (click)="mostrar('edad')">Editar</button>
-                    </ion-buttons>
-                    <div [hidden]="!hide1">
-                        <input type="number" placeholder="Maximo 2 digitos." [attr.maxlength]="2" [attr.minlength]="1" [(ngModel)]="perfil.edad" name="perfil" />
-                        <ion-buttons end>
-                            <button ion-button (click)="editar('edad')">Ok</button>
-                        </ion-buttons>
-                    </div>
+                <label>| Edad: {{alum.edad}}</label>
+                <label>| Sexo: {{alum.sexo}} </label>
+                <label>| Ocupacion: {{alum.tipo}} </label>
+                <label>| Legajo:   {{alum.legajo}}  </label>
+
+                <div class="bottom">
+                    <button ion-button (click)="mod()">  <ion-icon name="contact"></ion-icon>  |  Modificar</button>
                 </div>
-                <div>
-                    <label> Sexo:  {{(perfilData | async)?.sexo}}</label>
-                    <ion-buttons end [hidden]="hide2">
-                        <button ion-button (click)="mostrar('sexo')">Editar</button>
-                    </ion-buttons>
-                    <div [hidden]="!hide2">
-
-                        <select [(ngModel)]="perfil.sexo" name="perfil">
-                              <option value="femenino">Femenino</option>
-                              <option value="masculino">Masculino</option>
-                              <option value="indefinido">Indefinido</option>                        
-                            </select>
-
-                        <ion-buttons end>
-                            <button ion-button (click)="editar('sexo')">Ok</button>
-                        </ion-buttons>
-                    </div>
-                </div>
-
             </div>
-        </form>
-    </div>
-    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
-        <div>
-            <img src="{{url}}" alt="">
+            <div [hidden]="modificar">
+
+
+                <label>| Nombre: </label>
+                <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                <label>| Edad: </label>
+                <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                <label>| Sexo: </label>
+                <select [(ngModel)]="alum.sexo" name="sexo">
+                <option value="masculino"><ion-icon name="male">Masculino</ion-icon>
+                </option>
+                <option value="femenino">  <ion-icon name="female"></ion-icon> Femenino</option>                 
+              </select>
+
+                <div class="bottom">
+                    <button ion-button (click)="guardar()">  <ion-icon name="contact"></ion-icon>  |  Guardar</button>
+                </div>
+            </div>
+            <br>
         </div>
+
+
+
     </div>
 
 
