@@ -44,8 +44,8 @@ export class LoginPage {
   }
   rapido()
   {
-     this.email = "nata.kapo@hotmail.com";
-     this.pw = "123456";
+     this.email = "admin@admin.com";
+     this.pw = "administrador";
   }
 
   async login() {    
