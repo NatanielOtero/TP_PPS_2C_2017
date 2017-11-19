@@ -69,11 +69,15 @@
             </label>
             <label>   <ion-icon name="lock"></ion-icon> | Faltas:    {{alum.faltas}}                       
             </label>
+            <label>
+                Dias que falto
+            </label>
+            <label *ngFor="let item of alum.diasFaltas">
+                {{item}}
+            </label>
             <div class="botones">
-                <button ion-button (click)="remover()">
+                <button ion-button (click)="remover()" [disabled]="desabilitar">
                     <ion-icon name="remove" ></ion-icon>  </button>
-                <button ion-button (click)="agregar()">
-                    <ion-icon name="add"></ion-icon> </button>
             </div>
         </div>
         <div class="bottom">

@@ -28,6 +28,7 @@ export class AsistenciaPage {
   fecha: any;
   mostrar: boolean = true;
   mostrar1: boolean = true;
+  tomar: boolean = false;
   public Items: AngularFireList<any>;
   public items: Observable<any>;
   asist: Array<any> = new Array<any>();
@@ -42,16 +43,19 @@ export class AsistenciaPage {
 
   async leerDB() {
 
-    this.Items = this.afDB.list('/lista/' + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
+    this.Items = this.afDB.list('/lista/' + this.opcion + '-' + this.fecha[1] + '-' + this.fecha[0] + '-' + this.fecha[2] + '/' + this.opcion1);
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
     this.leerMateria();
     setTimeout(() => {
-      
+
       if (this.cant.length == 0) {
         this.leer();
       }
-      
+      else {
+        this.tomar = true;
+      }
+
     }, 500);
 
   }
@@ -76,6 +80,7 @@ export class AsistenciaPage {
     this.crearLista();
 
     this.mostrar1 = false;
+    this.tomar = false;
 
   }
 
@@ -94,14 +99,16 @@ export class AsistenciaPage {
 
   guardar() {
     const itemsRef = this.afDB.list('/lista/');
-    itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
+    itemsRef.set(this.opcion + '-' + this.fecha[1] + '-' + this.fecha[0] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
     for (var i = 0; i < this.cant1.length; i++) {
-      if(this.cant[i].vino == false)
-      {
+      if (this.cant[i].vino == false) {
         this.Items = this.afDB.list('/' + this.opcion + "/" + this.opcion1 + "/" + i);
         this.Items.set("/faltas", (this.cant1[i].faltas + 1));
+        this.Items.set("/diasFaltas/" + (this.cant1[i].faltas + 1) + '/', this.fecha[1] + '-' + this.fecha[0]);
       }
     }
+    this.tomar = true;
+    this.leerDB();
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AsistenciaPage');
