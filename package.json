@@ -32,7 +32,7 @@
     "@ionic/storage": "2.0.1",
     "angularfire2": "^5.0.0-rc.0",
     "babyparse": "^0.4.6",
-    "cordova-android": "^6.2.3",
+    "cordova-android": "^6.3.0",
     "cordova-browser": "^4.1.0",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
@@ -82,8 +82,8 @@
         "REVERSED_CLIENT_ID": "com.googleusercontent.apps.269696208664-7vfdsbjccq8l42326l5folj6rh2igu6m"
       },
       "cordova-plugin-file": {},
-      "cordova-plugin-compat": {},
-      "cordova-plugin-camera": {}
+      "cordova-plugin-camera": {},
+      "cordova-plugin-compat": {}
     },
     "platforms": [
       "android",

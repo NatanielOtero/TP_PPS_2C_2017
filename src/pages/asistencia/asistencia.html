@@ -15,7 +15,7 @@
     </ion-fab>
 </ion-header>
 <ion-content padding class="bg-image">
-        <button ion-button block large round icon-left color='light' (click)='takePhotoLinda()'> <ion-icon name="camera"></ion-icon>Foto aula</button>
+        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'> <ion-icon name="camera"></ion-icon>Foto aula</button>
     <div class="form_wrapper animated slideInLeft">
 
         <div>
@@ -36,7 +36,9 @@
             </select>
             
             </div>
-
+            <div>
+                    <img src="{{storage}}" alt="">
+            </div>
 
 
 

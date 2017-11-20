@@ -2,7 +2,7 @@ import { isEmpty } from 'rxjs/operator/isEmpty';
 import { Asistencia } from '../../entidades/asist';
 import { Alumno } from '../../entidades/alumnos';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController,IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
@@ -40,8 +40,9 @@ export class AsistenciaPage {
   public myPhoto: any;
   public myPhotoURL: any;
   asist: Array<any> = new Array<any>();
+  storage: any;
 
-  constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase,private camera: Camera, public navParams: NavParams,private toastCtrl: ToastController, private loadingCtrl : LoadingController) {
+  constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
     //this.leer();
     this.fecha = new Date().toLocaleDateString().toString();
     this.fecha = this.fecha.split('/');
@@ -62,15 +63,21 @@ export class AsistenciaPage {
       }
       else {
         this.tomar = true;
+        console.log(this.cant);
+        this.traerImagenes();
       }
 
     }, 500);
 
   }
 
-  
+  async traerImagenes() {
+    console.log("lista/" + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
+    const picture = storage().ref("lista/" + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
+    await picture.getDownloadURL().then(data => this.storage = data);
+  }
 
-  async takePhotoLinda() {
+  async tomarFoto() {
     //try {
     const options: CameraOptions = {
       quality: 50,
@@ -80,25 +87,21 @@ export class AsistenciaPage {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
-      /*const result = await this.camera.getPicture(options);
-      const image = `data:image/jpeg;base64,${result}`;
-      const pictures = storage().ref('/lista/'+this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
-      const itemsRef = this.afDB.list('/lista/');
-      itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
-      pictures.putString(image, 'data_url');
-    }
-    catch (e) {
-      console.error(e);
-    }*/
-    await this.camera.getPicture(options).then((ImageData)=>{
+
+    await this.camera.getPicture(options).then((ImageData) => {
       const image = "data:image/jpeg;base64," + ImageData;
-      const pictures = storage().ref('/lista/'+this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
-      /*const itemsRef = this.afDB.list('/lista/');
-      itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);*/
+      const pictures = storage().ref('/lista/' + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
       pictures.putString(image, 'data_url');
+      const itemsRef = this.afDB.list('/lista/');
+      itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1 + '/foto', 'si');
     }, (err) => {
-      console.error(err);
+      let tost = this.toastCtr.create({
+        message: err.message,
+        duration: 3000,
+        position: 'middle'
+      });
     });
+    this.traerImagenes();
   }
 
   leer() {
@@ -122,7 +125,7 @@ export class AsistenciaPage {
 
     this.mostrar1 = false;
     this.tomar = false;
-
+    this.storage = null;
   }
 
   crearLista() {
@@ -145,7 +148,7 @@ export class AsistenciaPage {
       if (this.cant[i].vino == false) {
         this.Items = this.afDB.list('/' + this.opcion + "/" + this.opcion1 + "/" + i);
         this.Items.set("/faltas", (this.cant1[i].faltas + 1));
-        this.Items.set("/diasFaltas/" + (this.cant1[i].faltas + 1) + '/', this.fecha[1] + '-' + this.fecha[0]);
+        this.Items.set("/diasFaltas/" + (this.cant1[i].faltas + 1) + '/', this.fecha[0] + '-' + this.fecha[1]);
       }
     }
     this.tomar = true;
