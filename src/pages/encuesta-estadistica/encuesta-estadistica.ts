@@ -63,16 +63,6 @@ export class EncuestaEstadisticaPage {
                   console.log(quest[i]);
                 }
               }
-              /* this.Cuestionario = quest[i];
-               console.log(this.Cuestionario);
-               this.display = true;
-               for(let j=0; j < quest[i].Preguntas.length;j++)
-               {
-                 this.respuestas.push("");
-                 this.preguntas.push(quest[i].Preguntas[j].question);
-               }
-               console.log(this.respuestas);
-               break;*/
             }
           }
         }

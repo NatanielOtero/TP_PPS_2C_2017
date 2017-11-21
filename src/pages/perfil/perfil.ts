@@ -41,7 +41,7 @@ export class PerfilPage {
     this.alum = this.navParams.get("usuario");
     this.traerImagenes();
     console.log(this.storage);
-    if(this.storage.length == 0)
+    /*if(this.storage.length == 0)
     {
       this.alum.foto = "../assets/imgs/male.png";
     }
@@ -55,7 +55,7 @@ export class PerfilPage {
           
         }
       }
-    }
+    }*/
   }
 
   guardar() {
@@ -97,11 +97,7 @@ export class PerfilPage {
       const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/');
       itemsRef.set('fotos/' + this.indice, false);
     }, (err) => {
-      let tost = this.toastCtr.create({
-        message: err.message,
-        duration: 3000,
-        position: 'middle'
-      });
+      
     });
     this.traerImagenes();
   }
@@ -117,11 +113,11 @@ export class PerfilPage {
     const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/fotos');
 
     this.items = itemsRef.valueChanges();
-    this.items.subscribe(fotos => this.cant = fotos);
-    this.indice = this.cant.length;
+    this.items.subscribe(fotos => this.indice = fotos.length);
+    //this.indice = this.cant.length;
     
     setTimeout(() => {
-    if (this.cant.length > 0) {
+    if (this.indice.length > 0) {
       for (var i = 0; i < this.cant.length; i++) {
         console.log("perfil/" + this.alum.id + '/' + i);
         const picture = storage().ref("perfil/" + this.alum.id + '/' + i);
