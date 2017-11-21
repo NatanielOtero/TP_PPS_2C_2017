@@ -58,9 +58,12 @@ export class EncuestaEstadisticaPage {
           for (var y = 0; y < this.materias.length; y++) {
             if (quest[i].materia == this.materias[y]) {
               for (var x = 0; x < this.cursos.length; x++) {
+                
                 if (quest[i].curso == this.cursos[x]) {
                   /////Cargar encuestas, ver que encuestas mostrar y como. volver 21/11/17
-                  console.log(quest[i]);
+                  this.alumno.tipo = quest[i].Preguntas[x].tipo;
+                  this.alumno.quest = quest[i].Preguntas[x].question;
+                  console.log(this.alumno.quest);  
                 }
               }
             }

@@ -12,6 +12,6 @@ export interface Materia{
     usuario : any,
     vino : any,
     materia : string[],
-    curso : string[]
-
+    curso : string[],
+    quest: string;
 }

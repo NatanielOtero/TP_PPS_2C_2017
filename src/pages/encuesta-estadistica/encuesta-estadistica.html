@@ -1,53 +1,27 @@
-<!--
-  Generated template for the EncuestaEstadisticaPage page.
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-    
-        <ion-navbar color="dark">
-    
-        </ion-navbar>
-    
-    </ion-header>
-    
-    
-    <ion-content padding class="bg-image">
-        <div class="form_wrapper">
-            <div class="bottom">
-    
+<ion-content class="bg-image" padding>
+    <div class="form_wrapper animated bounceInLeft">
+        <h3>Crear Encuesta</h3>
+        <div *ngIf="alumno.tipo == 'P'">
+            
+        </div>
+        <div *ngIf="alumno.tipo == 'P'">
+                <label>{{alumno.quest}}</label>
+            <!--<input type="text" placeholder="Ingrese respuesta" [(ngModel)]="respuestas[item.indice]" />-->
+        </div>
+
+        <div *ngIf="alumno.tipo == 'U'">
+            <label>{{alumno.quest}}</label>
+                
+            <div *ngFor="let i of alumno.opciones">
+                <label>{{alumno.quest}}</label>
+                <input [(ngModel)]="respuestas[alumno.indice]" value="{{i}}" type="radio" name="i">
+                <label>{{ i }}</label>
             </div>
-    
         </div>
-    
-        <div>
+        <div *ngIf="alumno.tipo == 'M'">
+            <label>{{alumno.question}}</label>
+            <input color="encuestas" style="margin-left: 5%" [(ngModel)]="respuestas[alumno.indice]" type="checkbox" name="check" />
         </div>
-        <ion-list *ngIf="display" style="background-color:bisque;text-align:center;">
-            <ion-item *ngFor="let item of Cuestionario.Preguntas">
-                <ion-list>
-                    <ion-item *ngIf="item.tipo == 'P'">
-                        <label>{{item.question}}</label>
-                    </ion-item>
-                    <ion-item *ngIf="item.tipo == 'P'">
-                        <ion-input type="text" placeholder="Ingrese respuesta" [(ngModel)]="respuestas[item.indice]"></ion-input>
-                    </ion-item>
-                    <ion-item *ngIf="item.tipo == 'U'">
-                        <label>{{item.question}}</label>
-                    </ion-item>
-                    <ion-item *ngIf="item.tipo == 'U'">
-                        <ion-list *ngFor="let i of item.opciones">
-                            <input color="encuestas" [(ngModel)]="respuestas[item.indice]" value="{{i}}" type="radio" name="i"> <label>{{ i }}</label>
-                        </ion-list>
-                    </ion-item>
-                    <ion-item *ngIf="item.tipo == 'M'">
-                        <label>{{item.question}}</label>
-                        <input color="encuestas" style="margin-left: 5%" [(ngModel)]="respuestas[item.indice]" type="checkbox" name="check">
-                    </ion-item>
-                </ion-list>
-            </ion-item>
-        </ion-list>-->
-        <button (click)="enviar()" ion-button color="encuestas">Enviar respuesta</button>
-        
-    
-    
-    </ion-content>
+    </div>
+    <button (click)="enviar()" ion-button color="encuestas">Enviar respuesta</button>
+</ion-content>
