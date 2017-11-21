@@ -1,3 +1,4 @@
+import { EncuestaEstadisticaPage } from '../encuesta-estadistica/encuesta-estadistica';
 import { AdministracionPage } from '../administracion/administracion';
 
 
@@ -62,6 +63,9 @@ export class HomePage {
             break;
           case "enc":
             this.navCtrl.push(EncuestasPage, {usuario: this.user});
+            break;
+            case "encEst":
+            this.navCtrl.push(EncuestaEstadisticaPage, {usuario: this.user});
             break;
           case "est":
             this.navCtrl.push(EstadisticasPage);

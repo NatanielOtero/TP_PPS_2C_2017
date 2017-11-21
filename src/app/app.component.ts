@@ -1,3 +1,5 @@
+import { EncuestasPage } from '../pages/encuestas/encuestas';
+import { EstadisticasPage } from '../pages/estadisticas/estadisticas';
 import { AdministracionPage } from '../pages/administracion/administracion';
 import { ArchivosPage } from '../pages/archivos/archivos';
 import { InicioPage } from '../pages/inicio/inicio';

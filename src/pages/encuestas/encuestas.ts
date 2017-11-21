@@ -34,6 +34,15 @@ export class EncuestasPage {
   public cant : Array<number> = [1,2,3,4,5];
   public cant1 : Array<any> = new Array<any>();
   public indice: number;
+  public curso : string;
+
+  public boton : boolean = false;
+  otra : boolean = true;
+  mostrar : boolean = false;
+  cursar : boolean = true;
+  datos : boolean = true;
+
+
 
   //items: Observable<any[]>;
   Items: AngularFireList<any>;
@@ -93,7 +102,8 @@ export class EncuestasPage {
     this.respuesta = "";
     this.cantidad = 2;
     this.formato = 'P';
-    this.option = []
+    this.option = [];
+   
   }
   
   SubirQuestion()
@@ -104,6 +114,7 @@ export class EncuestasPage {
     item.Nombre = this.nombre;
     item.Materia = this.materia;
     item.Profesor = this.usuarioActual.usuario;
+    item.curso = this.curso;
     item.FechaComienzo = new Date(tiempoActual).getDate()+"-"+(new Date(tiempoActual).getMonth()+1)+"-"+
     new Date(tiempoActual).getUTCFullYear()+"-"+new Date(tiempoActual).getHours()+"-"+new Date(tiempoActual).getMinutes();
     item.FechaFin = new Date(tiempoFin).getDate()+"-"+(new Date(tiempoFin).getMonth()+1)+"-"+
@@ -113,7 +124,29 @@ export class EncuestasPage {
     console.log(item);
     this.Items.set('/' + this.indice, item);
     console.log(this.usuarioActual);
+    this.otra = false;
+    this.boton = true;
+    this.mostrar = true;
+    this.datos = true;
+
   }
+
+  f()
+  {
+    this.cursar = false;
+  }
+  g()
+  {
+    this.mostrar = true;
+    this.datos = false;
+  }
+  otraE()
+  {
+    this.otra = true;
+    this.boton = false;
+    this.mostrar = false;
+  }
+ 
 
   public mychange(event)
   {

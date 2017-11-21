@@ -106,7 +106,7 @@
         <variable name="REVERSED_CLIENT_ID" value="com.googleusercontent.apps.269696208664-7vfdsbjccq8l42326l5folj6rh2igu6m" />
     </plugin>
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
-    <plugin name="cordova-plugin-camera" spec="^3.0.0" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
     <engine name="android" spec="~6.3.0" />
+    <plugin name="cordova-plugin-camera" spec="^3.0.0" />
 </widget>

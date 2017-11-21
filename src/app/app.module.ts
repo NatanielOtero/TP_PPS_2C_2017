@@ -1,3 +1,4 @@
+import { EncuestaEstadisticaPage } from '../pages/encuesta-estadistica/encuesta-estadistica';
 import { AdministracionPage } from '../pages/administracion/administracion';
 import { AlumnosPage } from '../pages/alumnos/alumnos';
 import { ArchivosPage } from '../pages/archivos/archivos';
@@ -42,7 +43,8 @@ import { Camera } from "@ionic-native/camera";
     InicioPage,
     ArchivosPage,
     AlumnosPage,
-    AdministracionPage
+    AdministracionPage,
+    EncuestaEstadisticaPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { Camera } from "@ionic-native/camera";
     InicioPage,
     ArchivosPage,
     AlumnosPage,
-    AdministracionPage
+    AdministracionPage,
+    EncuestaEstadisticaPage
   ],
   providers: [
     StatusBar,
