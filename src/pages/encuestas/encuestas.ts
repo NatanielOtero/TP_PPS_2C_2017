@@ -112,7 +112,7 @@ export class EncuestasPage {
     var tiempoActual = Date.now();
     var tiempoFin = tiempoActual + (this.horas* 3600000);
     item.Nombre = this.nombre;
-    item.Materia = this.materia;
+    item.materia = this.materia;
     item.Profesor = this.usuarioActual.usuario;
     item.curso = this.curso;
     item.FechaComienzo = new Date(tiempoActual).getDate()+"-"+(new Date(tiempoActual).getMonth()+1)+"-"+
