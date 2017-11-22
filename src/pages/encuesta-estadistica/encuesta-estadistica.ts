@@ -1,3 +1,4 @@
+import { Encuesta } from '../../entidades/encuesta';
 import { Materia } from '../../entidades/materia';
 import { async } from '@angular/core/testing';
 import { Component } from '@angular/core';
@@ -40,7 +41,9 @@ export class EncuestaEstadisticaPage {
   U : boolean = true;
   M : boolean = true;
   preguntas: any[] = new Array<any>();
-  respuesta : string;
+  opciones: any[] = new Array<any>();
+  encuesta = {} as Encuesta;
+  
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public alertCtrl: AlertController) {
 
@@ -86,19 +89,29 @@ export class EncuestaEstadisticaPage {
      {
        let encuesta = this.listaEncuestas[i];
        for (var x = 0; x < encuesta.Preguntas.length; x++) {
-          this.preguntas = encuesta.Preguntas[x].question;
-     
-       }   
+          this.preguntas.push(encuesta.Preguntas[x]);
+
+       }  
+       if(encuesta.tipo == "U" ) 
+       {
+        for (var x = 0; x < encuesta.Preguntas.length; x++) {
+          this.opciones.push(encuesta.Preguntas[x].opciones);
+
+       }  
+
+       }
        console.log(this.preguntas);   
-      console.log(this.listaEncuestas[i].tipo);
+     // console.log(this.listaEncuestas[i].tipo);
         if(encuesta.tipo == "P")
-        {          
+        {     
+
           this.P = false;
           this.U = true;
           this.M = true;
         }
         if(encuesta.tipo == "U")
         {
+
           this.P = true;
           this.U = false;
           this.M = true;

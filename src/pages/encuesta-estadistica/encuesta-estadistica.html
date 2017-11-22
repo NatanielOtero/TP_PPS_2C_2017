@@ -19,16 +19,27 @@
         <br>
         <div [hidden]="P">
             <div *ngFor="let preg of preguntas">
-                <label>{{preg}}</label>
-                <input type="text" [(ngModel)]="respuesta" name="" id="">
+                <label>{{preg.question}}</label>
+                <input type="text" [(ngModel)]="encuesta.respuesta[preg.indice]">
             </div>
 
         </div>
         <div [hidden]="U">
-
+            <div *ngFor="let preg of preguntas">
+                <label>{{preg.question}}</label>
+                <input type="radio" [(ngModel)]="encuesta.respuesta[preg.indice]" name="rad">
+            </div>
         </div>
         <div [hidden]="M">
+            <div *ngFor="let preg of preguntas">
+                <label>{{preg.question}}</label>
+                <div *ngFor="let i of opciones">
+                    <label>{{i}}</label>
+                    <input type="checkbox" [(ngModel)]="encuesta.respuesta[preg.indice]" name="cheki" value="{{i}}">
+                    <label>{{ i }}</label>
+                </div>
 
+            </div>
         </div>
         <br>
     </div>
