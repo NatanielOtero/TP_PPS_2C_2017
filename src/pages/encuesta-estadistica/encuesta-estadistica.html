@@ -1,17 +1,48 @@
+<ion-header>
+    <ion-navbar color="dark">
+
+    </ion-navbar>
+</ion-header>
+
+
 <ion-content class="bg-image" padding>
     <div class="form_wrapper animated bounceInLeft">
-        <h3>Crear Encuesta</h3>
-        <div *ngIf="alumno.tipo == 'P'">
-            
+        <div>
+            <h3>Tiene las siguientes encuestas disponibles</h3>
+            <div *ngFor="let item of encues">
+                <button (click)="responder(item)">{{item}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="form_wrapper animated bounceInRight">
+
+        <br>
+        <div [hidden]="P">
+            <div *ngFor="let preg of preguntas">
+                <label>{{preg}}</label>
+                <input type="text" [(ngModel)]="respuesta" name="" id="">
+            </div>
+
+        </div>
+        <div [hidden]="U">
+
+        </div>
+        <div [hidden]="M">
+
+        </div>
+        <br>
+    </div>
+    <!-- <div *ngIf="alumno.tipo == 'P'">
+
         </div>
         <div *ngIf="alumno.tipo == 'P'">
-                <label>{{alumno.quest}}</label>
-            <!--<input type="text" placeholder="Ingrese respuesta" [(ngModel)]="respuestas[item.indice]" />-->
+            <label>{{alumno.quest}}</label>
+           <input type="text" placeholder="Ingrese respuesta" [(ngModel)]="respuestas[item.indice]" />
         </div>
 
         <div *ngIf="alumno.tipo == 'U'">
             <label>{{alumno.quest}}</label>
-                
+
             <div *ngFor="let i of alumno.opciones">
                 <label>{{alumno.quest}}</label>
                 <input [(ngModel)]="respuestas[alumno.indice]" value="{{i}}" type="radio" name="i">
@@ -21,7 +52,8 @@
         <div *ngIf="alumno.tipo == 'M'">
             <label>{{alumno.question}}</label>
             <input color="encuestas" style="margin-left: 5%" [(ngModel)]="respuestas[alumno.indice]" type="checkbox" name="check" />
-        </div>
-    </div>
+            
+        </div>-->
+
     <button (click)="enviar()" ion-button color="encuestas">Enviar respuesta</button>
 </ion-content>

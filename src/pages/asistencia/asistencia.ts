@@ -41,6 +41,7 @@ export class AsistenciaPage {
   public myPhotoURL: any;
   asist: Array<any> = new Array<any>();
   storage: any;
+  boton : boolean = true;
 
   constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
     //this.leer();
@@ -122,7 +123,7 @@ export class AsistenciaPage {
   }
   g() {
     this.crearLista();
-
+    this.boton = false;
     this.mostrar1 = false;
     this.tomar = false;
     this.storage = null;

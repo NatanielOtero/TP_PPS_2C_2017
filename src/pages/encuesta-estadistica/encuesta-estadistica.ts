@@ -26,19 +26,21 @@ export class EncuestaEstadisticaPage {
   public items: Observable<any>;
   public Results: AngularFireList<any>;
   public results: Observable<any>;
-  public Cuestionario: any;
-  public Cuestionarios: Array<any>;
-  public display = false;
-  public respuestas: Array<string> = [];
-  public preguntas: Array<string> = [];
+  elegir : boolean = false;
   alumno = {} as Materia;
   cursaPPS4A: boolean = false;
   cursaPPS4B: boolean = false;
   cursaLAB44A: boolean = false;
   cursaLAB44B: boolean = false;
   encues: any[] = new Array<any>();
+  listaEncuestas : any[];
   materias: any[] = new Array<any>();
   cursos: any[] = new Array<any>();
+  P : boolean = true;
+  U : boolean = true;
+  M : boolean = true;
+  preguntas: any[] = new Array<any>();
+  respuesta : string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public alertCtrl: AlertController) {
 
@@ -61,9 +63,13 @@ export class EncuestaEstadisticaPage {
                 
                 if (quest[i].curso == this.cursos[x]) {
                   /////Cargar encuestas, ver que encuestas mostrar y como. volver 21/11/17
-                  this.alumno.tipo = quest[i].Preguntas[x].tipo;
-                  this.alumno.quest = quest[i].Preguntas[x].question;
+                  this.alumno.tipo = quest[i].tipo;
+                  this.alumno.quest = quest[i].Nombre;
+                  this.encues.push(this.alumno.quest);
+                  this.listaEncuestas = quest;
                   console.log(this.alumno.quest);  
+                  console.log(this.alumno.tipo);
+                  
                 }
               }
             }
@@ -73,7 +79,40 @@ export class EncuestaEstadisticaPage {
     );
 
   }
-
+  responder(nombre : any)
+  {
+   for (var i = 0; i < this.listaEncuestas.length; i++) {
+     if(this.listaEncuestas[i].Nombre == nombre)
+     {
+       let encuesta = this.listaEncuestas[i];
+       for (var x = 0; x < encuesta.Preguntas.length; x++) {
+          this.preguntas = encuesta.Preguntas[x].question;
+     
+       }   
+       console.log(this.preguntas);   
+      console.log(this.listaEncuestas[i].tipo);
+        if(encuesta.tipo == "P")
+        {          
+          this.P = false;
+          this.U = true;
+          this.M = true;
+        }
+        if(encuesta.tipo == "U")
+        {
+          this.P = true;
+          this.U = false;
+          this.M = true;
+        }
+        if(encuesta.tipo == "M")
+        {
+          this.P = true;
+          this.U = true;
+          this.M = false;
+        }
+     }
+     
+   }
+  }
   async encontrarAlumno() {
     this.Items = this.afDB.list("PPS/4A");
     this.items = this.Items.valueChanges();
@@ -148,6 +187,9 @@ export class EncuestaEstadisticaPage {
     console.log(this.cursaLAB44A);
     console.log(this.materias);
     console.log(this.cursos);
+    console.log(this.alumno);
+    console.log(this.encues);
+    console.log(this.listaEncuestas);
     //console.log(this.respuestas);
     //console.log(this.preguntas);
     /* var item: any = {};

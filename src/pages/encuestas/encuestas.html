@@ -77,8 +77,8 @@
 
                 <label>Formato</label>
                 <select [(ngModel)]="formato">
-                    <option value="U">Respuesta con opciones</option>
-                    <option value="M">Respuestas única</option>
+                    <option value="U">Opción multiple</option>
+                    <option value="M">Si o No</option>
                     <option value="P">Respuesta propia</option>
                  </select>
 
@@ -101,12 +101,14 @@
             <br>
             <div *ngFor="let item of cant" class="animated bounceInLeft">
 
-                <div *ngIf="item<=cantidad && formato=='U'" style="padding-top:0px;padding-bottom:0px;">
+                <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
                     <label>Respuestas</label>
                     <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
 
                 </div>
             </div>
+
+
 
 
 

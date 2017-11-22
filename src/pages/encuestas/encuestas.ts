@@ -35,6 +35,7 @@ export class EncuestasPage {
   public cant1 : Array<any> = new Array<any>();
   public indice: number;
   public curso : string;
+  public tipo : string;
 
   public boton : boolean = false;
   otra : boolean = true;
@@ -80,11 +81,11 @@ export class EncuestasPage {
     switch(this.formato)
     {
       case 'P':
-        item.tipo = 'P';
+        this.tipo = 'P';
         this.encuesta.push(item);
         break;
       case 'U':
-        item.tipo = 'U';
+      this.tipo  = 'U';
         item.opciones= [];
         for(let i=1;i<=this.cantidad;i++)
         {
@@ -94,7 +95,7 @@ export class EncuestasPage {
         this.encuesta.push(item);
         break;
       case 'M':
-        item.tipo = 'M';
+      this.tipo = 'M';
         this.encuesta.push(item);
         break;
     }
@@ -114,12 +115,13 @@ export class EncuestasPage {
     item.Nombre = this.nombre;
     item.materia = this.materia;
     item.Profesor = this.usuarioActual.usuario;
-    item.curso = this.curso;
+    item.curso = this.curso;   
     item.FechaComienzo = new Date(tiempoActual).getDate()+"-"+(new Date(tiempoActual).getMonth()+1)+"-"+
     new Date(tiempoActual).getUTCFullYear()+"-"+new Date(tiempoActual).getHours()+"-"+new Date(tiempoActual).getMinutes();
     item.FechaFin = new Date(tiempoFin).getDate()+"-"+(new Date(tiempoFin).getMonth()+1)+"-"+
     new Date(tiempoFin).getUTCFullYear()+"-"+new Date(tiempoFin).getHours()+"-"+new Date(tiempoFin).getMinutes();
     item.TiempoFin = tiempoFin;
+    item.tipo = this.tipo;
     item.Preguntas = this.encuesta;
     console.log(item);
     this.Items.set('/' + this.indice, item);

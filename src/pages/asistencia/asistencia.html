@@ -1,6 +1,6 @@
 <ion-header>
     <ion-navbar color="dark">
-        <ion-title>Asistencia</ion-title>
+
     </ion-navbar>
     <ion-fab top right>
         <button ion-fab color="light">
@@ -15,8 +15,9 @@
     </ion-fab>
 </ion-header>
 <ion-content padding class="bg-image">
-        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'> <ion-icon name="camera"></ion-icon>Foto aula</button>
+
     <div class="form_wrapper animated slideInLeft">
+        <h3>Tomar lista</h3>
 
         <div>
             <label style="color:white; font-size:15px">Elija la materia</label>
@@ -34,10 +35,14 @@
                 <option value="4A">4A</option>
                 <option value="4B">4B</option>
             </select>
-            
             </div>
-            <div>
+            <div class="animated bounceIn" [hidden]="mostrar1">
+
+                <button (click)='tomarFoto()'> <ion-icon name="camera"></ion-icon> | Foto aula</button>
+                <div>
                     <img src="{{storage}}" alt="">
+                </div>
+
             </div>
 
 
