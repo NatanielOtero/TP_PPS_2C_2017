@@ -8,13 +8,8 @@ import { EncuestasPage } from '../encuestas/encuestas';
 import { AsistenciaPage } from '../asistencia/asistencia';
 import { PerfilPage } from '../perfil/perfil';
 import { Alta } from "../../entidades/alta";
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
-=======
 import { Component, PACKAGE_ROOT_URL } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
->>>>>>> 2077bbda63e32f8c3af65908274b038e56b36e74
 import { AlertController } from 'ionic-angular';
 
 @Component({
@@ -30,11 +25,7 @@ export class HomePage {
   tipo : string;
   user:Alta;
   scannedCode = null;
-<<<<<<< HEAD
-  constructor(public alertCtrl: AlertController, public toastCtr : ToastController ,public navCtrl: NavController,public navParams: NavParams,private qrScanner: QRScanner) {
-=======
   constructor(public alertCtrl: AlertController,public navCtrl: NavController,public navParams: NavParams) {
->>>>>>> 2077bbda63e32f8c3af65908274b038e56b36e74
    this.tipo = navParams.get('tipo');
    this.user = navParams.get('usuario');
 
@@ -96,46 +87,5 @@ export class HomePage {
             break;
         }
     }
-<<<<<<< HEAD
-    codigoQR()
-    {
-      this.qrScanner.prepare()
-      .then((status: QRScannerStatus) => {
-         if (status.authorized) {
-           // camera permission was granted
-    
-    
-           // start scanning
-           let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-             console.log('Scanned something', text);
-    
-             this.qrScanner.hide(); // hide camera preview
-             scanSub.unsubscribe(); // stop scanning
-           });
-    
-           // show camera preview
-           this.qrScanner.show();
-    
-           // wait for user to scan something, then the observable callback will be called
-    
-         } else if (status.denied) {
-           // camera permission was permanently denied
-           // you must use QRScanner.openSettings() method to guide the user to the settings page
-           // then they can grant the permission from there
-         } else {
-           // permission was denied, but not permanently. You can ask for permission again at a later time.
-         }
-      })
-      .catch((e: any) =>{  let tost = this.toastCtr.create({
-        message: 'Error: ' + e,
-        duration: 3000,
-        position: 'middle'
-      });
-      tost.present();
-    });
-    }
-
-=======
->>>>>>> 2077bbda63e32f8c3af65908274b038e56b36e74
 }
 
