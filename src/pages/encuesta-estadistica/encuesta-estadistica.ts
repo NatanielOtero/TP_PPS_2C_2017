@@ -1,3 +1,4 @@
+import { ResponderPage } from '../responder/responder';
 import { Encuesta } from '../../entidades/encuesta';
 import { Materia } from '../../entidades/materia';
 import { async } from '@angular/core/testing';
@@ -36,13 +37,12 @@ export class EncuestaEstadisticaPage {
   encues: any[] = new Array<any>();
   listaEncuestas : any[];
   materias: any[] = new Array<any>();
-  cursos: any[] = new Array<any>();
-  P : boolean = true;
-  U : boolean = true;
-  M : boolean = true;
+  cursos: any[] = new Array<any>(); 
   preguntas: any[] = new Array<any>();
   opciones: any[] = new Array<any>();
-  encuesta = {} as Encuesta;
+  respuestas : any[] = new Array<any>();
+  indice : any;
+
   
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public alertCtrl: AlertController) {
@@ -84,6 +84,22 @@ export class EncuestaEstadisticaPage {
   }
   responder(nombre : any)
   {
+    for (var i = 0; i < this.listaEncuestas.length; i++) {
+      if(this.listaEncuestas[i].Nombre == nombre)
+      {
+        this.indice = i;
+        let encuesta = this.listaEncuestas[i];
+        this.navCtrl.setRoot(ResponderPage,{
+          encuesta : encuesta,
+          user : this.usuarioActual,
+          indice : this.indice
+        })
+      }
+    }
+   /* 
+    this.P = true;
+    this.U = true;
+    this.M = true;
    for (var i = 0; i < this.listaEncuestas.length; i++) {
      if(this.listaEncuestas[i].Nombre == nombre)
      {
@@ -124,7 +140,7 @@ export class EncuestaEstadisticaPage {
         }
      }
      
-   }
+   }*/
   }
   async encontrarAlumno() {
     this.Items = this.afDB.list("PPS/4A");
@@ -203,6 +219,8 @@ export class EncuestaEstadisticaPage {
     console.log(this.alumno);
     console.log(this.encues);
     console.log(this.listaEncuestas);
+    console.log(this.respuestas);
+   
     //console.log(this.respuestas);
     //console.log(this.preguntas);
     /* var item: any = {};

@@ -6,7 +6,7 @@
 
 
 <ion-content class="bg-image" padding>
-    <div class="form_wrapper animated bounceInLeft">
+    <div class="form_wrapper animated bounceInLeft" [hidden]="contestando">
         <div>
             <h3>Tiene las siguientes encuestas disponibles</h3>
             <div *ngFor="let item of encues">
@@ -14,17 +14,18 @@
             </div>
         </div>
     </div>
-    <div class="form_wrapper animated bounceInRight">
+    <!--<div class="form_wrapper animated bounceInRight" [hidden]="!contestando">
 
         <br>
         <div [hidden]="P">
             <div *ngFor="let preg of preguntas">
                 <label>{{preg.question}}</label>
-                <input type="text" [(ngModel)]="encuesta.respuesta[preg.indice]">
+                <label>{{preg.indice}}</label>
+                <input type="text" [(ngModel)]="respuestas[preg.indice]">
             </div>
 
         </div>
-        <div [hidden]="U">
+      <div [hidden]="U">
             <div *ngFor="let preg of preguntas">
                 <label>{{preg.question}}</label>
                 <input type="radio" [(ngModel)]="encuesta.respuesta[preg.indice]" name="rad">
@@ -40,9 +41,7 @@
                 </div>
 
             </div>
-        </div>
-        <br>
-    </div>
+        </div>-->
     <!-- <div *ngIf="alumno.tipo == 'P'">
 
         </div>

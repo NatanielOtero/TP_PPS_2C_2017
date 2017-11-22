@@ -9,7 +9,7 @@ import { AsistenciaPage } from '../asistencia/asistencia';
 import { PerfilPage } from '../perfil/perfil';
 import { Alta } from "../../entidades/alta";
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
@@ -26,7 +26,7 @@ export class HomePage {
   tipo : string;
   user:Alta;
   scannedCode = null;
-  constructor(public alertCtrl: AlertController,public navCtrl: NavController,public navParams: NavParams,private qrScanner: QRScanner) {
+  constructor(public alertCtrl: AlertController, public toastCtr : ToastController ,public navCtrl: NavController,public navParams: NavParams,private qrScanner: QRScanner) {
    this.tipo = navParams.get('tipo');
    this.user = navParams.get('usuario');
 
@@ -117,7 +117,13 @@ export class HomePage {
            // permission was denied, but not permanently. You can ask for permission again at a later time.
          }
       })
-      .catch((e: any) => console.log('Error is', e));
+      .catch((e: any) =>{  let tost = this.toastCtr.create({
+        message: 'Error: ' + e,
+        duration: 3000,
+        position: 'middle'
+      });
+      tost.present();
+    });
     }
 
 }

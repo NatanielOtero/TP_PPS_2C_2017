@@ -1,3 +1,4 @@
+import { ResponderPage } from '../pages/responder/responder';
 import { EncuestaEstadisticaPage } from '../pages/encuesta-estadistica/encuesta-estadistica';
 import { AdministracionPage } from '../pages/administracion/administracion';
 import { AlumnosPage } from '../pages/alumnos/alumnos';
@@ -43,7 +44,8 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
     ArchivosPage,
     AlumnosPage,
     AdministracionPage,
-    EncuestaEstadisticaPage
+    EncuestaEstadisticaPage,
+    ResponderPage
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
     ArchivosPage,
     AlumnosPage,
     AdministracionPage,
-    EncuestaEstadisticaPage
+    EncuestaEstadisticaPage,
+    ResponderPage
   ],
   providers: [
     StatusBar,

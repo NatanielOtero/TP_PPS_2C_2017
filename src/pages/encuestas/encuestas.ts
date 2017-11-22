@@ -86,18 +86,14 @@ export class EncuestasPage {
         break;
       case 'U':
       this.tipo  = 'U';
-        item.opciones= [];
+        item.opciones = [];
         for(let i=1;i<=this.cantidad;i++)
         {
           item.opciones.push(this.option[i]);
           console.log(this.option);
         }
         this.encuesta.push(item);
-        break;
-      case 'M':
-      this.tipo = 'M';
-        this.encuesta.push(item);
-        break;
+        break;     
     }
     this.question = ""; 
     this.respuesta = "";
