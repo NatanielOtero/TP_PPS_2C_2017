@@ -1,6 +1,6 @@
 import { Perfil } from '../../entidades/perfil';
 import { HomePage } from '../home/home';
-import { Component, Input } from '@angular/core';
+import { Component, Input, PACKAGE_ROOT_URL } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Alta } from '../../entidades/alta';
 import { Datos } from "../../entidades/datos";
@@ -10,7 +10,7 @@ import * as firebase from 'firebase';
 import { storage, initializeApp } from "firebase";
 import { Observable } from 'rxjs/Observable';
 import { Camera, CameraOptions } from "@ionic-native/camera";
-import { LoadingController} from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 /**
  * Generated class for the PerfilPage page.
@@ -34,13 +34,16 @@ export class PerfilPage {
   public items: Observable<any>;
   modificar: boolean = true;
   indice: any = 0;
-  storage: Array<any> = new Array<any>();
+  storage: string;
+  imagenes: any[];
   fotos: Array<any> = new Array<any>();
+  imagen: string;
+  mostrarCambio: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera, private loadingCtrl : LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera, private loadingCtrl: LoadingController) {
     this.alum = this.navParams.get("usuario");
     this.traerImagenes();
-    console.log(this.storage);
+    console.log("imagenes", this.imagenes.length);
     /*if(this.storage.length == 0)
     {
       this.alum.foto = "../assets/imgs/male.png";
@@ -76,11 +79,9 @@ export class PerfilPage {
   }
 
   ionViewDidLoad() {
-
   }
 
   async tomarFoto() {
-    //try {
     const options: CameraOptions = {
       quality: 50,
       targetHeight: 600,
@@ -97,12 +98,14 @@ export class PerfilPage {
       const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/');
       itemsRef.set('fotos/' + this.indice, false);
     }, (err) => {
-      
+
     });
     this.traerImagenes();
   }
 
   async traerImagenes() {
+
+    this.imagenes = new Array<any>();
 
     let loading = this.loadingCtrl.create({
       spinner: 'bubbles'
@@ -111,26 +114,60 @@ export class PerfilPage {
     loading.present();
 
     const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/fotos');
-
     this.items = itemsRef.valueChanges();
-    this.items.subscribe(fotos => this.indice = fotos.length);
-    //this.indice = this.cant.length;
-    
-    setTimeout(() => {
-    if (this.indice.length > 0) {
-      for (var i = 0; i < this.cant.length; i++) {
-        console.log("perfil/" + this.alum.id + '/' + i);
-        const picture = storage().ref("perfil/" + this.alum.id + '/' + i);
-        picture.getDownloadURL().then(data => this.storage.push(data));
-        
-      }
-      
-    }
-   }, 500);
+    this.items.subscribe(fotos => {
+      this.cant = fotos;
+      console.log(this.imagenes);
+      this.imagenesBD();
+    });
+
+    //this.indice = this.cant.length
     setTimeout(() => {
       loading.dismiss();
     }, 3000);
-
   }
 
+  async imagenesBD() {
+    for (var i = 0; i < this.cant.length; i++) {
+      const picture = storage().ref("perfil/" + this.alum.id + '/' + i);
+      console.log(i);
+      await picture.getDownloadURL().then(data => this.storage = data);
+      this.imagenes[i] = this.storage;
+    }
+    console.log(this.imagenes);
+    for (var i = 0; i < this.cant.length; i++) {
+      if (this.cant[i] == true)
+        this.imagen = this.imagenes[i];
+    }
+    if (this.imagen == null)
+      this.imagen = "../assets/imgs/male.png";
+  }
+
+  cambiarImagen() {
+    if (this.mostrarCambio == false)
+      this.mostrarCambio = true;
+    else
+      this.mostrarCambio = false;
+  }
+
+  modificarImagen(imagen:any) {
+    console.log(imagen);
+    
+    for (var i = 0; i < this.cant.length; i++) {
+      if (this.imagenes[i] == imagen) {
+        console.log(imagen);
+        console.log(this.cant[i]);
+        console.log('/prueba/' + this.alum.id + '/fotos/' + i);
+        const itemRef = this.afDB.object('/prueba/' + this.alum.id + "/fotos/" + i);
+        itemRef.set(true);
+      }
+      else {
+        console.log(this.alum.id);
+        console.log(this.cant[i]);
+        console.log('/prueba/' + this.alum.id + '/fotos/' + i);
+        const itemRef = this.afDB.object('/prueba/' + this.alum.id + "/fotos/" + i);
+        itemRef.set(false);
+      }
+    }
+  }
 }
