@@ -28,7 +28,6 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from "@ionic-native/camera";
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 @NgModule({
   declarations: [
     MyApp,
@@ -81,7 +80,6 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
     GooglePlus,
     Facebook,
     Camera,
-    QRScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

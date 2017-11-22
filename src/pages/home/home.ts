@@ -8,10 +8,14 @@ import { EncuestasPage } from '../encuestas/encuestas';
 import { AsistenciaPage } from '../asistencia/asistencia';
 import { PerfilPage } from '../perfil/perfil';
 import { Alta } from "../../entidades/alta";
+<<<<<<< HEAD
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
+=======
+import { Component, PACKAGE_ROOT_URL } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
+>>>>>>> 2077bbda63e32f8c3af65908274b038e56b36e74
 import { AlertController } from 'ionic-angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 
 @Component({
   selector: 'page-home',
@@ -26,7 +30,11 @@ export class HomePage {
   tipo : string;
   user:Alta;
   scannedCode = null;
+<<<<<<< HEAD
   constructor(public alertCtrl: AlertController, public toastCtr : ToastController ,public navCtrl: NavController,public navParams: NavParams,private qrScanner: QRScanner) {
+=======
+  constructor(public alertCtrl: AlertController,public navCtrl: NavController,public navParams: NavParams) {
+>>>>>>> 2077bbda63e32f8c3af65908274b038e56b36e74
    this.tipo = navParams.get('tipo');
    this.user = navParams.get('usuario');
 
@@ -88,6 +96,7 @@ export class HomePage {
             break;
         }
     }
+<<<<<<< HEAD
     codigoQR()
     {
       this.qrScanner.prepare()
@@ -126,5 +135,7 @@ export class HomePage {
     });
     }
 
+=======
+>>>>>>> 2077bbda63e32f8c3af65908274b038e56b36e74
 }
 
