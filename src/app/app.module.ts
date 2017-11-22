@@ -27,8 +27,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from "@ionic-native/camera";
-
-
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 @NgModule({
   declarations: [
     MyApp,
@@ -52,7 +51,7 @@ import { Camera } from "@ionic-native/camera";
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-     HttpModule
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,7 +78,7 @@ import { Camera } from "@ionic-native/camera";
     GooglePlus,
     Facebook,
     Camera,
-    
+    QRScanner,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

@@ -134,7 +134,8 @@ export class PerfilPage {
       await picture.getDownloadURL().then(data => this.storage = data);
       this.imagenes[i] = this.storage;
     }
-    console.log(this.imagenes);
+    this.indice = this.imagenes.length;
+    console.log("indice",this.indice);
     for (var i = 0; i < this.cant.length; i++) {
       if (this.cant[i] == true)
         this.imagen = this.imagenes[i];
