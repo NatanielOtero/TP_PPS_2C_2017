@@ -113,8 +113,8 @@
 
 
             <div [hidden]="boton" class="bottom">
-                <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>Agregar Pregunta</button>
-                <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">Subir Cuestionario</button>
+                <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>Agregar pregunta</button>
+                <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">Subir cuestionario</button>
             </div>
 
 
@@ -122,7 +122,7 @@
         <div [hidden]="otra">
             <label>Encuesta creada</label>
             <div class="bottom">
-                <button ion-button (click)="otraE()" color="encuestas" full>Realizar Otra?</button>
+                <button ion-button (click)="otraE()" color="encuestas" full>Realizar otra?</button>
             </div>
 
         </div>

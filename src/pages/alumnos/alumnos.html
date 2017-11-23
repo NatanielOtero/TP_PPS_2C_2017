@@ -28,7 +28,7 @@
     <div class="form_wrapper animated slideInLeft" [hidden]="mostrar">
 
         <div>
-            <label style="color:white; font-size:15px">Elija el metodo</label>
+            <label style="color:white; font-size:15px">Elija el método</label>
 
 
             <select [(ngModel)]="opcion" (ngModelChange)='f()'>
@@ -74,7 +74,7 @@
 
         <input id="file" type="file" (change)="handleUpload($event)">
         <button ion-button (click)="readCsvData()">leer csv</button>
-        <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</button>
+        <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Descargar CSV</button>
     </div>
     <div class="table">
         <thead>

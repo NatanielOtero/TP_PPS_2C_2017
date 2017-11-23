@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { ResponderPage } from '../pages/responder/responder';
 import { EncuestaEstadisticaPage } from '../pages/encuesta-estadistica/encuesta-estadistica';
 import { AdministracionPage } from '../pages/administracion/administracion';
@@ -80,6 +81,7 @@ import { Camera } from "@ionic-native/camera";
     GooglePlus,
     Facebook,
     Camera,
+    AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

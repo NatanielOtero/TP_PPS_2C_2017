@@ -31,23 +31,24 @@ export class ResponderPage {
     this.respondio = this.navParams.get('user');
     this.indice = this.navParams.get('indice');
 
-   
+    console.log("indice",this.navParams.get('indice'));
   }
   enviar()
   {
    
-    console.log(this.respondio);
-    console.log(this.encuesta);
-    console.log(this.respuestas);
+    console.log("respondio" + this.respondio);
+    console.log('encuesta' + this.encuesta);
+    console.log("respuestas" + this.respuestas);
     let result : any = {};
-    result.alumno = this.respondio;
     result.profesor = this.encuesta.Profesor;
     result.curso = this.encuesta.curso;
     result.materia = this.encuesta.materia;
-    result.encuesta = this.encuesta.nombre;
+    result.encuesta = this.encuesta.Nombre;
     result.id = this.indice;
+    console.log("respuesta",result);
     let Items = this.afDB.list('/Resultados/');
-    Items.set("/" + this.indice + " /" , result);
+    Items.set("/" + this.indice + "/" , result);
+    Items.set("/" + this.indice + "/alumno/" + this.respondio.legajo, this.respuestas);
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResponderPage');

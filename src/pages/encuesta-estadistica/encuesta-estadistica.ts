@@ -28,34 +28,32 @@ export class EncuestaEstadisticaPage {
   public items: Observable<any>;
   public Results: AngularFireList<any>;
   public results: Observable<any>;
-  elegir : boolean = false;
+  elegir: boolean = false;
   alumno = {} as Materia;
   cursaPPS4A: boolean = false;
   cursaPPS4B: boolean = false;
   cursaLAB44A: boolean = false;
   cursaLAB44B: boolean = false;
   encues: any[] = new Array<any>();
-  listaEncuestas : any[];
+  listaEncuestas: any[];
   materias: any[] = new Array<any>();
-  cursos: any[] = new Array<any>(); 
+  cursos: any[] = new Array<any>();
   preguntas: any[] = new Array<any>();
   opciones: any[] = new Array<any>();
-  respuestas : any[] = new Array<any>();
-  indice : any;
+  respuestas: any[] = new Array<any>();
+  indice: any;
+  bandera: boolean = false;
 
-  
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public alertCtrl: AlertController) {
-
-
-
     this.usuarioActual = this.navParams.get("usuario");
-    //console.log(this.usuarioActual);
+    //console.log("usuario",this.usuarioActual);
     this.encontrarAlumno();
     this.Items = afDB.list('Encuestas');
-    this.Results = afDB.list('Respuestas');
+    this.Results = afDB.list('Resultados');
     this.results = this.Results.valueChanges();
-
+    var tiempoActual = Date.now();
     this.items = this.Items.valueChanges();
     this.items.subscribe(
       quest => {
@@ -63,16 +61,32 @@ export class EncuestaEstadisticaPage {
           for (var y = 0; y < this.materias.length; y++) {
             if (quest[i].materia == this.materias[y]) {
               for (var x = 0; x < this.cursos.length; x++) {
-                
                 if (quest[i].curso == this.cursos[x]) {
                   /////Cargar encuestas, ver que encuestas mostrar y como. volver 21/11/17
-                  this.alumno.tipo = quest[i].tipo;
-                  this.alumno.quest = quest[i].Nombre;
-                  this.encues.push(this.alumno.quest);
-                  this.listaEncuestas = quest;
-                  console.log(this.alumno.quest);  
-                  console.log(this.alumno.tipo);
-                  
+                  if (quest[i].TiempoFin > tiempoActual)
+                  {
+
+
+                    this.results.subscribe(result => {
+                      for (var j = 0; j < result.length; j++) {
+                        console.log(result[j].encuesta, quest[i].Nombre)
+                        if (result[j].encuesta == quest[i].Nombre) {
+                          //console.log('hola',result[j].alumno[this.usuarioActual.legajo]);
+                          this.bandera = true;
+                        }
+
+                      }
+                      if (this.bandera) {
+                        this.bandera = false;
+                      }
+                      else {
+                        this.alumno.tipo = quest[i].tipo;
+                        this.alumno.quest = quest[i].Nombre;
+                        this.encues.push(this.alumno.quest);
+                        this.listaEncuestas = quest;
+                      }
+                    });
+                  }
                 }
               }
             }
@@ -80,67 +94,69 @@ export class EncuestaEstadisticaPage {
         }
       }
     );
+  }
+
+  averiguar() {
 
   }
-  responder(nombre : any)
-  {
+
+  responder(nombre: any) {
     for (var i = 0; i < this.listaEncuestas.length; i++) {
-      if(this.listaEncuestas[i].Nombre == nombre)
-      {
+      if (this.listaEncuestas[i].Nombre == nombre) {
         this.indice = i;
         let encuesta = this.listaEncuestas[i];
-        this.navCtrl.setRoot(ResponderPage,{
-          encuesta : encuesta,
-          user : this.usuarioActual,
-          indice : this.indice
+        this.navCtrl.setRoot(ResponderPage, {
+          encuesta: encuesta,
+          user: this.usuarioActual,
+          indice: this.indice
         })
       }
     }
-   /* 
-    this.P = true;
-    this.U = true;
-    this.M = true;
-   for (var i = 0; i < this.listaEncuestas.length; i++) {
-     if(this.listaEncuestas[i].Nombre == nombre)
-     {
-       let encuesta = this.listaEncuestas[i];
-       for (var x = 0; x < encuesta.Preguntas.length; x++) {
-          this.preguntas.push(encuesta.Preguntas[x]);
-
-       }  
-       if(encuesta.tipo == "U" ) 
-       {
+    /* 
+     this.P = true;
+     this.U = true;
+     this.M = true;
+    for (var i = 0; i < this.listaEncuestas.length; i++) {
+      if(this.listaEncuestas[i].Nombre == nombre)
+      {
+        let encuesta = this.listaEncuestas[i];
         for (var x = 0; x < encuesta.Preguntas.length; x++) {
-          this.opciones.push(encuesta.Preguntas[x].opciones);
-
-       }  
-
-       }
-       console.log(this.preguntas);   
-     // console.log(this.listaEncuestas[i].tipo);
-        if(encuesta.tipo == "P")
-        {     
-
-          this.P = false;
-          this.U = true;
-          this.M = true;
-        }
-        if(encuesta.tipo == "U")
+           this.preguntas.push(encuesta.Preguntas[x]);
+ 
+        }  
+        if(encuesta.tipo == "U" ) 
         {
-
-          this.P = true;
-          this.U = false;
-          this.M = true;
+         for (var x = 0; x < encuesta.Preguntas.length; x++) {
+           this.opciones.push(encuesta.Preguntas[x].opciones);
+ 
+        }  
+ 
         }
-        if(encuesta.tipo == "M")
-        {
-          this.P = true;
-          this.U = true;
-          this.M = false;
-        }
-     }
-     
-   }*/
+        console.log(this.preguntas);   
+      // console.log(this.listaEncuestas[i].tipo);
+         if(encuesta.tipo == "P")
+         {     
+ 
+           this.P = false;
+           this.U = true;
+           this.M = true;
+         }
+         if(encuesta.tipo == "U")
+         {
+ 
+           this.P = true;
+           this.U = false;
+           this.M = true;
+         }
+         if(encuesta.tipo == "M")
+         {
+           this.P = true;
+           this.U = true;
+           this.M = false;
+         }
+      }
+      
+    }*/
   }
   async encontrarAlumno() {
     this.Items = this.afDB.list("PPS/4A");
@@ -176,9 +192,9 @@ export class EncuestaEstadisticaPage {
         if (this.usuarioActual.legajo == cantidad[i].legajo) {
           this.cursaPPS4B = true;
           this.materias.push("LAB4");
-          if(this.cursos[0] == "4A")
+          if (this.cursos[0] == "4A")
             break;
-          else  
+          else
             this.cursos.push("4A");
         }
       }
@@ -191,9 +207,9 @@ export class EncuestaEstadisticaPage {
         if (this.usuarioActual.legajo == cantidad[i].legajo) {
           this.cursaPPS4B = true;
           this.materias.push("LAB4");
-          if(this.cursos[0] == "4B")
+          if (this.cursos[0] == "4B")
             break;
-          else  
+          else
             this.cursos.push("4B");
         }
       }
@@ -220,7 +236,7 @@ export class EncuestaEstadisticaPage {
     console.log(this.encues);
     console.log(this.listaEncuestas);
     console.log(this.respuestas);
-   
+
     //console.log(this.respuestas);
     //console.log(this.preguntas);
     /* var item: any = {};
