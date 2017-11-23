@@ -143,6 +143,8 @@ export class EncuestasPage {
     this.otra = true;
     this.boton = false;
     this.mostrar = false;
+    this.materia = "";
+    this.curso = "";
   }
  
 

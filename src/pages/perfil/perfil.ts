@@ -39,10 +39,16 @@ export class PerfilPage {
   fotos: Array<any> = new Array<any>();
   imagen: string;
   mostrarCambio: boolean = false;
+  default : boolean;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera, private loadingCtrl: LoadingController) {
     this.alum = this.navParams.get("usuario");
     this.traerImagenes();
+    if(this.imagenes.length == 0)
+    {
+        this.default = true;
+    } 
+
     console.log("imagenes", this.imagenes.length);
     /*if(this.storage.length == 0)
     {
@@ -116,11 +122,15 @@ export class PerfilPage {
     const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/fotos');
     this.items = itemsRef.valueChanges();
     this.items.subscribe(fotos => {
-      this.cant = fotos;
+      this.cant = fotos;     
       console.log(this.imagenes);
+      if(this.cant.length > 0)
+      {
+        this.default = false;
+      }
       this.imagenesBD();
     });
-
+   
     //this.indice = this.cant.length
     setTimeout(() => {
       loading.dismiss();
@@ -142,7 +152,9 @@ export class PerfilPage {
         this.imagen = this.imagenes[i];
     }
     if (this.imagen == null)
-      this.imagen = "../assets/imgs/male.png";
+     
+      this.default = true;      
+
   }
 
   cambiarImagen() {

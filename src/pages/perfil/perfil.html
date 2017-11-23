@@ -16,7 +16,13 @@
                     Datos : {{alum.usuario}}
                 </h3>
                 <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
-                    <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                    <div [hidden]="!default">
+                        <button class="imgbtn" (click)="cambiarImagen()"></button>
+                    </div>
+                    <div [hidden]="default">
+                        <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                    </div>
+
                     <div [hidden]="!mostrarCambio">
                         <div style="text-align:center">
                             <div *ngFor='let images of imagenes'>
