@@ -51,7 +51,7 @@ export class EncuestasPage {
   public Profesores: AngularFireList<any>;
   public profesores: Observable<any>;
   public Materias: Array<string>= [];
-  constructor(public navCtrl: NavController,public actionSheetCtrl : ActionSheetController, afDB: AngularFireDatabase, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,public actionSheetCtrl : ActionSheetController,public afDB: AngularFireDatabase, public navParams: NavParams) {
     //this.items = afDB.list('Encuestas').valueChanges();
 
     this.Items = afDB.list('Encuestas');
@@ -119,8 +119,19 @@ export class EncuestasPage {
     item.TiempoFin = tiempoFin;
     item.tipo = this.tipo;
     item.Preguntas = this.encuesta;
+
+    /*var resultadoEncuesta : any = {};
+    resultadoEncuesta.alumno = 0;
+    resultadoEncuesta.curso = this.curso;
+    resultadoEncuesta.encuesta = this.nombre;
+    resultadoEncuesta.id = this.indice;
+    resultadoEncuesta.materia = this.materia;
+    resultadoEncuesta.profesor = this.usuarioActual.usuario;*/
     console.log(item);
     this.Items.set('/' + this.indice, item);
+    /*this.Items = this.afDB.list('Resultados');
+    this.Items.valueChanges();
+    this.Items.set('/' + this.indice + '/',resultadoEncuesta);*/
     console.log(this.usuarioActual);
     this.otra = false;
     this.boton = true;

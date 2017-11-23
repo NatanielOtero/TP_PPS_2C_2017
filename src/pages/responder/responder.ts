@@ -1,6 +1,7 @@
-import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the ResponderPage page.
@@ -22,6 +23,11 @@ export class ResponderPage {
   respondio : any;
   opciones : any[] = new Array<any>();
   indice : any;
+  public Items: AngularFireList<any>;
+  public items: Observable<any>;
+  bandera: boolean = false;
+  anteriores : any[] = new Array<any>();
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB : AngularFireDatabase) {
     this.encuesta = this.navParams.get('encuesta');
     console.log(" encuesta  :" + JSON.stringify( this.encuesta));
@@ -36,7 +42,7 @@ export class ResponderPage {
   enviar()
   {
    
-    console.log("respondio" + this.respondio);
+    console.log("respondio" + this.respondio.legajo);
     console.log('encuesta' + this.encuesta);
     console.log("respuestas" + this.respuestas);
     let result : any = {};
@@ -44,11 +50,18 @@ export class ResponderPage {
     result.curso = this.encuesta.curso;
     result.materia = this.encuesta.materia;
     result.encuesta = this.encuesta.Nombre;
+    //result.alumno = this.respondio.legajo;
     result.id = this.indice;
     console.log("respuesta",result);
-    let Items = this.afDB.list('/Resultados/');
-    Items.set("/" + this.indice + "/" , result);
-    Items.set("/" + this.indice + "/alumno/" + this.respondio.legajo, this.respuestas);
+
+
+    this.Items = this.afDB.list('/Resultados/' + this.indice + "/alumno/" + this.respondio.legajo);
+    this.Items.set('/',this.respuestas);
+    //this.Items.set("/",this.respuestas);
+
+    /*let Item = this.afDB.object('/Resultados/' + this.indice + "/alumno/" + this.respondio.legajo);
+    Item.set(this.respuestas);*/
+    
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResponderPage');

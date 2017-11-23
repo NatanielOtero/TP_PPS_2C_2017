@@ -62,19 +62,16 @@ export class EncuestaEstadisticaPage {
             if (quest[i].materia == this.materias[y]) {
               for (var x = 0; x < this.cursos.length; x++) {
                 if (quest[i].curso == this.cursos[x]) {
-                  /////Cargar encuestas, ver que encuestas mostrar y como. volver 21/11/17
-                  if (quest[i].TiempoFin > tiempoActual)
-                  {
-
-
+                  if (quest[i].TiempoFin > tiempoActual) {
                     this.results.subscribe(result => {
+                      console.log(result.length);
                       for (var j = 0; j < result.length; j++) {
-                        console.log(result[j].encuesta, quest[i].Nombre)
-                        if (result[j].encuesta == quest[i].Nombre) {
-                          //console.log('hola',result[j].alumno[this.usuarioActual.legajo]);
-                          this.bandera = true;
+                        console.log(result[j].alumno[this.usuarioActual.legajo]);
+                        if (result[j].alumno[this.usuarioActual.legajo] != undefined) {
+                          if (result[j].encuesta == quest[i].Nombre) {
+                            this.bandera = true;
+                          }
                         }
-
                       }
                       if (this.bandera) {
                         this.bandera = false;

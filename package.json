@@ -35,6 +35,7 @@
     "@techiediaries/ngx-qrcode": "0.0.5",
     "angularfire2": "^5.0.0-rc.0",
     "babyparse": "^0.4.6",
+    "chart.js": "^2.7.1",
     "cordova-android": "^6.3.0",
     "cordova-browser": "^4.1.0",
     "cordova-plugin-browsertab": "^0.2.0",
