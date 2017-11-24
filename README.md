@@ -12,7 +12,7 @@ Objetivos : Esquema de la aplicacion, Frontend , Login, Registro, Login con red 
 
 * Gustavo Rotela
 
-Objetivos : Lectura de archivos, Carga de listados en las altas, carga de imagenes en las aulas, carga de imagenes en el perfil, carga de listados para tomar asistencia, encuestas , estadisticas.
+Objetivos : Lectura de archivos, Carga de listados en las altas, carga de imagenes en las aulas, carga de imagenes en el perfil, carga de listados para tomar asistencia, encuestas.
 
 
 
