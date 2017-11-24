@@ -41,7 +41,7 @@ export class PerfilPage {
   mostrarCambio: boolean = false;
   default : boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera,private loadingCtrl : LoadingController) {
     this.alum = this.navParams.get("usuario");
     this.traerImagenes();
     if(this.imagenes.length == 0)
@@ -114,10 +114,14 @@ export class PerfilPage {
     this.imagenes = new Array<any>();
 
     let loading = this.loadingCtrl.create({
-      spinner: 'bubbles'
+      spinner: 'hide',
+      content: `<div class="cssload-container">
+              <div class="cssload-whirlpool"></div>
+          </div>`,
+      cssClass: 'loader'
     });
 
-    loading.present();
+  loading.present();
 
     const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/fotos');
     this.items = itemsRef.valueChanges();
@@ -134,7 +138,7 @@ export class PerfilPage {
     //this.indice = this.cant.length
     setTimeout(() => {
       loading.dismiss();
-    }, 3000);
+    }, 5000);
   }
 
   async imagenesBD() {

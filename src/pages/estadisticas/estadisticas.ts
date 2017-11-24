@@ -1,3 +1,5 @@
+import { VerEstadisticaPage } from '../ver-estadistica/ver-estadistica';
+import { AngularFireObject } from 'angularfire2/database/interfaces';
 import { Component } from '@angular/core';
 import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -25,8 +27,9 @@ export class EstadisticasPage {
   codigo = this.navParams.get("codigo");
   estado = false;
   check = false;
-  Encuesta: string = "";
+  Encuesta: any[] = new Array<any>();
   pregunta: string = "";
+  listEncuesta: any[] = new Array<any>();
 
   tipo = "";
   pieChartLabels: Array<string> = [];
@@ -43,7 +46,7 @@ export class EstadisticasPage {
   cursaLAB44A: boolean = false;
   cursaLAB44B: boolean = false;
   encues: any[] = new Array<any>();
-  listaEncuestas: any[];
+
   materias: any[] = new Array<any>();
   cursos: any[] = new Array<any>();
   preguntas: any[] = new Array<any>();
@@ -52,6 +55,8 @@ export class EstadisticasPage {
   indice: any;
   legajos: any[] = new Array<any>();
   bandera: boolean = false;
+  public Questions: AngularFireList<any>;
+  public quests: Observable<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
     /*var encuesta = this.codigo.split("-");
@@ -81,28 +86,50 @@ export class EstadisticasPage {
       }
     );*/
     this.traerLegajos();
+   
     this.Results = afDB.list('Resultados');
     this.results = this.Results.valueChanges();
     this.results.subscribe(res => {
-      console.log(res.length);
+      console.log(res);
       for (var i = 0; i < res.length; i++) {
         if (res[i].tipo == "U") {
           if (res[i].alumno == 0) {
             //break;
           }
           else {
-            this.pregunta = res[i].encuesta;
+            this.Encuesta.push(res[i].encuesta);
+            this.listEncuesta.push(res[i]);
             for (var j = 0; j < this.legajos.length; j++) {
               if (res[i].alumno[this.legajos[j]] != undefined) {
                 this.ListaRespuestas.push(res[i].alumno[this.legajos[j]]);
               }
+              
             }
           }
         }
       }
+      console.log(res);
     });
+   
+   
   }
-
+  navegar(donde : any)
+  {
+    
+    for (var i = 0; i < this.listEncuesta.length; i++) {
+    
+     if(donde == this.listEncuesta[i].encuesta)
+     {
+       this.navCtrl.setRoot(VerEstadisticaPage,{
+         encuesta : this.listEncuesta[i]
+       })
+      console.log(" la encontro" , this.listEncuesta[i].encuesta);
+     }
+     
+      
+    }
+  
+  }
   async traerLegajos() {
     this.Items = this.afDB.list('prueba');
     this.items = this.Items.valueChanges();

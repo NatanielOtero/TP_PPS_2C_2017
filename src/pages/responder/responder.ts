@@ -1,3 +1,4 @@
+import { NativeAudio } from '@ionic-native/native-audio';
 import { EncuestaEstadisticaPage } from '../encuesta-estadistica/encuesta-estadistica';
 import { HomePage } from '../home/home';
 import { Component } from '@angular/core';
@@ -30,7 +31,8 @@ export class ResponderPage {
   bandera: boolean = false;
   anteriores : any[] = new Array<any>();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB : AngularFireDatabase) {
+  constructor(public navCtrl: NavController, private audio : NativeAudio, public navParams: NavParams, public afDB : AngularFireDatabase) {
+    this.audio.preloadSimple('fin', 'assets/sounds/finish.mp3')
     this.encuesta = this.navParams.get('encuesta');
     console.log(" encuesta  :" + JSON.stringify( this.encuesta));
     console.log(" preguntas sin json  :" + this.encuesta.Preguntas);
@@ -43,6 +45,7 @@ export class ResponderPage {
   }
   enviar()
   {
+    this.audio.play('fin');
    
     console.log("respondio" + this.respondio.legajo);
     console.log('encuesta' + this.encuesta);

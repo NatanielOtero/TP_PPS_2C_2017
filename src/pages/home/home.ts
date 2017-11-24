@@ -1,3 +1,4 @@
+import { NativeAudio } from '@ionic-native/native-audio';
 import { EncuestaEstadisticaPage } from '../encuesta-estadistica/encuesta-estadistica';
 import { AdministracionPage } from '../administracion/administracion';
 import { AlumnosPage } from '../alumnos/alumnos';
@@ -25,9 +26,10 @@ export class HomePage {
   tipo: string;
   user: Alta;
   scannedCode = null;
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController,private audio : NativeAudio ,public navCtrl: NavController, public navParams: NavParams) {
     this.tipo = navParams.get('tipo');
     this.user = navParams.get('usuario');
+    this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3')
 
     switch (this.tipo) {
       case "alumno":
@@ -52,6 +54,7 @@ export class HomePage {
   }
 
   ruteo(pagina: string) {
+    this.audio.play('btn');
     switch (pagina) {
       case "asist":
         this.navCtrl.push(AsistenciaPage);

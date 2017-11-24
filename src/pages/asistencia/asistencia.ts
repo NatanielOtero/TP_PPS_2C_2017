@@ -1,3 +1,4 @@
+import { NativeAudio } from '@ionic-native/native-audio';
 import { isEmpty } from 'rxjs/operator/isEmpty';
 import { Asistencia } from '../../entidades/asist';
 import { Alumno } from '../../entidades/alumnos';
@@ -43,11 +44,12 @@ export class AsistenciaPage {
   storage: any;
   boton : boolean = true;
 
-  constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
+  constructor(public navCtrl: NavController, private http: Http, private audio : NativeAudio , public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
     //this.leer();
     this.fecha = new Date().toLocaleDateString().toString();
     this.fecha = this.fecha.split('/');
     console.log(this.fecha);
+    this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3')
   }
 
 
@@ -57,6 +59,15 @@ export class AsistenciaPage {
     this.items = this.Items.valueChanges();
     this.items.subscribe(cantidad => this.cant = cantidad);
     this.leerMateria();
+    let loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: `<div class="cssload-container">
+              <div class="cssload-whirlpool"></div>
+          </div>`,
+      cssClass: 'loader'
+    });
+
+loading.present();
     setTimeout(() => {
 
       if (this.cant.length == 0) {
@@ -67,15 +78,15 @@ export class AsistenciaPage {
         console.log(this.cant);
         this.traerImagenes();
       }
-
-    }, 500);
+      loading.dismiss();
+    }, 400);
 
   }
 
   async traerImagenes() {
     console.log("lista/" + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
     const picture = storage().ref("lista/" + this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1);
-    await picture.getDownloadURL().then(data => this.storage = data);
+    await picture.getDownloadURL().then(data => this.storage = data).catch(err => console.error(err));
   }
 
   async tomarFoto() {
@@ -143,6 +154,7 @@ export class AsistenciaPage {
 
 
   guardar() {
+    this.audio.play('btn');
     const itemsRef = this.afDB.list('/lista/');
     itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
     for (var i = 0; i < this.cant1.length; i++) {

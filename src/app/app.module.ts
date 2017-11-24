@@ -1,3 +1,4 @@
+import { VerEstadisticaPage } from '../pages/ver-estadistica/ver-estadistica';
 import { AngularFireDatabase } from 'angularfire2/database-deprecated';
 import { ResponderPage } from '../pages/responder/responder';
 import { EncuestaEstadisticaPage } from '../pages/encuesta-estadistica/encuesta-estadistica';
@@ -45,7 +46,8 @@ import { Camera } from "@ionic-native/camera";
     AlumnosPage,
     AdministracionPage,
     EncuestaEstadisticaPage,
-    ResponderPage
+    ResponderPage,
+    VerEstadisticaPage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { Camera } from "@ionic-native/camera";
     AlumnosPage,
     AdministracionPage,
     EncuestaEstadisticaPage,
-    ResponderPage
+    ResponderPage,
+    VerEstadisticaPage
   ],
   providers: [
     StatusBar,

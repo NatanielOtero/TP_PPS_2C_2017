@@ -6,29 +6,34 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>estadísticas</ion-title>
+    <ion-navbar color="dark">
+
     </ion-navbar>
 </ion-header>
 
 
 <ion-content class="bg-image" padding>
-    
-    <h2><label>Estadisticas de "{{Encuesta}}"</label></h2>
-    <h4><label>Pregunta: "{{pregunta}}"</label></h4>
-    <div *ngIf="tipo == 'P'">
-          <div *ngFor="let i of ListaRespuestas"> 
-          <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
-          <label> {{i}}</label>
-          </div>
-    </div>
-    <div *ngIf="tipo != 'P'">
-   <canvas  id="myChart">
-   </canvas>
+    <div class="form_wrapper animated slideInUp">
 
-</div>
-<button (click)="hola()"></button>
-  </ion-content>
-  <div left bottom>
-      <button ion-fab color="dark" (click)="presentActionSheet()"><ion-icon ios="ios-menu" md="md-menu"></ion-icon></button>
-  </div>
+
+
+        <div class="bottom" *ngFor="let item of Encuesta">
+            <button (click)="navegar(item)">{{item}}</button>
+        </div>
+        <div *ngFor="let p of preguntas">
+            <label style="color:white">Pregunta: "{{p}}"</label>
+            <div *ngIf="tipo == 'P'">
+                <div *ngFor="let i of ListaRespuestas">
+                    <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                    <label> {{i}}</label>
+                </div>
+            </div>
+            <div *ngIf="tipo != 'P'">
+                <canvas id="myChart">
+                     </canvas>
+
+            </div>
+        </div>
+
+    </div>
+</ion-content>
