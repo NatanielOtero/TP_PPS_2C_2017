@@ -1,3 +1,5 @@
+import { EncuestaEstadisticaPage } from '../encuesta-estadistica/encuesta-estadistica';
+import { HomePage } from '../home/home';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
@@ -61,6 +63,10 @@ export class ResponderPage {
 
     /*let Item = this.afDB.object('/Resultados/' + this.indice + "/alumno/" + this.respondio.legajo);
     Item.set(this.respuestas);*/
+    this.navCtrl.setRoot(HomePage,{
+      tipo:this.respondio.tipo,
+      usuario:this.respondio
+    });
     
   }
   ionViewDidLoad() {

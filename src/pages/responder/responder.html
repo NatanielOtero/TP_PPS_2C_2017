@@ -23,7 +23,7 @@
                 <h3> {{item.question}} </h3>
                 <div style="background-color:white">
                     <div *ngFor="let op of item.opciones">
-                        <label>{{op}}  <input type="radio" [(ngModel)]="respuestas[item.indice]" name="{{op}}" value="{{op}}"></label>
+                        <label>{{op}}  <input type="radio" [(ngModel)]="respuestas[item.indice]"  value="{{op}}"></label>
 
                     </div>
                 </div>
