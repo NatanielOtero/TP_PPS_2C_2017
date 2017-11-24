@@ -7,13 +7,20 @@
 
 <ion-content class="bg-image" padding>
     <div class="form_wrapper animated bounceInLeft" [hidden]="contestando">
-        <div>
+        <div [hidden]="!encuestasPendientes">
             <h3>Tiene las siguientes encuestas disponibles</h3>
             <div *ngFor="let item of encues">
                 <button (click)="responder(item)">{{item}}</button>
             </div>
         </div>
+        <div [hidden]="encuestasPendientes" class="bottom">
+            <label>No tiene encuestas pendientes</label>
+            <br>
+
+        </div>
+
     </div>
+
     <!--<div class="form_wrapper animated bounceInRight" [hidden]="!contestando">
 
         <br>
@@ -65,5 +72,5 @@
             
         </div>-->
 
-    <button (click)="enviar()" ion-button color="encuestas">Enviar respuesta</button>
+
 </ion-content>

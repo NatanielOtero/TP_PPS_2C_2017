@@ -4,6 +4,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database';
 import { Chart } from 'chart.js';
+
 import { Materia } from '../../entidades/materia';
 
 @IonicPage()

@@ -43,6 +43,7 @@ export class EncuestaEstadisticaPage {
   respuestas: any[] = new Array<any>();
   indice: any;
   bandera: boolean = false;
+  encuestasPendientes = false;
 
 
 
@@ -81,6 +82,10 @@ export class EncuestaEstadisticaPage {
                         this.alumno.quest = quest[i].Nombre;
                         this.encues.push(this.alumno.quest);
                         this.listaEncuestas = quest;
+                        if(this.listaEncuestas.length == 0)
+                        {
+                          this.encuestasPendientes = true;
+                        }
                       }
                     });
                   }
