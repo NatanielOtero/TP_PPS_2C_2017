@@ -57,6 +57,7 @@ export class EstadisticasPage {
   bandera: boolean = false;
   public Questions: AngularFireList<any>;
   public quests: Observable<any>;
+  listaPreguntas: any[] = new Array<any>();
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
     /*var encuesta = this.codigo.split("-");
@@ -86,11 +87,11 @@ export class EstadisticasPage {
       }
     );*/
     this.traerLegajos();
-   
+    
     this.Results = afDB.list('Resultados');
     this.results = this.Results.valueChanges();
     this.results.subscribe(res => {
-      console.log(res);
+      //console.log(res);
       for (var i = 0; i < res.length; i++) {
         if (res[i].tipo == "U") {
           if (res[i].alumno == 0) {
@@ -101,35 +102,59 @@ export class EstadisticasPage {
             this.listEncuesta.push(res[i]);
             for (var j = 0; j < this.legajos.length; j++) {
               if (res[i].alumno[this.legajos[j]] != undefined) {
-                this.ListaRespuestas.push(res[i].alumno[this.legajos[j]]);
+                //console.log(res[i].alumno[this.legajos[j]]);
               }
-              
+
             }
           }
         }
       }
+
+      
       console.log(res);
     });
-   
-   
+    this.traerPreguntas();
+
   }
-  navegar(donde : any)
-  {
-    
+  navegar(donde: any) {
+
     for (var i = 0; i < this.listEncuesta.length; i++) {
-    
-     if(donde == this.listEncuesta[i].encuesta)
-     {
-       this.navCtrl.setRoot(VerEstadisticaPage,{
-         encuesta : this.listEncuesta[i]
-       })
-      console.log(" la encontro" , this.listEncuesta[i].encuesta);
-     }
-     
-      
+
+      if (donde == this.listEncuesta[i].encuesta) {
+        console.log(this.listaPreguntas[i]);
+        this.navCtrl.setRoot(VerEstadisticaPage, {
+          encuesta: this.listEncuesta[i],
+          preguntas: this.listaPreguntas[i],
+          legajos:this.legajos
+        })
+        
+      }
+
     }
-  
+
   }
+
+  traerPreguntas()
+  {
+    this.Items = this.afDB.list('Encuestas');
+    this.items = this.Items.valueChanges();
+    this.items.subscribe(preg => {
+      for (var i = 0; i < preg.length; i++) {
+        for (var j = 0; j < this.Encuesta.length; j++) {
+          if(preg[i].Nombre == this.Encuesta[j])
+          {
+              this.listaPreguntas.push(preg[i].Preguntas);
+              //console.log(this.Encuesta);
+              //console.log('hola',preg[i].Nombre,this.Encuesta[j]);
+              console.log('hola' + i,this.listaPreguntas);
+          }
+          
+        }
+        //if(preg[i].Nombre == this.Encuesta)
+      }
+    });
+  }
+
   async traerLegajos() {
     this.Items = this.afDB.list('prueba');
     this.items = this.Items.valueChanges();

@@ -18,7 +18,7 @@ export class VerEstadisticaPage {
   estado = false;
   check = false;
   Encuesta: any[] = new Array<any>();
-  pregunta: string = "";
+  preguntas: any[] = [];
   listEncuesta: any[] = new Array<any>();
   ListaRespuestas: Array<any> = [];
   tipo = "";
@@ -27,14 +27,91 @@ export class VerEstadisticaPage {
   pieChartType: string = 'pie';
   pieChartColor: Array<any> = [];
   encuesta : any;
+  pregunta: string = "";
+  nombreEnc:any ;
+  opciones:string[]=[];
+  cantidadPersonasVotos:number=0;
+  cantidadVotos:number[] = [];
+  legajos : any [] = [];
+  respuestas: any [] = [];
+  a:number = 0;
+  b:number = 0;
+  c:number = 0;
+  d:number = 0;
+  f:number = 0;
+  
+
+
+  //pregunta: any[] = [];
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.encuesta =  this.navParams.get('encuesta');
-    console.log(this.encuesta);
+    this.preguntas = this.navParams.get('preguntas');
+    this.legajos = this.navParams.get('legajos');
+    this.nombreEnc = this.encuesta.encuesta;
+    //console.log(this.legajos);
+    //this.pieChartLabels = this.encuesta;
+    for (var i = 0; i < this.preguntas.length; i++) {
+      //var element = array[i];
+      for (var j = 0; j < this.preguntas[i].opciones.length; j++) {
+        this.opciones.push(this.preguntas[i].opciones[j]);
+        
+      }
+      console.log("opciones",this.opciones);
+      //this.opciones.push(this.preguntas[i].opciones);
+      //this.preguntas.push(this.pregunta[i].question);
+      this.pregunta = this.preguntas[i].question;
+      //console.log('tasukete',this.encuesta.alumno.length);
+      
+    }
+    for (var i = 0; i < this.legajos.length; i++) {
+      if(this.encuesta.alumno[this.legajos[i]]!= undefined)
+      {
+        for (var j = 0; j < this.opciones.length; j++) {
+
+          if(this.encuesta.alumno[this.legajos[i]] == this.opciones[j])
+          {
+            if(j == 0)
+            {
+              this.a++;
+            }
+            else if(j == 1)
+            {
+              this.b++;
+            }
+            else if(j == 2)
+            {
+              this.c++;
+            }
+            else if(j == 3)
+            {
+              this.d++;
+            }
+            else if(j == 4)
+            {
+              this.f++;
+            }
+          }
+          
+        }
+       
+      }
+        //this.respuestas.push(this.encuesta.alumno[this.legajos[i]]);
+      
+    }
+    this.cantidadVotos.push(this.a);
+    this.cantidadVotos.push(this.b);
+    this.cantidadVotos.push(this.c);
+    this.cantidadVotos.push(this.d);
+    this.cantidadVotos.push(this.f);
+    //console.log(this.opciones);
+
+    this.mostrar();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VerEstadisticaPage');
   }
+
   public chartClicked(e: any): void {
     console.log(e);
   }
@@ -44,7 +121,7 @@ export class VerEstadisticaPage {
   }
 
   /*ObtenerCantidades() {
-    //this.results.subscribe(
+    this.results.subscribe(
       rest => {
         for (let i = 0; i < rest.length; i++) {
           if (rest[i].cuestionario == this.codigo) {
@@ -73,8 +150,8 @@ export class VerEstadisticaPage {
             }
             //this.Aula.Alumnos = aula[i].Alumnos;
             break;
-        }
-       }
+        }*/
+       /*}
         for (let z = 0; z < this.ListaRespuestas.length; z++) {
           this.pieChartData.push(this.ListaRespuestas[z].cantidad);
           /*switch(z)
@@ -99,19 +176,27 @@ export class VerEstadisticaPage {
         this.mostrar();
       }
     );
-  }*/
+      }*/
   mostrar() {
+    /*for (let z = 0; z < this.ListaRespuestas.length; z++) {
+      this.pieChartData.push(this.ListaRespuestas[z].cantidad);
+    }*/
+    //this.pieChartData.push(this.pregunta.length);
+    console.log(this.opciones);
+    console.log(this.cantidadVotos);
+    
+
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
       type: this.pieChartType,
       //type: "pie",
       data: {
-        labels: this.pieChartLabels,
+        labels: this.opciones,
         //labels: ["A","B","C","D","E"],
         datasets: [{
-          label: this.pieChartLabels,
+          label: "cantidad de votos",
           //data:[4,5,6,7,8],
-          data: this.pieChartData,
+          data: this.cantidadVotos,
           backgroundColor: [
             'rgba(0, 0, 0, 0.3)',
             'rgba(230, 0, 0, 0.4)',
@@ -129,17 +214,8 @@ export class VerEstadisticaPage {
           borderWidth: 2
         }]
       },
-      /*options: {
-          scales: {
-              yAxes: [{
-                  ticks: {
-                      beginAtZero:true
-                  }
-              }]
-          }
-      }*/
     });
+    console.log(myChart);
     this.estado = true;
   }
-
 }
