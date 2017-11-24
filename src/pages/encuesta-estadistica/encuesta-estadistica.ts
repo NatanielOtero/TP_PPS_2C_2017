@@ -35,7 +35,7 @@ export class EncuestaEstadisticaPage {
   cursaLAB44A: boolean = false;
   cursaLAB44B: boolean = false;
   encues: any[] = new Array<any>();
-  listaEncuestas: any[];
+  listaEncuestas: any[] = new Array<any>();
   materias: any[] = new Array<any>();
   cursos: any[] = new Array<any>();
   preguntas: any[] = new Array<any>();
@@ -82,10 +82,13 @@ export class EncuestaEstadisticaPage {
                         this.alumno.quest = quest[i].Nombre;
                         this.encues.push(this.alumno.quest);
                         this.listaEncuestas = quest;
-                        if(this.listaEncuestas.length == 0)
-                        {
-                          this.encuestasPendientes = true;
-                        }
+                        console.log(this.listaEncuestas);
+                       if(this.listaEncuestas.length == 0)
+                          {
+                            this.encuestasPendientes = true;
+                          }
+                      
+                      
                       }
                     });
                   }

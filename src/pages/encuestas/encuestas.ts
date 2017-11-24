@@ -17,8 +17,9 @@ export class EncuestasPage {
 
   usuarioActual : any;
   perfilActual : any;
+  des: boolean = false;
 
-  public formato : string = 'P';
+  public formato : string;
   public cantidad : number = 2;
   public horas : number;
 
@@ -73,6 +74,12 @@ export class EncuestasPage {
 
   }
 
+  lock()
+  {
+      this.des = true;
+
+  }
+
   AgregarQuestion()
   { 
     var item : any = {};
@@ -97,8 +104,7 @@ export class EncuestasPage {
     }
     this.question = ""; 
     this.respuesta = "";
-    this.cantidad = 2;
-    this.formato = 'P';
+    this.cantidad = 2;    
     this.option = [];
    
   }
@@ -156,6 +162,8 @@ export class EncuestasPage {
     this.mostrar = false;
     this.materia = "";
     this.curso = "";
+    this.des = false;
+    this.formato = "";
   }
  
 

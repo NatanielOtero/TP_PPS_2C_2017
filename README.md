@@ -4,23 +4,15 @@ TP Final de la practica profesional supervisada
 
 * Nataniel Otero
 
-Objetivos : Login con Google + , Login con Facebook, Esquema de la aplicacion, Estilos
+Objetivos : Esquema de la aplicacion, Frontend , Login, Registro, Login con red social, ABM alumnos, ABM profesores,
+ manejo de asistencias, Modificacion de datos del pefil, toma de asistencia.
 
-Fecha de entrega : 3/11
+
 
 
 * Gustavo Rotela
 
-Objetivos : Lectura de archivos, Descarga de archivos
+Objetivos : Lectura de archivos, Carga de listados en las altas, carga de imagenes en las aulas, carga de imagenes en el perfil, carga de listados para tomar asistencia, encuestas , estadisticas.
 
-Fecha de entrega : 3/11
 
-PLUGINS:
- ionic cordova plugin add cordova-plugin-file, npm install --save @ionic-native/file, npm install babyparse --save
-
-* Santiago Ortiz
-
-Objetivos : Administracion de los perfiles
-
-Fecha de entrega : 3/11
 

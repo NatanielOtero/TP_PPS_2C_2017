@@ -76,7 +76,7 @@
             <div>
 
                 <label>Formato</label>
-                <select [(ngModel)]="formato">
+                <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
                     <option value="U">Con opciones</option>                  
                     <option value="P">Respuesta propia</option>
                  </select>
