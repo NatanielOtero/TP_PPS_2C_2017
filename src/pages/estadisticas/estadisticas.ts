@@ -103,47 +103,35 @@ export class EstadisticasPage {
         }
       }
     );*/
-    this.Items = afDB.list('Encuestas');
+    
     this.Results = afDB.list('Resultados');
     this.results = this.Results.valueChanges();
-    var tiempoActual = Date.now();
-    this.items = this.Items.valueChanges();
-    this.items.subscribe(
-      quest => {
-        for (let i = 0; i < quest.length; i++) {
-          for (var y = 0; y < this.materias.length; y++) {
-            if (quest[i].materia == this.materias[y]) {
-              for (var x = 0; x < this.cursos.length; x++) {
-                if (quest[i].curso == this.cursos[x]) {
-                  /////Cargar encuestas, ver que encuestas mostrar y como. volver 21/11/17
-                  if (quest[i].tipo == "U")
-                  {
-                    this.results.subscribe(result => {
-                      for (var j = 0; j < result.length; j++) {
-                        console.log(result[j].encuesta, quest[i].Nombre)
-                        if (result[j].encuesta == quest[i].Nombre) {
-                          //console.log('hola',result[j].alumno[this.usuarioActual.legajo]);
-                          this.bandera = true;
-                        }
-                      }
-                      if (this.bandera) {
-                        this.bandera = false;
-                      }
-                      else {
-                        this.alumno.tipo = quest[i].tipo;
-                        this.alumno.quest = quest[i].Nombre;
-                        this.encues.push(this.alumno.quest);
-                        this.listaEncuestas = quest;
-                      }
-                    });
-                  }
-                }
+    this.results.subscribe(res => {
+      for (var i = 0; i < res.length; i++) {
+        if(res[i].tipo == "U")
+        {
+          if(res[i].alumno == 0)
+          {
+            //break;
+          }
+          else
+          {
+            
+            this.Items = afDB.list('prueba');
+            this.items = this.Items.valueChanges();   
+            this.items.subscribe(alum => {
+              console.log('hola');
+              console.log(res[i]);
+              for (var j = 0; j < alum.length; j++) {
+                console.log(res[i].alumno[alum[j].legajo]);
               }
-            }
+            });
+            
           }
         }
       }
-    );
+    });
+
   }
 
   public chartClicked(e: any): void {

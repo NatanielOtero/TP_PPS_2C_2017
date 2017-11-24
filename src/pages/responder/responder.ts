@@ -59,6 +59,7 @@ export class ResponderPage {
 
     this.Items = this.afDB.list('/Resultados/' + this.indice + "/alumno/" + this.respondio.legajo);
     this.Items.set('/',this.respuestas);
+    //this.Items = this.afDB.list('/Resultados/' + this.indice + '/respondieron/' + this.resp)
     //this.Items.set("/",this.respuestas);
 
     /*let Item = this.afDB.object('/Resultados/' + this.indice + "/alumno/" + this.respondio.legajo);

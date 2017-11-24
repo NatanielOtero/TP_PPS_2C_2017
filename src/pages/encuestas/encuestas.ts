@@ -126,6 +126,7 @@ export class EncuestasPage {
     resultadoEncuesta.id = this.indice;
     resultadoEncuesta.materia = this.materia;
     resultadoEncuesta.profesor = this.usuarioActual.usuario;
+    resultadoEncuesta.tipo = this.tipo;
     console.log(item);
     this.Items.set('/' + this.indice, item);
     this.Items = this.afDB.list('Resultados');
