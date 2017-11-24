@@ -50,9 +50,10 @@ export class EstadisticasPage {
   opciones: any[] = new Array<any>();
   respuestas: any[] = new Array<any>();
   indice: any;
+  legajos: any[] = new Array<any>();
   bandera: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, afDB: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
     /*var encuesta = this.codigo.split("-");
     this.Encuesta = encuesta[0];
     this.usuarioActual = JSON.parse(localStorage.getItem("usuario"));
@@ -64,21 +65,7 @@ export class EstadisticasPage {
         for (let i = 0; i < quest.length; i++) {
           if (quest[i].Codigo == this.codigo) {
             this.tipo = quest[i].Preguntas[0].tipo;
-            this.pregunta = quest[i].Preguntas[0].question;
-            if (quest[i].Preguntas[0].tipo == 'P') {
-              this.Respuestas = afDB.list('Respuestas');
-              this.respuesta = this.Respuestas.valueChanges();
-              this.respuesta.subscribe(
-                rest => {
-                  for (let x = 0; x < rest.length; x++) {
-                    if (rest[x].cuestionario == this.codigo) {
-                      this.ListaRespuestas.push(rest[x].respuestas[0].respuesta);
-                    }
-                  }
-                }
-              );
-            }
-            else {
+
               this.pregunta = quest[i].Preguntas[0].question;
               if (quest[i].Preguntas[0].tipo == 'U') {
                 for (let y = 0; y < quest[i].Preguntas[0].opciones.length; y++) {
@@ -87,52 +74,54 @@ export class EstadisticasPage {
                   this.pieChartLabels.push(quest[i].Preguntas[0].opciones[y]);
                 }
               }
-              if (quest[i].Preguntas[0].tipo == 'M') {
-                this.ListaRespuestas.push({ "respuesta": "SÍ", "cantidad": 0 });
-                this.ListaRespuestas.push({ "respuesta": "NO", "cantidad": 0 });
-                this.pieChartLabels.push("SÍ");
-                this.pieChartLabels.push("NO");
-                this.check = true;
-              }
-              this.Respuestas = afDB.list('Respuestas');
-              this.respuesta = this.Respuestas.valueChanges();
-              this.ObtenerCantidades();
-            }
+            
             break;
           }
         }
       }
     );*/
-    
+    this.traerLegajos();
     this.Results = afDB.list('Resultados');
     this.results = this.Results.valueChanges();
     this.results.subscribe(res => {
+      console.log(res.length);
       for (var i = 0; i < res.length; i++) {
-        if(res[i].tipo == "U")
-        {
-          if(res[i].alumno == 0)
-          {
+        if (res[i].tipo == "U") {
+          if (res[i].alumno == 0) {
             //break;
           }
-          else
-          {
-            
-            this.Items = afDB.list('prueba');
-            this.items = this.Items.valueChanges();   
-            this.items.subscribe(alum => {
-              console.log('hola');
-              console.log(res[i]);
-              for (var j = 0; j < alum.length; j++) {
-                console.log(res[i].alumno[alum[j].legajo]);
+          else {
+            this.pregunta = res[i].encuesta;
+            for (var j = 0; j < this.legajos.length; j++) {
+              if (res[i].alumno[this.legajos[j]] != undefined) {
+                this.ListaRespuestas.push(res[i].alumno[this.legajos[j]]);
               }
-            });
-            
+            }
           }
         }
       }
     });
-
   }
+
+  async traerLegajos() {
+    this.Items = this.afDB.list('prueba');
+    this.items = this.Items.valueChanges();
+    await this.items.subscribe(alum => {
+      console.log('hola');
+      //console.log(res[i]);
+
+      for (var j = 0; j < alum.length; j++) {
+        //console.log(res[i].alumno[alum[j].legajo]);
+        //console.log(res[i].alumno);
+        if (alum[j].legajo != undefined) {
+          this.legajos[j] = alum[j].legajo;
+        }
+
+      }
+      //console.log(this.legajos);
+    });
+  }
+
 
   public chartClicked(e: any): void {
     console.log(e);
@@ -143,19 +132,19 @@ export class EstadisticasPage {
   }
 
   ObtenerCantidades() {
-    this.respuesta.subscribe(
+    this.results.subscribe(
       rest => {
         for (let i = 0; i < rest.length; i++) {
           if (rest[i].cuestionario == this.codigo) {
             if (!this.check) {
               for (let y = 0; y < this.ListaRespuestas.length; y++) {
-                if (this.ListaRespuestas[y].respuesta == rest[i].respuestas[0].respuesta) {
+                if (this.ListaRespuestas[y].results == rest[i].respuestas[0].results) {
                   this.ListaRespuestas[y].cantidad++;
                 }
               }
             }
             else {
-              if (rest[i].respuestas[0].respuesta == true) {
+              if (rest[i].respuestas[0].results == true) {
                 this.ListaRespuestas[0].cantidad++;
               }
               else {
