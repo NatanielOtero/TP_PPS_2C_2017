@@ -66,7 +66,7 @@ export class HomePage {
         this.navCtrl.push(EncuestaEstadisticaPage, { usuario: this.user });
         break;
       case "est":
-        this.navCtrl.push(EstadisticasPage);
+        this.navCtrl.push(EstadisticasPage, { usuario: this.user });
         break;
       case "perfil":
         this.navCtrl.push(PerfilPage, { usuario: this.user });

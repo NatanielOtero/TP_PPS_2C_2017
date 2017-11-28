@@ -52,6 +52,7 @@ export class VerEstadisticaPage {
     //this.pieChartLabels = this.encuesta;
     for (var i = 0; i < this.preguntas.length; i++) {
       //var element = array[i];
+      
       for (var j = 0; j < this.preguntas[i].opciones.length; j++) {
         this.opciones.push(this.preguntas[i].opciones[j]);
         

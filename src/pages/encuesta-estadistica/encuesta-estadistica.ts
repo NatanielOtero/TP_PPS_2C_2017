@@ -59,42 +59,45 @@ export class EncuestaEstadisticaPage {
     this.items.subscribe(
       quest => {
         for (let i = 0; i < quest.length; i++) {
-          for (var y = 0; y < this.materias.length; y++) {
-            if (quest[i].materia == this.materias[y]) {
-              for (var x = 0; x < this.cursos.length; x++) {
-                if (quest[i].curso == this.cursos[x]) {
-                  if (quest[i].TiempoFin > tiempoActual) {
-                    this.results.subscribe(result => {
-                      console.log(result.length);
-                      for (var j = 0; j < result.length; j++) {
-                        console.log(result[j].alumno[this.usuarioActual.legajo]);
-                        if (result[j].alumno[this.usuarioActual.legajo] != undefined) {
-                          if (result[j].encuesta == quest[i].Nombre) {
-                            this.bandera = true;
+          if (quest[i].habilitado == true) {
+            for (var y = 0; y < this.materias.length; y++) {
+              if (quest[i].materia == this.materias[y]) {
+                for (var x = 0; x < this.cursos.length; x++) {
+                  if (quest[i].curso == this.cursos[x]) {
+                    if (quest[i].TiempoFin > tiempoActual) {
+                      this.results.subscribe(result => {
+                        console.log(result.length);
+                        for (var j = 0; j < result.length; j++) {
+                          console.log(result[j].alumno[this.usuarioActual.legajo]);
+                          if (result[j].alumno[this.usuarioActual.legajo] != undefined) {
+                            if (result[j].encuesta == quest[i].Nombre) {
+                              this.bandera = true;
+                            }
                           }
                         }
-                      }
-                      if (this.bandera) {
-                        this.bandera = false;
-                      }
-                      else {
-                        this.alumno.tipo = quest[i].tipo;
-                        this.alumno.quest = quest[i].Nombre;
-                        this.encues.push(this.alumno.quest);
-                        this.listaEncuestas = quest;
-                        console.log(this.listaEncuestas);
-                       if(this.listaEncuestas.length == 0)
-                          {
+                        if (this.bandera) {
+                          this.bandera = false;
+                        }
+                        else {
+                          this.alumno.tipo = quest[i].tipo;
+                          this.alumno.quest = quest[i].Nombre;
+                          this.encues.push(this.alumno.quest);
+                          this.listaEncuestas = quest;
+                          console.log(this.listaEncuestas);
+                          if (this.listaEncuestas.length == 0) {
                             this.encuestasPendientes = true;
                           }
-                      
-                      
-                      }
-                    });
+                        }
+                      });
+                    }
                   }
                 }
               }
             }
+          }
+          else
+          {
+            this.encues.push("");
           }
         }
       }

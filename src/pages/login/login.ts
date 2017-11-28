@@ -44,7 +44,7 @@ export class LoginPage {
   }
   rapido()
   {
-     this.email = "gusrot2@gmail.com";
+     this.email = "pepegrillo@gmail.com";
      this.pw = "123456";
   }
 

@@ -34,10 +34,12 @@
 </ion-header>
 
 <ion-content class="bg-image" padding>
-    <div class="form_wrapper animated bounceInLeft">
+    <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
 
         <h3>Crear Encuesta</h3>
-
+        <div>
+            <button ion-button (click)="modificar()" color="encuestas" full>Modificar/borrar encuesta</button>
+        </div>
         <div [hidden]="mostrar">
             <label>Materia</label>
             <select [(ngModel)]="materia" (change)='f()'>
@@ -50,9 +52,9 @@
 
                 <label>Elija el curso</label>
                 <select [(ngModel)]="curso" (change)="g()">
-                <option value="4A">4A</option>
-                <option value="4B">4B</option>
-            </select>
+                    <option value="4A">4A</option>
+                    <option value="4B">4B</option>
+                </select>
 
             </div>
 
@@ -77,9 +79,9 @@
 
                 <label>Formato</label>
                 <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
-                    <option value="U">Con opciones</option>                  
+                    <option value="U">Con opciones</option>
                     <option value="P">Respuesta propia</option>
-                 </select>
+                </select>
 
             </div>
 
@@ -87,11 +89,11 @@
             <div *ngIf="formato=='U'" class="animated bounceInLeft">
                 <label>Cantidad de Respuestas</label>
                 <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
-                        <option value="2">2</option>
-                            <option value="3">3</option>
-                                <option value="4">4</option>
-                                    <option value="5">5</option>
-                    </select>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
             <div>
                 <label> Pregunta</label>
@@ -106,18 +108,10 @@
 
                 </div>
             </div>
-
-
-
-
-
-
             <div [hidden]="boton" class="bottom">
                 <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>Agregar pregunta</button>
                 <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">Subir cuestionario</button>
             </div>
-
-
         </div>
         <div [hidden]="otra">
             <label>Encuesta creada</label>
@@ -125,6 +119,32 @@
                 <button ion-button (click)="otraE()" color="encuestas" full>Realizar otra?</button>
             </div>
 
+        </div>
+    </div>
+    <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+        <div class="form_wrapper animated slideInUp">
+            <div [hidden]="cambiarEncuesta">
+                <h3>lista de encuestas</h3>
+                <div *ngFor="let item of nombres">
+                    <div *ngIf="item != ''">
+                      <button (click)="cambiar(item)">{{item}}</button>
+                    </div>
+                </div>
+            </div>
+            <div [hidden]="!cambiarEncuesta">
+                <div [hidden]="cambiarPregunta">
+                    <div *ngFor="let p of preguntas">
+                        <button (click)="cambiarPreg(p)">{{p}}</button>
+                    </div>
+                    <div>
+                        <button (click)="borrarEnc()">Borrar Encuesta</button>
+                    </div>
+                </div>
+                <div [hidden]="!cambiarPregunta">
+                    <input type="text" [(ngModel)]="pregunta">
+                    <button (click)="guardarCambioPreg(p)">guardar cambio</button>
+                </div>
+            </div>
         </div>
     </div>
 </ion-content>
