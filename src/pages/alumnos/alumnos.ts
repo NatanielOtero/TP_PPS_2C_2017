@@ -19,7 +19,7 @@ import * as baby from 'babyparse';
   templateUrl: 'alumnos.html',
 })
 export class AlumnosPage {
-
+  i:number = 0;
   alta = {} as Alta;
   public usuariosList: AngularFireList<any>;
   public usuariosObs: Observable<any>;
@@ -153,7 +153,7 @@ export class AlumnosPage {
 
       console.log(this.mat);
       for (var i = 0; i < this.cant.length; i++) {
-        if (this.cant[i].tipo == 'alumno') {
+        //if (this.cant[i].tipo == 'alumno') {
 
 
           if (array[0] == this.cant[i].legajo) {
@@ -165,11 +165,11 @@ export class AlumnosPage {
             this.band = true;
             //this.materias = this.cant[i].materias;
           }
-        }
+        //}
       }
 
       if (!this.band) {
-        this.Items = this.afDB.list("/prueba/" + (j + this.cant.length));
+        this.Items = this.afDB.list("/prueba/" + (this.i + this.cant.length));
         this.Items.set("/pass", array[0]);
         this.Items.set("/legajo", array[0]);
         this.Items.set("/tipo", "alumno");
@@ -177,9 +177,10 @@ export class AlumnosPage {
         this.Items.set("/edad", "sin definir");
         this.Items.set("/email", "sin definir");
         this.Items.set("/usuario", array[1] + array1[0]);
-        this.Items.set("/id", (j + this.cant.length));
+        this.Items.set("/id", (this.i + this.cant.length));
         this.Items.set("/actividad", "activo");
         console.log("este usuario no existia");
+        this.i++;
       }
       else {
         this.band = false;

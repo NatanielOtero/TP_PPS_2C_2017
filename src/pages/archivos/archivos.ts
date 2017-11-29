@@ -42,6 +42,7 @@ export class ArchivosPage {
   public mat1: string;
   public mat2: string;
   public materias: any[];
+  i:number = 0;
 
   constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase) {
     this.leerDB();
@@ -103,7 +104,7 @@ export class ArchivosPage {
       }*/
 
       if (!this.band) {
-        this.Items = this.afDB.list("/" + this.opcion + "/" + this.opcion1 + '/' + (j + this.cant.length));
+        this.Items = this.afDB.list("/" + this.opcion + "/" + this.opcion1 + '/' + (this.i + this.cant.length));
         this.Items.set("/pass", array[0]);
         this.Items.set("/legajo", array[0]);
         this.Items.set("/tipo", "alumno");
@@ -111,11 +112,12 @@ export class ArchivosPage {
         this.Items.set("/edad", "sin definir");
         this.Items.set("/email", "sin definir");
         this.Items.set("/usuario", array[1] + array1[0]);
-        this.Items.set("/id", (j + this.cant.length));
+        this.Items.set("/id", (this.i + this.cant.length));
         this.Items.set("/actividad", "activo");
         this.Items.set("/vino",false);
         this.Items.set("/faltas",0);
         console.log("este usuario no existia");
+        this.i++;
       }
       else {
         this.band = false;

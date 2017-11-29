@@ -24,11 +24,11 @@ export class EmpleadosPage {
   public usuariosList: AngularFireList<any>;
   public usuariosObs: Observable<any>;
   public usuarios: Array<any>;
-  id : number;
-  opcion :string;
-  mostrar : boolean = false;
-  uno : boolean = true;
-  varios : boolean = true;
+  id: number;
+  opcion: string;
+  mostrar: boolean = false;
+  uno: boolean = true;
+  varios: boolean = true;
   public Items: AngularFireList<any>;
   public items: Observable<any>;
   band: boolean = false;
@@ -37,57 +37,79 @@ export class EmpleadosPage {
   csvData: any[] = [];
   public mat: string;
   public cant: Array<any> = new Array<any>();
+  bandera: boolean = true;
+  numero: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
     this.alta.edad = "sin definir";
-    this.alta.email = "sin definir";    
+    this.alta.email = "sin definir";
     this.alta.sexo = "sin definir";
     this.alta.usuario = "sin definir";
+
+    this.leerDB();
   }
-  f()
-  {
+
+  f() {
     switch (this.opcion) {
       case "uno":
         this.uno = false;
         this.varios = true;
         break;
       case "var":
-      this.uno = true;
-      this.varios = false;
-      break;
+        this.uno = true;
+        this.varios = false;
+        break;
       default:
         break;
     }
   }
-  enviar(){   
- 
+
+  enviar() {
 
     for (var index = 0; index < this.usuarios.length; index++) {
       var element = this.usuarios[index].id;
       this.id = element;
-      console.log(element);
-      console.log(this.id);
     }
 
-   var lastId = (this.id + 1);
-   this.alta.id = lastId;  
-   console.log(this.id);
-   console.log(lastId);   
-   console.log(this.alta);
-   console.log("inicio" + JSON.stringify(this.usuarios));
-   try {
-    const itemRef = this.afDB.object('/prueba/' + lastId  + "/");
-    itemRef.set(this.alta);
-   } catch (error) {
-     console.log(error);
-     console.log(this.id);
-     console.log(lastId);   
-     console.log(this.alta);
-     console.log("inicio" + JSON.stringify(this.usuarios));
-    
-   }
-   
-   
+    var lastId = (this.id + 1);
+    this.alta.id = lastId;
+    try {
+      for (let i = 0; i < this.numero.length; i++) {
+        console.log(this.numero[i]);
+        if (this.numero[i] == '.' || this.numero[i] == 'e' || this.numero[i] == ',' || this.numero[i] == " ") {
+          console.log("entre");
+          this.bandera = false;
+        }
+      }
+      if (this.bandera) {
+        this.alta.legajo = Number(this.numero);
+        if (this.alta.legajo == 0) {
+          console.log("introduzca un legajo");
+        }
+        else {
+          for (var i = 0; i < this.cant.length; i++) {
+            console.log(this.cant[i].legajo);
+            if (this.alta.legajo == this.cant[i].legajo) {
+              this.band = true;
+            }
+          }
+          if (!this.band) {
+            const itemRef = this.afDB.object('/prueba/' + lastId + "/");
+            itemRef.set(this.alta);
+          }
+          else {
+            this.band = false;
+            console.log("ya existe ese legajo");
+          }
+        }
+      }
+      else {
+        this.bandera = true;
+        console.log("no es un numero");
+      }
+    } catch (error) {
+
+    }
   }
 
   ionViewDidLoad() {
@@ -96,78 +118,85 @@ export class EmpleadosPage {
     this.usuariosObs.subscribe(
       user => this.usuarios = user,
     );
-    console.log("inicio" + JSON.stringify(this.usuarios));
   }
 
   private readCsvData() {
+    console.log("hola1");
     this.http.get(this.logo)
       .subscribe(
       data => this.extractData(data),
-      err => this.handleError(err)
-      );
+      err => this.handleError(err),
+    );
   }
   private handleError(err) {
-    console.log('something went wrong: ', err);
   }
   private extractData(res) {
     let csvData = res['_body'] || '';
     let parsedData = baby.parse(csvData, {
       header: false,
       dynamicTyping: true,
-      encoding: "UTF-8"
+      encoding: "UTF-8",
+
     }).data;
-
+    console.log("hola2");
     this.csvData = parsedData;
-
     console.log("despues CSV", this.formatParsedObject(this.csvData, false));
   }
 
+  handleUpload(e) {
+    if (e.target.files && e.target.files[0]) {
+      var reader = new FileReader();
+      //this.materia = e.target.files;
+      console.log("hola");
+      reader.onload = (e: any) => {
+        this.logo = e.target.result;
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }
+  }
+
   formatParsedObject(arr, hasTitles) {
-    //console.log("array",arr);
+    console.log("array", arr);
     let legajo,
       nom,
       cursa,
       obj = [];
 
     for (var j = 0; j < arr.length - 1; j++) {
-      var items = arr[j][0];
-      var items1 = arr[j][1];
-      let array = items.split(";");
-      let array1 = items1.split(";");
+      console.log(arr[j][0]);
+      let array = arr[j][0];
+      let items1 = arr[j][1];
+      //let array = items.split(";");
+      let array1 = items1.split(",");
 
-      console.log(this.mat);
       for (var i = 0; i < this.cant.length; i++) {
-        if (this.cant[i].tipo == 'alumno') {
 
-
-          if (array[0] == this.cant[i].legajo) {
-            if (this.cant[i].actividad == "inactivo") {
-              this.Items = this.afDB.list("/prueba/" + i);
-              this.Items.set("/actividad", "activo");
-            }
-
-            this.band = true;
-            //this.materias = this.cant[i].materias;
+        if (array[0] == this.cant[i].legajo) {
+          if (this.cant[i].actividad == "inactivo") {
+            this.Items = this.afDB.list("/prueba/" + i);
+            this.Items.set("/actividad", "activo");
           }
+
+          this.band = true;
+          //this.materias = this.cant[i].materias;
         }
+
       }
 
       if (!this.band) {
         this.Items = this.afDB.list("/prueba/" + (j + this.cant.length));
-        this.Items.set("/pass", array[0]);
-        this.Items.set("/legajo", array[0]);
-        this.Items.set("/tipo", "alumno");
+        this.Items.set("/pass", array);
+        this.Items.set("/legajo", array);
+        this.Items.set("/tipo", this.alta.tipo);
         this.Items.set("/sexo", "sin definir");
         this.Items.set("/edad", "sin definir");
         this.Items.set("/email", "sin definir");
-        this.Items.set("/usuario", array[1] + array1[0]);
+        this.Items.set("/usuario", array1[0] + " " + array1[1]);
         this.Items.set("/id", (j + this.cant.length));
         this.Items.set("/actividad", "activo");
-        console.log("este usuario no existia");
       }
       else {
         this.band = false;
-        console.log("este usuario existe");
       }
 
       obj.push({
@@ -178,7 +207,6 @@ export class EmpleadosPage {
       });
     }
     this.csvItem = obj;
-    console.log("hola", this.cant);
     this.leerDB();
   }
 

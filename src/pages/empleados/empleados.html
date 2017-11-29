@@ -36,8 +36,8 @@
             <form class="login active">
 
                 <div>
-                    <label>   <ion-icon name="mail"></ion-icon> | Legajo:</label>
-                    <input [(ngModel)]="alta.legajo" type="number" name="mail" />
+                    <label> <ion-icon name="mail"></ion-icon> | Legajo:</label>
+                    <input [(ngModel)]="numero" type="text" name="mail"  />
                 </div>
                 <div>
                     <label>   <ion-icon name="mail"></ion-icon> | Nombre:</label>
@@ -64,7 +64,10 @@
 
 
 
-
+        <select name="tipo" [(ngModel)]="alta.tipo">
+            <option value="profesor"> Profesor       </option>
+            <option value="administrativo">  Administrativo </option>                 
+         </select>
         <input id="file" type="file" (change)="handleUpload($event)">
         <button ion-button (click)="readCsvData()">leer csv</button>
         <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Descargar CSV</button>
