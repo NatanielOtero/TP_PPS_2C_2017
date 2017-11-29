@@ -44,6 +44,8 @@ export class EncuestaEstadisticaPage {
   indice: any;
   bandera: boolean = false;
   encuestasPendientes = false;
+  bandera1: boolean = true;
+  bandera2: boolean = false;
 
 
 
@@ -66,9 +68,9 @@ export class EncuestaEstadisticaPage {
                   if (quest[i].curso == this.cursos[x]) {
                     if (quest[i].TiempoFin > tiempoActual) {
                       this.results.subscribe(result => {
-                        console.log(result.length);
+                        //console.log(result.length);
                         for (var j = 0; j < result.length; j++) {
-                          console.log(result[j].alumno[this.usuarioActual.legajo]);
+                          //console.log(result[j].alumno[this.usuarioActual.legajo]);
                           if (result[j].alumno[this.usuarioActual.legajo] != undefined) {
                             if (result[j].encuesta == quest[i].Nombre) {
                               this.bandera = true;
@@ -81,13 +83,35 @@ export class EncuestaEstadisticaPage {
                         else {
                           this.alumno.tipo = quest[i].tipo;
                           this.alumno.quest = quest[i].Nombre;
-                          this.encues.push(this.alumno.quest);
+                          for (let z = 0; z < this.encues.length; z++) {
+                            if (this.encues[z] == this.alumno.quest) {
+                              this.bandera1 = false;
+                            }
+                          }
+                          if (this.bandera1) {
+                            this.encues.push(this.alumno.quest);
+                            this.bandera2 = true;
+                          }
+                          else
+                            this.bandera1 = true;
+
                           this.listaEncuestas = quest;
-                          console.log(this.listaEncuestas);
-                          if (this.listaEncuestas.length == 0) {
+
+                          console.log(this.encues);
+                          console.log(this.alumno.quest, i);
+                          console.log('y', y);
+                          console.log('x', x);
+                          console.log(this.encues.length);
+                          if (this.encues.length == 0) {
                             this.encuestasPendientes = true;
                           }
                         }
+                        /*if (this.bandera2)
+                        {
+                          console.log("entre");
+                          this.encuestasPendientes = true;
+                          this.bandera2 = false;
+                        }*/
                       });
                     }
                   }
@@ -95,13 +119,24 @@ export class EncuestaEstadisticaPage {
               }
             }
           }
-          else
-          {
+          else {
             this.encues.push("");
           }
         }
+       /* console.log(this.encues);
+        console.log("hola");
+        for (let index = 0; index < this.encues.length; index++) {
+          console.log(this.encues[index]);
+          if (this.encues[index] != "") {
+            console.log("hola mama", index);
+            this.bandera2 = true;
+          }
+        }*/
+        
+          
       }
     );
+    //console.log(this.encues);
   }
 
   averiguar() {

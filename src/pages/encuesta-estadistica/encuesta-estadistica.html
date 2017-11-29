@@ -11,8 +11,8 @@
             <h3>Tiene las siguientes encuestas disponibles</h3>
             <div *ngFor="let item of encues">
                 <div *ngIf="item != ''">
-                <button (click)="responder(item)">{{item}}</button>
-            </div>
+                    <button (click)="responder(item)">{{item}}</button>
+                </div>
             </div>
         </div>
         <div [hidden]="!encuestasPendientes" class="bottom">

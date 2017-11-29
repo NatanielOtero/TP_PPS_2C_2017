@@ -221,6 +221,7 @@ export class EncuestasPage {
     var item: any = {};
     var tiempoActual = Date.now();
     var tiempoFin = tiempoActual + (this.horas * 3600000);
+    console.log(tiempoFin);
     item.Nombre = this.nombre;
     item.materia = this.materia;
     item.Profesor = this.usuarioActual.usuario;

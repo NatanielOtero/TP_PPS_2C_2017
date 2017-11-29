@@ -38,6 +38,9 @@ export class AlumnosPage {
   band: boolean = false;
   public csvItem: any[] = [];
   public materia: any[];
+  numero:string;
+  bandera: boolean = true;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
     this.alta.edad = "sin definir";
     this.alta.email = "sin definir";
@@ -76,7 +79,7 @@ export class AlumnosPage {
   enviar() {
 
 
-    for (var index = 0; index < this.usuarios.length; index++) {
+    /*for (var index = 0; index < this.usuarios.length; index++) {
       var element = this.usuarios[index].id;
       this.id = element;
       console.log(element);
@@ -100,6 +103,55 @@ export class AlumnosPage {
       console.log(lastId);
       console.log(this.alta);
       console.log("inicio" + JSON.stringify(this.usuarios));
+
+    }*/
+    for (var index = 0; index < this.usuarios.length; index++) {
+      var element = this.usuarios[index].id;
+      this.id = element;
+    }
+
+    var lastId = (this.id + 1);
+    this.alta.id = lastId;
+    try {
+      for (let i = 0; i < this.numero.length; i++) {
+        console.log(this.numero[i]);
+        if (this.numero[i] == '.' || this.numero[i] == 'e' || this.numero[i] == ',' || this.numero[i] == " ") {
+          console.log("entre");
+          this.bandera = false;
+        }
+      }
+      if (this.bandera) {
+        this.alta.legajo = Number(this.numero);
+        if (this.alta.legajo == 0) {
+          console.log("introduzca un legajo");
+        }
+        else {
+          for (var i = 0; i < this.cant.length; i++) {
+            console.log(this.cant[i].legajo);
+            if (this.alta.legajo == this.cant[i].legajo) {
+              this.band = true;
+            }
+          }
+          if (!this.band) {
+            if (this.alta.usuario != "sin definir" && this.alta.usuario.length >= 6) {
+              const itemRef = this.afDB.object('/prueba/' + lastId + "/");
+              itemRef.set(this.alta);
+            }
+            else {
+              console.log("ingrese un usuario valido con mas de 6 caracteres");
+            }
+          }
+          else {
+            this.band = false;
+            console.log("ya existe ese legajo");
+          }
+        }
+      }
+      else {
+        this.bandera = true;
+        console.log("no es un numero");
+      }
+    } catch (error) {
 
     }
   }

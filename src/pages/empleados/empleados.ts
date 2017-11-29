@@ -94,8 +94,13 @@ export class EmpleadosPage {
             }
           }
           if (!this.band) {
-            const itemRef = this.afDB.object('/prueba/' + lastId + "/");
-            itemRef.set(this.alta);
+            if (this.alta.usuario != "sin definir" && this.alta.usuario.length >= 6) {
+              const itemRef = this.afDB.object('/prueba/' + lastId + "/");
+              itemRef.set(this.alta);
+            }
+            else {
+              console.log("ingrese un usuario valido con mas de 6 caracteres");
+            }
           }
           else {
             this.band = false;
