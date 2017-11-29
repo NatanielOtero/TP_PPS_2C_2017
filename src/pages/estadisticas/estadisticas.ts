@@ -122,7 +122,7 @@ export class EstadisticasPage {
 
       if (donde == this.listEncuesta[i].encuesta) {
         console.log(this.listaPreguntas[i]);
-        this.navCtrl.setRoot(VerEstadisticaPage, {
+        this.navCtrl.push(VerEstadisticaPage, {
           encuesta: this.listEncuesta[i],
           preguntas: this.listaPreguntas[i],
           legajos:this.legajos

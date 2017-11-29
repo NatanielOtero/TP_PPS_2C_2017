@@ -12,6 +12,7 @@ import { Alta } from "../../entidades/alta";
 import { Component, PACKAGE_ROOT_URL } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
+import { FaltasPage } from '../faltas/faltas';
 
 @Component({
   selector: 'page-home',
@@ -82,6 +83,9 @@ export class HomePage {
         break;
       case "adm":
         this.navCtrl.push(AdministracionPage);
+        break;
+      case "fal":
+        this.navCtrl.push(FaltasPage, { usuario: this.user });
         break;
       default:
         break;

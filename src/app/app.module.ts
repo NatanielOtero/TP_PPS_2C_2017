@@ -30,6 +30,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from "@ionic-native/camera";
+import { ChartsModule } from 'ng2-charts';
+
+import { FaltasPage } from '../pages/faltas/faltas';
 @NgModule({
   declarations: [
     MyApp,
@@ -47,7 +50,8 @@ import { Camera } from "@ionic-native/camera";
     AdministracionPage,
     EncuestaEstadisticaPage,
     ResponderPage,
-    VerEstadisticaPage
+    VerEstadisticaPage,
+    FaltasPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +59,8 @@ import { Camera } from "@ionic-native/camera";
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    HttpModule
+    HttpModule,
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -75,7 +80,8 @@ import { Camera } from "@ionic-native/camera";
     AdministracionPage,
     EncuestaEstadisticaPage,
     ResponderPage,
-    VerEstadisticaPage
+    VerEstadisticaPage,
+    FaltasPage
   ],
   providers: [
     StatusBar,
