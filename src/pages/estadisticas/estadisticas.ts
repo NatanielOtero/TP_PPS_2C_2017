@@ -1,12 +1,12 @@
 import { VerEstadisticaPage } from '../ver-estadistica/ver-estadistica';
 import { AngularFireObject } from 'angularfire2/database/interfaces';
 import { Component } from '@angular/core';
-import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database';
 import { Chart } from 'chart.js';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Materia } from '../../entidades/materia';
 
 @IonicPage()
@@ -59,7 +59,11 @@ export class EstadisticasPage {
   public quests: Observable<any>;
   listaPreguntas: any[] = new Array<any>();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
+  scannedCode = null;
+  Encuestas: AngularFireList<any>;
+  encuestas: Observable<any>;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase,public alertCtrl: AlertController, private barcodeScanner: BarcodeScanner) {
     /*var encuesta = this.codigo.split("-");
     this.Encuesta = encuesta[0];
     this.usuarioActual = JSON.parse(localStorage.getItem("usuario"));
@@ -283,5 +287,54 @@ export class EstadisticasPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad EstadisticaEncuestaPage');
+  }
+
+  buscarinfo()
+  {
+    let mensaje = "";
+    let titulo="";
+    this.Encuestas = this.afDB.list('Encuestas');
+    this.encuestas = this.Encuestas.valueChanges();
+
+    this.barcodeScanner.scan().then(barcodeData => {
+
+      this.scannedCode = barcodeData.text;
+
+          this.encuestas.forEach(element => {
+            element.forEach(encuesta => {
+              
+              if (encuesta.Nombre == this.scannedCode) 
+              {
+                titulo=encuesta.Nombre;
+                mensaje = mensaje + " Materia: " + encuesta.materia;
+                mensaje = mensaje + "<br> Curso: " + encuesta.curso;
+                mensaje = mensaje + "<br> Profesor: " + encuesta.Profesor;
+                mensaje = mensaje + "<br> Fecha de inicio: " + encuesta.FechaComienzo;
+                mensaje = mensaje + "<br> Fecha de finalizacion: " + encuesta.FechaFin;
+              }
+            });
+          });
+          setTimeout(() => {
+            if (titulo == "") {
+              this.mensaje("", "No se encontro encuesta");
+            }
+            else {
+              this.mensaje(titulo, mensaje);
+            }
+          }, 300);
+
+
+    }, (err) => {
+      this.mensaje('Error: ', err);
+    });
+
+  }
+  mensaje(t, m) {
+    let alert = this.alertCtrl.create({
+      title: t,
+      subTitle: m,
+      buttons: ['Aceptar']
+    });
+    alert.present();
   }
 }

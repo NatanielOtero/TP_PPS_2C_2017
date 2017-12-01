@@ -34,18 +34,23 @@ export class LoginPage {
   public usuariosList : AngularFireList<any>;
   public usuariosObs : Observable<any>;
   public usuarios : Array<any>;
-
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtr: ToastController, public ActCtr: ActionSheetController,
     private aute: AngularFireAuth, private alert: AlertController, public audio: NativeAudio, private googlePlus: GooglePlus,
     private facebook : Facebook,public afDB: AngularFireDatabase) {
     this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3'); 
-     
+    
   }
   rapido()
   {
      this.email = "admin@admin.com";
      this.pw = "administrador";
+  }
+  async  cargar(u)
+  {
+    this.email = u;
+    this.pw = "123456";
   }
 
   async login() {    
