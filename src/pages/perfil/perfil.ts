@@ -39,15 +39,15 @@ export class PerfilPage {
   fotos: Array<any> = new Array<any>();
   imagen: string;
   mostrarCambio: boolean = false;
-  default: boolean;
-  foto = {} as any;
+  default : boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera,private loadingCtrl : LoadingController) {
     this.alum = this.navParams.get("usuario");
     this.traerImagenes();
-    if (this.imagenes.length == 0) {
-      this.default = true;
-    }
+    if(this.imagenes.length == 0)
+    {
+        this.default = true;
+    } 
 
     console.log("imagenes", this.imagenes.length);
     /*if(this.storage.length == 0)
@@ -121,19 +121,20 @@ export class PerfilPage {
       cssClass: 'loader'
     });
 
-    loading.present();
+  loading.present();
 
     const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/fotos');
     this.items = itemsRef.valueChanges();
     this.items.subscribe(fotos => {
-      this.cant = fotos;
+      this.cant = fotos;     
       console.log(this.imagenes);
-      if (this.cant.length > 0) {
+      if(this.cant.length > 0)
+      {
         this.default = false;
       }
       this.imagenesBD();
     });
-
+   
     //this.indice = this.cant.length
     setTimeout(() => {
       loading.dismiss();
@@ -147,16 +148,16 @@ export class PerfilPage {
       await picture.getDownloadURL().then(data => this.storage = data);
       this.imagenes[i] = this.storage;
     }
-
+    
     this.indice = this.imagenes.length;
-    console.log("indice", this.indice);
+    console.log("indice",this.indice);
     for (var i = 0; i < this.cant.length; i++) {
       if (this.cant[i] == true)
         this.imagen = this.imagenes[i];
     }
     if (this.imagen == null)
-
-      this.default = true;
+     
+      this.default = true;      
 
   }
 
@@ -167,9 +168,9 @@ export class PerfilPage {
       this.mostrarCambio = false;
   }
 
-  modificarImagen(imagen: any) {
+  modificarImagen(imagen:any) {
     console.log(imagen);
-
+    
     for (var i = 0; i < this.cant.length; i++) {
       if (this.imagenes[i] == imagen) {
         console.log(imagen);
@@ -186,30 +187,6 @@ export class PerfilPage {
         itemRef.set(false);
       }
     }
-    this.mostrarCambio = false;
-  }
-
-  obtenerFoto(e) {
-    this.foto = e.target.files[0];
-    console.log(this.foto);
-  }
-
-  subirFoto() {
-
-    /*const pictures = storage().ref('/perfil/' + this.alum.id + '/' + this.indice + '/');
-    pictures.putString(this.foto, 'data_url');
-    const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/');
-    itemsRef.set('fotos/' + this.indice, false);*/
-    var storageRef = storage().ref();
-
-    storageRef.child('/perfil/' + this.alum.id + '/' + this.indice)
-      .put(this.foto)
-      .then((snapshot) => {
-        console.log("FILE: " + this.foto.name);
-      });
-    const itemsRef = this.afDB.list('/prueba/' + this.alum.id + '/');
-    itemsRef.set('fotos/' + this.indice, false);
-
-    this.traerImagenes();
+    this.mostrarCambio=false;
   }
 }
