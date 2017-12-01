@@ -37,8 +37,10 @@
                 <label>| Ocupación: {{alum.tipo}} </label>
                 <label>| Legajo: {{alum.legajo}} </label>
                 <label>
-                    <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
-                        <ion-icon name="camera"></ion-icon>Foto de perfil</button>
+                    <!--<button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                        <ion-icon name="camera"></ion-icon>Foto de perfil</button>-->
+                        <ion-input (change)="obtenerFoto($event)" type="file" id="file" name="file"></ion-input>
+                        <button ion-button block large round icon-left color='light' (click)="subirFoto()">Agregar imagen</button>
                 </label>
                 <div class="bottom">
                     <button ion-button (click)="mod()">
