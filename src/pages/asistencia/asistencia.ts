@@ -12,7 +12,6 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { storage, initializeApp } from "firebase";
 import { DateTimeData } from 'ionic-angular/util/datetime-util';
 import { ToastController } from 'ionic-angular';
-import { File } from '@ionic-native/file';
 
 /**
  * Generated class for the AsistenciaPage page.
@@ -171,72 +170,4 @@ loading.present();
   ionViewDidLoad() {
     console.log('ionViewDidLoad AsistenciaPage');
   }
-
-
-  saveAsCsv() {
-    
-    var csv: any = this.convertToCSV(this.cant)
-    var file=new File();
-    var date=new Date();
-    
-    var fileName: any = "listado "+this.opcion1+"-"+this.opcion+"-"+ date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+".csv"
-    file.writeFile(file.externalRootDirectory, fileName, csv )
-      .then(
-      _ => {
-        let tost = this.toastCtr.create({
-          message: 'Archivo Guardado exitosamente',
-          duration: 3000,
-          position: 'middle'
-        }).present();
-      }
-      )
-      .catch(
-      err => {
-
-        file.writeExistingFile(file.externalRootDirectory, fileName, csv)
-          .then(
-          _ => {
-            let tost = this.toastCtr.create({
-              message: 'Archivo Guardado exitosamente',
-              duration: 3000,
-              position: 'middle'
-            }).present();
-          }
-          )
-          .catch(
-          err => {
-            alert('Failure')
-          }
-          )
-      }
-      )
-
-  }
-
-  convertToCSV(listado) {
-    var csv: any = 'Legajo;Alumno;Asistio\r\n'
-    var line: any = ''
-    var aux:string;
-
-      for (var j = 0; j < listado.length; j++) 
-      {
-        if(listado[j].vino==true)
-        {
-          aux="presente";
-        }
-        else
-        {
-          aux="ausente";
-        }
-        line= listado[j].legajo+";"+listado[j].usuario+";"+aux+'\r\n';
-        csv = csv+line;     
-      }
-
-    return csv
-  }
-
-
-
-
-
 }
