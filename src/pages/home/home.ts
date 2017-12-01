@@ -143,7 +143,7 @@ export class HomePage {
 
   escanearprofesor() {
     console.log(this.user);
-    let entro = false;
+    
     this.aviso = [];
     let dia = this.obtenerdia();
 
@@ -160,7 +160,7 @@ export class HomePage {
           this.cursos.forEach(element => {
             element.forEach(curso => {
               //console.log(curso);
-              entro = true;
+              
               if (curso.dia == dia) {
                 if (curso.profesor == this.user.usuario) {
                   this.aviso.push(curso);
@@ -168,13 +168,27 @@ export class HomePage {
                 }
               }
             });
-
           });
-
+          setTimeout(() => {
+            console.log("entro");
+            if (this.aviso.length == 0) {
+              this.mensaje("", "El día de hoy no debe dar ninguna clase");
+            }
+            if (this.aviso.length != 0) {
+              let mensaje = "";
+              console.log(this.aviso);
+              this.aviso.forEach(element => {
+                mensaje = mensaje + " Materia: " + element.materia;
+                mensaje = mensaje + "<br> Aula: " + element.aula;
+                mensaje = mensaje + "<br> Turno: " + element.turno + "<br> <br>";
+              });
+              this.mensaje("El día de hoy debe dar clases", mensaje);
+            }
+          }, 300);
           break;
 
         default:
-          
+
           this.mensaje('Error', 'Codigo no valido');
 
           break;
@@ -183,22 +197,7 @@ export class HomePage {
     }, (err) => {
       this.mensaje('Error: ', err);
     });
-    setTimeout(() => {
-      console.log("entro");
-      if (this.aviso.length == 0) {
-        this.mensaje("", "El día de hoy no debe dar ninguna clase");
-      }
-      else {
-        let mensaje = "";
-        console.log(this.aviso);
-        this.aviso.forEach(element => {
-          mensaje = mensaje + " Materia: " + element.materia;
-          mensaje = mensaje + "<br> Aula: " + element.aula;
-          mensaje = mensaje + "<br> Turno: " + element.turno + "<br> <br>";
-        });
-        this.mensaje("El día de hoy debe dar clases", mensaje);
-      }
-    }, 300);
+
 
   }
 
@@ -233,6 +232,23 @@ export class HomePage {
               }
             });
           });
+          setTimeout(() => {
+            console.log("entro");
+            if (this.aviso.length == 0) {
+              this.mensaje("", "El día de hoy no debe cursar ninguna clase");
+            }
+            if (this.aviso.length != 0) {
+              let mensaje = "";
+              console.log(this.aviso);
+              this.aviso.forEach(element => {
+                mensaje = mensaje + " Materia: " + element.materia;
+                mensaje = mensaje + "<br> Aula: " + element.aula;
+                mensaje = mensaje + "<br> Profesor: " + element.profesor;
+                mensaje = mensaje + "<br> Turno: " + element.turno + "<br> <br>";
+              });
+              this.mensaje("El día de hoy debe cursar:", mensaje);
+            }
+          }, 300);
           break;
 
         default:
@@ -240,26 +256,11 @@ export class HomePage {
           break;
       }
 
+
     }, (err) => {
       this.mensaje('Error: ', err);
     });
-    setTimeout(() => {
-      console.log("entro");
-      if (this.aviso.length == 0) {
-        this.mensaje("", "El día de hoy no debe cursar ninguna clase");
-      }
-      else {
-        let mensaje = "";
-        console.log(this.aviso);
-        this.aviso.forEach(element => {
-          mensaje = mensaje + " Materia: " + element.materia;
-          mensaje = mensaje + "<br> Aula: " + element.aula;
-          mensaje = mensaje + "<br> Profesor: " + element.profesor;
-          mensaje = mensaje + "<br> Turno: " + element.turno + "<br> <br>";
-        });
-        this.mensaje("El día de hoy debe cursar:", mensaje);
-      }
-    }, 300);
+
   }
 }
 
