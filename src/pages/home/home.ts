@@ -13,7 +13,9 @@ import { Component, PACKAGE_ROOT_URL } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { FaltasPage } from '../faltas/faltas';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -27,7 +29,13 @@ export class HomePage {
   tipo: string;
   user: Alta;
   scannedCode = null;
-  constructor(public alertCtrl: AlertController,private audio : NativeAudio ,public navCtrl: NavController, public navParams: NavParams) {
+
+  public Cursos: AngularFireList<any>;
+  public cursos: Observable<any>;
+  aviso = [];
+
+
+  constructor(public alertCtrl: AlertController, private audio: NativeAudio, public navCtrl: NavController, public navParams: NavParams, private barcodeScanner: BarcodeScanner, public af: AngularFireDatabase) {
     this.tipo = navParams.get('tipo');
     this.user = navParams.get('usuario');
     this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3')
@@ -49,7 +57,7 @@ export class HomePage {
         break;
     }
   }
-  
+
   verificarPrivilegios() {
 
   }
@@ -90,6 +98,168 @@ export class HomePage {
       default:
         break;
     }
+  }
+
+  mensaje(t, m) {
+    let alert = this.alertCtrl.create({
+      title: t,
+      subTitle: m,
+      buttons: ['Aceptar']
+    });
+    alert.present();
+  }
+
+  obtenerdia() {
+    let date = new Date();
+    let dia: string;
+    switch (date.getDay()) {
+      case 0:
+        dia = "domingo";
+        break;
+      case 1:
+        dia = "lunes";
+        break;
+      case 2:
+        dia = "martes";
+        break;
+      case 3:
+        dia = "miercoles";
+        break;
+      case 4:
+        dia = "jueves";
+        break;
+      case 5:
+        dia = "viernes";
+        break;
+      case 6:
+        dia = "sabado";
+        break;
+      default:
+        break;
+    }
+    return dia;
+  }
+
+
+  escanearprofesor() {
+    console.log(this.user);
+    let entro = false;
+    this.aviso = [];
+    let dia = this.obtenerdia();
+
+    this.Cursos = this.af.list('cursos');
+    this.cursos = this.Cursos.valueChanges();
+
+    this.barcodeScanner.scan().then(barcodeData => {
+
+      this.scannedCode = barcodeData.text;
+
+      switch (this.scannedCode) {
+
+        case "profesor":
+          this.cursos.forEach(element => {
+            element.forEach(curso => {
+              //console.log(curso);
+              entro = true;
+              if (curso.dia == dia) {
+                if (curso.profesor == this.user.usuario) {
+                  this.aviso.push(curso);
+                  console.log(this.aviso);
+                }
+              }
+            });
+
+          });
+
+          break;
+
+        default:
+          
+          this.mensaje('Error', 'Codigo no valido');
+
+          break;
+      }
+
+    }, (err) => {
+      this.mensaje('Error: ', err);
+    });
+    setTimeout(() => {
+      console.log("entro");
+      if (this.aviso.length == 0) {
+        this.mensaje("", "El día de hoy no debe dar ninguna clase");
+      }
+      else {
+        let mensaje = "";
+        console.log(this.aviso);
+        this.aviso.forEach(element => {
+          mensaje = mensaje + " Materia: " + element.materia;
+          mensaje = mensaje + "<br> Aula: " + element.aula;
+          mensaje = mensaje + "<br> Turno: " + element.turno + "<br> <br>";
+        });
+        this.mensaje("El día de hoy debe dar clases", mensaje);
+      }
+    }, 300);
+
+  }
+
+  escanearalumno() {
+    console.log(this.user);
+    let entro = false;
+    this.aviso = [];
+    let dia = this.obtenerdia();
+
+    this.Cursos = this.af.list('cursos');
+    this.cursos = this.Cursos.valueChanges();
+
+    this.barcodeScanner.scan().then(barcodeData => {
+
+      this.scannedCode = barcodeData.text;
+
+      switch (this.scannedCode) {
+
+        case "alumno":
+          this.cursos.forEach(element => {
+            element.forEach(curso => {
+              //console.log(curso);
+              entro = true;
+              if (curso.dia == dia) {
+                curso.alumnos.forEach(alumno => {
+                  if (alumno.legajo == this.user.legajo) {
+
+                    this.aviso.push(curso);
+                    console.log(this.aviso);
+                  }
+                });
+              }
+            });
+          });
+          break;
+
+        default:
+          this.mensaje('Error', 'Codigo no valido');
+          break;
+      }
+
+    }, (err) => {
+      this.mensaje('Error: ', err);
+    });
+    setTimeout(() => {
+      console.log("entro");
+      if (this.aviso.length == 0) {
+        this.mensaje("", "El día de hoy no debe cursar ninguna clase");
+      }
+      else {
+        let mensaje = "";
+        console.log(this.aviso);
+        this.aviso.forEach(element => {
+          mensaje = mensaje + " Materia: " + element.materia;
+          mensaje = mensaje + "<br> Aula: " + element.aula;
+          mensaje = mensaje + "<br> Profesor: " + element.profesor;
+          mensaje = mensaje + "<br> Turno: " + element.turno + "<br> <br>";
+        });
+        this.mensaje("El día de hoy debe cursar:", mensaje);
+      }
+    }, 300);
   }
 }
 

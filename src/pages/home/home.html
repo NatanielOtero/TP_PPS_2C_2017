@@ -10,14 +10,16 @@
     </ion-fab>
 
     <div [hidden]="alum" padding class="botones">
-        <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> Encuestas </button>
-        <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
-        <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> Faltas </button>
+        <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 25%;" (click)="ruteo('encEst')" ion-button> Encuestas </button>
+        <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 25%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
+        <button class="animated slideInRight imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('fal')" ion-button> Faltas </button>
+        <button class="animated slideInUp imgbtn7" style=" width: 100%;height: 25%;" (click)="escanearalumno()" ion-button> Leer Código QR </button>
     </div>
     <div [hidden]="prof" padding class="botones">
 
-        <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> Gestor de encuestas </button>
-        <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
+        <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('enc')" ion-button> Gestor de encuestas </button>
+        <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
+        <button class="animated slideInUp imgbtn7" style=" width: 100%;height: 33%;" (click)="escanearprofesor()" ion-button> Leer Código QR </button>
 
     </div>
     <div [hidden]="ad" padding class="botones">

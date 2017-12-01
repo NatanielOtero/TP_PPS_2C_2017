@@ -58,7 +58,6 @@ export class FaltasPage {
   cargar() {
     this.Lista = this.afDB.list('lista');
     this.lista = this.Lista.valueChanges();
-    console.log(this.usuario.legajo);
 
     let cursos = ["4A", "4B"];
 
@@ -67,8 +66,9 @@ export class FaltasPage {
       let ausente = 0;
       let esta = false;
       this.lista.forEach(tomalista => {
-
-        tomalista.forEach(element => {
+      console.log(Object.keys(tomalista));
+        tomalista.forEach(element => { 
+          
           if (element[curso] != undefined) {
 
             for (let index = 0; index < element[curso].length; index++) {
