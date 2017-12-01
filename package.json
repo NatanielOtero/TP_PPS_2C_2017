@@ -36,8 +36,7 @@
     "angularfire2": "^5.0.0-rc.0",
     "babyparse": "^0.4.6",
     "chart.js": "^2.7.1",
-    "cordova-android": "^6.3.0",
-    "cordova-browser": "^4.1.0",
+    "cordova-android": "6.3.0",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-buildinfo": "^2.0.1",
     "cordova-plugin-camera": "^3.0.0",
@@ -58,6 +57,8 @@
     "ionicons": "3.0.0",
     "jquery": "^3.2.1",
     "ng2-charts": "^1.6.0",
+    "ngx-qrcode2": "0.0.5",
+    "phonegap-plugin-barcodescanner": "^7.0.0",
     "promise-polyfill": "^6.0.2",
     "rxjs": "5.4.3",
     "sw-toolbox": "3.6.0",
@@ -88,11 +89,11 @@
       },
       "cordova-plugin-file": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-compat": {}
+      "cordova-plugin-compat": {},
+      "phonegap-plugin-barcodescanner": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "android"
     ]
   }
 }

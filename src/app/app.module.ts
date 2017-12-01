@@ -32,6 +32,8 @@ import { Facebook } from '@ionic-native/facebook';
 import { Camera } from "@ionic-native/camera";
 import { ChartsModule } from 'ng2-charts';
 
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { FaltasPage } from '../pages/faltas/faltas';
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     HttpModule,
-    ChartsModule
+    ChartsModule,
+    NgxQRCodeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -91,7 +94,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
     Facebook,
     Camera,
     AngularFireDatabase,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    BarcodeScanner
   ]
 })
 export class AppModule { }
