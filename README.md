@@ -4,7 +4,7 @@ TP Final de la practica profesional supervisada
 
 * Nataniel Otero
 
-Objetivos : A,F,I
+Objetivos : A,F,I,G
 
 * Gustavo Rotela
 
