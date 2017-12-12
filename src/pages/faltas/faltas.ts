@@ -59,22 +59,38 @@ export class FaltasPage {
     this.Lista = this.afDB.list('lista');
     this.lista = this.Lista.valueChanges();
 
+    
     let cursos = ["4A", "4B"];
+    let materia= ["PPS", "LAB4"];
+    
 
     cursos.forEach(curso => {
-      let presente = 0;
+    
+    
+     
+      this.lista.forEach(tomalista => {
+
+         materia.forEach(mat => {
+       let presente = 0;
       let ausente = 0;
       let esta = false;
-      this.lista.forEach(tomalista => {
-      console.log(Object.keys(tomalista));
+
+
+       console.log(tomalista);
         tomalista.forEach(element => { 
           
+
+
           if (element[curso] != undefined) {
 
+            if (element.materia==mat) {
+              
             for (let index = 0; index < element[curso].length; index++) {
+
 
               if (element[curso][index].legajo == this.usuario.legajo) {
 
+                console.log(element);
                 this.curso.forEach(element => {
 
                   if (element == curso) {
@@ -96,16 +112,22 @@ export class FaltasPage {
               }
             }
           }
+          
+          }
+
+
         });
-        if ((ausente != 0) && (presente != 0)) {
-          //console.log(this.barChartData);
+        if ((ausente != 0) || (presente != 0)) {
+          console.log(this.barChartData);
+          this.barChartLabels.push("Materia: "+mat+" - Curso: "+ curso);
           this.barChartData.push([{ data: [ausente], label: 'Ausentes' }, { data: [presente], label: 'Presentes' }]);
           this.ok = true;
         }
 
       });
-
+});
     });
+    
   }
 
 }

@@ -13,6 +13,7 @@ import { storage, initializeApp } from "firebase";
 import { DateTimeData } from 'ionic-angular/util/datetime-util';
 import { ToastController } from 'ionic-angular';
 import { File } from '@ionic-native/file';
+import { Printer, PrintOptions } from '@ionic-native/printer';
 
 /**
  * Generated class for the AsistenciaPage page.
@@ -45,7 +46,9 @@ export class AsistenciaPage {
   storage: any;
   boton : boolean = true;
 
-  constructor(public navCtrl: NavController, private http: Http, private audio : NativeAudio , public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
+  descarga:string;
+
+  constructor(public navCtrl: NavController, private http: Http, private audio : NativeAudio , public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController,private printer: Printer) {
     //this.leer();
     this.fecha = new Date().toLocaleDateString().toString();
     this.fecha = this.fecha.split('/');
@@ -158,6 +161,8 @@ loading.present();
     this.audio.play('btn');
     const itemsRef = this.afDB.list('/lista/');
     itemsRef.set(this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] + '/' + this.opcion1, this.cant);
+    itemsRef.update (this.opcion + '-' + this.fecha[0] + '-' + this.fecha[1] + '-' + this.fecha[2] , {"curso":this.opcion1,"materia":this.opcion});
+  
     for (var i = 0; i < this.cant1.length; i++) {
       if (this.cant[i].vino == false) {
         this.Items = this.afDB.list('/' + this.opcion + "/" + this.opcion1 + "/" + i);
@@ -172,6 +177,31 @@ loading.present();
     console.log('ionViewDidLoad AsistenciaPage');
   }
 
+  selector(eleccion)
+  {
+    if ((eleccion==undefined)||(eleccion=="")) {
+      let tost = this.toastCtr.create({
+        message: 'Elija una opción',
+        duration: 2000,
+        position: 'middle'
+      }).present();
+    }
+    else
+    {
+      switch (eleccion) {
+      case "pdf":
+        this.saveAsPDF(); 
+        break;
+
+      case "csv":
+        this.saveAsCsv(); 
+        break;
+      default:
+        break;
+    }
+    }
+    
+  }
 
   saveAsCsv() {
     
@@ -179,7 +209,7 @@ loading.present();
     var file=new File();
     var date=new Date();
     
-    var fileName: any = "listado "+this.opcion1+"-"+this.opcion+"-"+ date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+".csv"
+    var fileName: any = "listado "+this.opcion1+"-"+this.opcion+"-"+ date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+".csv";
     file.writeFile(file.externalRootDirectory, fileName, csv )
       .then(
       _ => {
@@ -235,7 +265,50 @@ loading.present();
     return csv
   }
 
+  saveAsPDF()
+  {
+    var date=new Date();
+    var aux:string;
+    var fileName: any = "listado "+this.opcion1+"-"+this.opcion+"-"+ date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+".pdf";
+    
+    var data = "<table style='width: 75%;height: 300px;margin: 0 auto;' border='1'><tr style='background-color: #399F8B;'><th>Legajo</th><th>Alumno</th><th>Asistio</th></tr>";
+    for (var i = 0; i < this.cant.length; i++) 
+    {
+      if(this.cant[i].vino==true)
+      {
+        aux="presente";
+      }
+      else
+      {
+        aux="ausente";
+      }
+      data += "<tr style='background-color:white;'><td>" + this.cant[i].legajo + "</td><td>" + this.cant[i].usuario + "</td><td>" + aux +  "</td></tr>";
+    }
+    data += "</table>";
+    let toast = this.toastCtrl.create({
+      message: 'Lista de asistencia guardada.',
+      duration: 2500,
+      position: 'middle'
+    });
+    //this.printer.isAvailable().then(onSuccess, onError);
+    //var info = document.getElementById("informacion");
+    //info.innerHTML = data;
+    let options: PrintOptions = {
+        name: fileName,
+        duplex: true,
+        landscape: true,
+        grayscale: true
+      };
 
+      this.printer.print(data, options).then(onSuccess =>{
+        toast.present();
+      }, onError =>
+      {
+        console.log(onError);
+      });
+
+      
+    }
 
 
 

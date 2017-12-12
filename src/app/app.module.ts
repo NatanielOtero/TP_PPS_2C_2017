@@ -31,6 +31,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from "@ionic-native/camera";
 import { ChartsModule } from 'ng2-charts';
+import { Printer } from '@ionic-native/printer';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
@@ -95,7 +96,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
     Camera,
     AngularFireDatabase,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    BarcodeScanner
+    BarcodeScanner,
+    Printer
   ]
 })
 export class AppModule { }

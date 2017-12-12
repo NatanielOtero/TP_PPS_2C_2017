@@ -109,4 +109,5 @@
     <plugin name="cordova-plugin-camera" spec="^3.0.0" />
     <plugin name="cordova-plugin-compat" spec="^1.2.0" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.0.0" />
+    <plugin name="de.appplant.cordova.plugin.printer" spec="^0.7.3" />
 </widget>

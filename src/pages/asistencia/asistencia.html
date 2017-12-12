@@ -67,8 +67,19 @@
                 </tr>
             </tbody>
         </table>
+        <div class="bottom">
         <button ion-button (click)="guardar()" [disabled]="tomar"> Guardar Datos </button>
-        <button ion-button (click)="saveAsCsv()" [disabled]="tomar"> Descargar listado </button>
+        <ion-item color="primary">
+        <ion-label style="color:white; font-size:15px">Tipo de descarga</ion-label>
+        
+        <ion-select [(ngModel)]="descarga" >
+            <ion-option value="pdf">pdf</ion-option>
+            <ion-option value="csv">excel</ion-option>
+          </ion-select>
+        
+    </ion-item>
+        <button ion-button (click)="selector(descarga)" [disabled]="tomar"> Descargar listado </button>
+    </div>
     </div>
 
 

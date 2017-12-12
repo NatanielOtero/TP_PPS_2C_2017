@@ -19,13 +19,13 @@
     
                 <ion-card style="opacity: 0.7">
                   <ion-card-header>
-                      PPS
+                      {{barChartLabels[m]}}
                   </ion-card-header>
                   <ion-card-content>
                     <div style="display: block">
                       <canvas baseChart
                               [datasets]="barChartData[m]"
-                              [labels]="barChartLabels"
+                              [labels]=""
                               [options]="barChartOptions"
                               [legend]="barChartLegend"
                               [chartType]="barChartType"
