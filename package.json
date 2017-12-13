@@ -25,6 +25,7 @@
     "@ionic-native/core": "4.3.0",
     "@ionic-native/facebook": "^4.3.2",
     "@ionic-native/file": "^4.3.3",
+    "@ionic-native/geolocation": "^4.5.2",
     "@ionic-native/google-plus": "^4.3.2",
     "@ionic-native/in-app-browser": "^4.3.2",
     "@ionic-native/native-audio": "^4.3.2",
@@ -45,6 +46,7 @@
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-facebook4": "^1.9.1",
     "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-geolocation": "^3.0.0",
     "cordova-plugin-googleplus": "^5.1.1",
     "cordova-plugin-inappbrowser": "^1.7.2",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -88,7 +90,10 @@
       },
       "cordova-plugin-file": {},
       "cordova-plugin-camera": {},
-      "cordova-plugin-compat": {}
+      "cordova-plugin-compat": {},
+      "cordova-plugin-geolocation": {
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
+      }
     },
     "platforms": [
       "android",

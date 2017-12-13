@@ -1,150 +1,649 @@
-<!--
-  Generated template for the EncuestasPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
-
-<ion-header>
-
-    <ion-navbar>
-        <ion-title>encuestas</ion-title>
-    </ion-navbar>
-    <ion-fab top right>
-        <button ion-fab color="light">  <ion-icon name="menu"></ion-icon></button>
-        <ion-fab-list side="bottom">
-            <button ion-fab color="primary">  <ion-icon name="contact"></ion-icon></button>
-            <button ion-fab color="secondary">QR</button>
-
-        </ion-fab-list>
-    </ion-fab>
-</ion-header>
-
-
-<ion-content padding class="bg-image">
-
-</ion-content>-->
-<!--
-  Generated template for the EstadisticaEncuestaPage page.
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
     <ion-navbar color="dark">
     </ion-navbar>
 </ion-header>
 
 <ion-content class="bg-image" padding>
-    <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
-
-        <h3>Crear Encuesta</h3>
-        <div>
-            <button ion-button (click)="modificar()" color="encuestas" full>Modificar/borrar encuesta</button>
-        </div>
-        <div [hidden]="mostrar">
-            <label>Materia</label>
-            <select [(ngModel)]="materia" (change)='f()'>
-                <option value="PPS">PPS</option>
-                <option value="LAB4">LAB4</option>
-            </select>
-
-
-            <div class="animated bounceInLeft" [hidden]="cursar">
-
-                <label>Elija el curso</label>
-                <select [(ngModel)]="curso" (change)="g()">
-                    <option value="4A">4A</option>
-                    <option value="4B">4B</option>
+    <div *ngIf="idioma == 'espanol'">
+        <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
+            <h3>Crear Encuesta</h3>
+            <div>
+                <button ion-button (click)="modificar()" color="encuestas" full>Modificar/borrar encuesta</button>
+            </div>
+            <div [hidden]="mostrar">
+                <label>Elija la materia</label>
+                <select [(ngModel)]="materia" (change)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
                 </select>
+                <div class="animated bounceInLeft" [hidden]="cursar">
 
+                    <label>Elija el curso</label>
+                    <select [(ngModel)]="curso" (change)="g()">
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                    </select>
+                </div>
+                <br>
             </div>
+            <div [hidden]="datos">
+                <div>
+                    <label>Nombre de la encuesta</label>
+                    <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+                </div>
+                <div>
+                    <label>Cantidad de horas</label>
+                    <ion-input type="number" [(ngModel)]="horas" required></ion-input>
+                </div>
+                <div>
+                    <label>Formato</label>
+                    <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
+                        <option value="U">Con opciones</option>
+                        <option value="P">Respuesta propia</option>
+                    </select>
+                </div>
+                <div *ngIf="formato=='U'" class="animated bounceInLeft">
+                    <label>Cantidad de Respuestas</label>
+                    <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <label> Pregunta</label>
+                    <ion-input type="text" [(ngModel)]="question" required></ion-input>
+                </div>
+                <br>
+                <div *ngFor="let item of cant" class="animated bounceInLeft">
 
-            <br>
-        </div>
+                    <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
+                        <label>Respuestas</label>
+                        <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
 
-        <div [hidden]="datos">
-
-
-
-            <div>
-                <label>Nombre de la encuesta</label>
-                <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
-            </div>
-            <div>
-
-                <label>Cantidad de horas</label>
-                <ion-input type="number" [(ngModel)]="horas" required></ion-input>
-            </div>
-
-            <div>
-
-                <label>Formato</label>
-                <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
-                    <option value="U">Con opciones</option>
-                    <option value="P">Respuesta propia</option>
-                </select>
-
-            </div>
-
-
-            <div *ngIf="formato=='U'" class="animated bounceInLeft">
-                <label>Cantidad de Respuestas</label>
-                <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </div>
-            <div>
-                <label> Pregunta</label>
-                <ion-input type="text" [(ngModel)]="question" required></ion-input>
-            </div>
-            <br>
-            <div *ngFor="let item of cant" class="animated bounceInLeft">
-
-                <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
-                    <label>Respuestas</label>
-                    <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
-
+                    </div>
+                </div>
+                <div [hidden]="boton" class="bottom">
+                    <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>Agregar pregunta</button>
+                    <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">Subir cuestionario</button>
                 </div>
             </div>
-            <div [hidden]="boton" class="bottom">
-                <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>Agregar pregunta</button>
-                <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">Subir cuestionario</button>
+            <div [hidden]="otra">
+                <label>Encuesta creada</label>
+                <div class="bottom">
+                    <button ion-button (click)="otraE()" color="encuestas" full>Realizar otra?</button>
+                </div>
             </div>
-        </div>
-        <div [hidden]="otra">
-            <label>Encuesta creada</label>
-            <div class="bottom">
-                <button ion-button (click)="otraE()" color="encuestas" full>Realizar otra?</button>
-            </div>
-
         </div>
     </div>
-    <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
-        <div class="form_wrapper animated slideInUp">
-            <div [hidden]="cambiarEncuesta">
-                <h3>lista de encuestas</h3>
-                <div *ngFor="let item of nombres">
-                    <div *ngIf="item != ''">
-                      <button (click)="cambiar(item)">{{item}}</button>
+    <div *ngIf="idioma == 'frances'">
+        <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
+            <h3>créer un sondage</h3>
+            <div>
+                <button ion-button (click)="modificar()" color="encuestas" full>modifier / supprimer un sondage</button>
+            </div>
+            <div [hidden]="mostrar">
+                <label>choisissez le matériel</label>
+                <select [(ngModel)]="materia" (change)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+                <div class="animated bounceInLeft" [hidden]="cursar">
+
+                    <label>choisissez le cours</label>
+                    <select [(ngModel)]="curso" (change)="g()">
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <div [hidden]="datos">
+                <div>
+                    <label>nom de l'enquête</label>
+                    <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+                </div>
+                <div>
+                    <label>nombre d'heures</label>
+                    <ion-input type="number" [(ngModel)]="horas" required></ion-input>
+                </div>
+                <div>
+                    <label>format</label>
+                    <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
+                        <option value="U">avec des options</option>
+                        <option value="P">propre réponse</option>
+                    </select>
+                </div>
+                <div *ngIf="formato=='U'" class="animated bounceInLeft">
+                    <label>nombre de réponses</label>
+                    <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <label> question</label>
+                    <ion-input type="text" [(ngModel)]="question" required></ion-input>
+                </div>
+                <br>
+                <div *ngFor="let item of cant" class="animated bounceInLeft">
+
+                    <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
+                        <label>réponses</label>
+                        <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
+
+                    </div>
+                </div>
+                <div [hidden]="boton" class="bottom">
+                    <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>ajouter une question</button>
+                    <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">télécharger le questionnaire</button>
+                </div>
+            </div>
+            <div [hidden]="otra">
+                <label>enquête créée</label>
+                <div class="bottom">
+                    <button ion-button (click)="otraE()" color="encuestas" full>effectuer un autre?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
+            <h3>create surveys</h3>
+            <div>
+                <button ion-button (click)="modificar()" color="encuestas" full>Modify / delete survey</button>
+            </div>
+            <div [hidden]="mostrar">
+                <label>choose subject</label>
+                <select [(ngModel)]="materia" (change)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+                <div class="animated bounceInLeft" [hidden]="cursar">
+
+                    <label>choose the course</label>
+                    <select [(ngModel)]="curso" (change)="g()">
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <div [hidden]="datos">
+                <div>
+                    <label>name of survey</label>
+                    <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+                </div>
+                <div>
+                    <label>Number of hours</label>
+                    <ion-input type="number" [(ngModel)]="horas" required></ion-input>
+                </div>
+                <div>
+                    <label>format</label>
+                    <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
+                        <option value="U">with options</option>
+                        <option value="P">own answer</option>
+                    </select>
+                </div>
+                <div *ngIf="formato=='U'" class="animated bounceInLeft">
+                    <label>number of answers</label>
+                    <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <label> question</label>
+                    <ion-input type="text" [(ngModel)]="question" required></ion-input>
+                </div>
+                <br>
+                <div *ngFor="let item of cant" class="animated bounceInLeft">
+
+                    <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
+                        <label>answers</label>
+                        <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
+
+                    </div>
+                </div>
+                <div [hidden]="boton" class="bottom">
+                    <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>add question</button>
+                    <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">upload survey</button>
+                </div>
+            </div>
+            <div [hidden]="otra">
+                <label>survey created</label>
+                <div class="bottom">
+                    <button ion-button (click)="otraE()" color="encuestas" full>Do again?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
+            <h3>Создать опрос</h3>
+            <div>
+                <button ion-button (click)="modificar()" color="encuestas" full>изменить / удалить опрос</button>
+            </div>
+            <div [hidden]="mostrar">
+                <label>выбрать материал</label>
+                <select [(ngModel)]="materia" (change)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+                <div class="animated bounceInLeft" [hidden]="cursar">
+
+                    <label>выбрать курс</label>
+                    <select [(ngModel)]="curso" (change)="g()">
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <div [hidden]="datos">
+                <div>
+                    <label>название опроса</label>
+                    <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+                </div>
+                <div>
+                    <label>количество часов</label>
+                    <ion-input type="number" [(ngModel)]="horas" required></ion-input>
+                </div>
+                <div>
+                    <label>формат</label>
+                    <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
+                        <option value="U">с опциями</option>
+                        <option value="P">собственный ответ</option>
+                    </select>
+                </div>
+                <div *ngIf="formato=='U'" class="animated bounceInLeft">
+                    <label>количество ответов</label>
+                    <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <label> вопрос</label>
+                    <ion-input type="text" [(ngModel)]="question" required></ion-input>
+                </div>
+                <br>
+                <div *ngFor="let item of cant" class="animated bounceInLeft">
+
+                    <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
+                        <label>ответы</label>
+                        <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
+
+                    </div>
+                </div>
+                <div [hidden]="boton" class="bottom">
+                    <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>добавить вопрос</button>
+                    <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">загрузить вопросник</button>
+                </div>
+            </div>
+            <div [hidden]="otra">
+                <label>опрос создан</label>
+                <div class="bottom">
+                    <button ion-button (click)="otraE()" color="encuestas" full>выполнить другое?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
+            <h3>Umfrage erstellen</h3>
+            <div>
+                <button ion-button (click)="modificar()" color="encuestas" full>Umfrage ändern / löschen</button>
+            </div>
+            <div [hidden]="mostrar">
+                <label>wähle das Material</label>
+                <select [(ngModel)]="materia" (change)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+                <div class="animated bounceInLeft" [hidden]="cursar">
+
+                    <label>wähle den Kurs</label>
+                    <select [(ngModel)]="curso" (change)="g()">
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <div [hidden]="datos">
+                <div>
+                    <label>Name der Umfrage</label>
+                    <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+                </div>
+                <div>
+                    <label>Anzahl der Stunden</label>
+                    <ion-input type="number" [(ngModel)]="horas" required></ion-input>
+                </div>
+                <div>
+                    <label>formatieren</label>
+                    <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
+                        <option value="U">mit Optionen</option>
+                        <option value="P">eigene Antwort</option>
+                    </select>
+                </div>
+                <div *ngIf="formato=='U'" class="animated bounceInLeft">
+                    <label>Anzahl der Antworten</label>
+                    <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Frage</label>
+                    <ion-input type="text" [(ngModel)]="question" required></ion-input>
+                </div>
+                <br>
+                <div *ngFor="let item of cant" class="animated bounceInLeft">
+
+                    <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
+                        <label>Antworten</label>
+                        <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
+
+                    </div>
+                </div>
+                <div [hidden]="boton" class="bottom">
+                    <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>Frage hinzufügen</button>
+                    <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">Fragebogen hochladen</button>
+                </div>
+            </div>
+            <div [hidden]="otra">
+                <label>Umfrage erstellt</label>
+                <div class="bottom">
+                    <button ion-button (click)="otraE()" color="encuestas" full>einen anderen durchführen?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div class="form_wrapper animated bounceInLeft" [hidden]="modificarEncuesta">
+            <h3>criar uma pesquisa</h3>
+            <div>
+                <button ion-button (click)="modificar()" color="encuestas" full>modificar / excluir pesquisa</button>
+            </div>
+            <div [hidden]="mostrar">
+                <label>escolha o material</label>
+                <select [(ngModel)]="materia" (change)='f()'>
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+                <div class="animated bounceInLeft" [hidden]="cursar">
+
+                    <label>escolha o curso</label>
+                    <select [(ngModel)]="curso" (change)="g()">
+                        <option value="4A">4A</option>
+                        <option value="4B">4B</option>
+                    </select>
+                </div>
+                <br>
+            </div>
+            <div [hidden]="datos">
+                <div>
+                    <label>nome da pesquisa</label>
+                    <ion-input type="text" [(ngModel)]="nombre" required></ion-input>
+                </div>
+                <div>
+                    <label>número de horas</label>
+                    <ion-input type="number" [(ngModel)]="horas" required></ion-input>
+                </div>
+                <div>
+                    <label>formato</label>
+                    <select [(ngModel)]="formato" (change)="lock()" [disabled]="des">
+                        <option value="U">com opções</option>
+                        <option value="P">própria resposta</option>
+                    </select>
+                </div>
+                <div *ngIf="formato=='U'" class="animated bounceInLeft">
+                    <label>número de respostas</label>
+                    <select [(ngModel)]="cantidad" interface="popover" (ionChange)="mychange($event)">
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div>
+                    <label> questão</label>
+                    <ion-input type="text" [(ngModel)]="question" required></ion-input>
+                </div>
+                <br>
+                <div *ngFor="let item of cant" class="animated bounceInLeft">
+
+                    <div *ngIf="item<=cantidad && formato=='U' " style="padding-top:0px;padding-bottom:0px;">
+                        <label>responde</label>
+                        <ion-input type="text" placeholder="Respuesta {{item}}" [(ngModel)]=option[item] required></ion-input>
+
+                    </div>
+                </div>
+                <div [hidden]="boton" class="bottom">
+                    <button ion-button (click)="AgregarQuestion()" color="encuestas" [disabled]="question==null ||  question==''" full>adicionar pergunta</button>
+                    <button ion-button (click)="SubirQuestion()" color="encuestas" full [disabled]="encuesta.length == 0 || horas == null || horas <= 0 ||  nombre == ''">fazer uma pergunta</button>
+                </div>
+            </div>
+            <div [hidden]="otra">
+                <label>pesquisa criada</label>
+                <div class="bottom">
+                    <button ion-button (click)="otraE()" color="encuestas" full>executar outro?</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="idioma == 'espanol'">
+        <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+            <div class="form_wrapper animated slideInUp">
+                <div [hidden]="cambiarEncuesta">
+                    <h3>lista de encuestas</h3>
+                    <div *ngFor="let item of nombres">
+                        <div *ngIf="item != ''">
+                            <button (click)="cambiar(item)">{{item}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!cambiarEncuesta">
+                    <div [hidden]="cambiarPregunta">
+                        <div *ngFor="let p of preguntas">
+                            <button (click)="cambiarPreg(p)">{{p}}</button>
+                        </div>
+                        <div>
+                            <button (click)="borrarEnc()">Borrar Encuesta</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!cambiarPregunta">
+                        <input type="text" [(ngModel)]="pregunta">
+                        <button (click)="guardarCambioPreg(p)">guardar cambio</button>
                     </div>
                 </div>
             </div>
-            <div [hidden]="!cambiarEncuesta">
-                <div [hidden]="cambiarPregunta">
-                    <div *ngFor="let p of preguntas">
-                        <button (click)="cambiarPreg(p)">{{p}}</button>
-                    </div>
-                    <div>
-                        <button (click)="borrarEnc()">Borrar Encuesta</button>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'frances'">
+        <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+            <div class="form_wrapper animated slideInUp">
+                <div [hidden]="cambiarEncuesta">
+                    <h3>liste des enquêtes</h3>
+                    <div *ngFor="let item of nombres">
+                        <div *ngIf="item != ''">
+                            <button (click)="cambiar(item)">{{item}}</button>
+                        </div>
                     </div>
                 </div>
-                <div [hidden]="!cambiarPregunta">
-                    <input type="text" [(ngModel)]="pregunta">
-                    <button (click)="guardarCambioPreg(p)">guardar cambio</button>
+                <div [hidden]="!cambiarEncuesta">
+                    <div [hidden]="cambiarPregunta">
+                        <div *ngFor="let p of preguntas">
+                            <button (click)="cambiarPreg(p)">{{p}}</button>
+                        </div>
+                        <div>
+                            <button (click)="borrarEnc()">supprimer l'enquête</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!cambiarPregunta">
+                        <input type="text" [(ngModel)]="pregunta">
+                        <button (click)="guardarCambioPreg(p)">enregistrer la modification</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+            <div class="form_wrapper animated slideInUp">
+                <div [hidden]="cambiarEncuesta">
+                    <h3>list of surveys</h3>
+                    <div *ngFor="let item of nombres">
+                        <div *ngIf="item != ''">
+                            <button (click)="cambiar(item)">{{item}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!cambiarEncuesta">
+                    <div [hidden]="cambiarPregunta">
+                        <div *ngFor="let p of preguntas">
+                            <button (click)="cambiarPreg(p)">{{p}}</button>
+                        </div>
+                        <div>
+                            <button (click)="borrarEnc()">delete survey</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!cambiarPregunta">
+                        <input type="text" [(ngModel)]="pregunta">
+                        <button (click)="guardarCambioPreg(p)">save change</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+            <div class="form_wrapper animated slideInUp">
+                <div [hidden]="cambiarEncuesta">
+                    <h3>список опросов</h3>
+                    <div *ngFor="let item of nombres">
+                        <div *ngIf="item != ''">
+                            <button (click)="cambiar(item)">{{item}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!cambiarEncuesta">
+                    <div [hidden]="cambiarPregunta">
+                        <div *ngFor="let p of preguntas">
+                            <button (click)="cambiarPreg(p)">{{p}}</button>
+                        </div>
+                        <div>
+                            <button (click)="borrarEnc()">удалить опрос</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!cambiarPregunta">
+                        <input type="text" [(ngModel)]="pregunta">
+                        <button (click)="guardarCambioPreg(p)">сохранить изменения</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+            <div class="form_wrapper animated slideInUp">
+                <div [hidden]="cambiarEncuesta">
+                    <h3>Liste der Umfragen</h3>
+                    <div *ngFor="let item of nombres">
+                        <div *ngIf="item != ''">
+                            <button (click)="cambiar(item)">{{item}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!cambiarEncuesta">
+                    <div [hidden]="cambiarPregunta">
+                        <div *ngFor="let p of preguntas">
+                            <button (click)="cambiarPreg(p)">{{p}}</button>
+                        </div>
+                        <div>
+                            <button (click)="borrarEnc()">Umfrage löschen</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!cambiarPregunta">
+                        <input type="text" [(ngModel)]="pregunta">
+                        <button (click)="guardarCambioPreg(p)">Änderung speichern</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div div class="form_wrapper animated bounceInLeft" [hidden]="!modificarEncuesta">
+            <div class="form_wrapper animated slideInUp">
+                <div [hidden]="cambiarEncuesta">
+                    <h3>lista de pesquisas</h3>
+                    <div *ngFor="let item of nombres">
+                        <div *ngIf="item != ''">
+                            <button (click)="cambiar(item)">{{item}}</button>
+                        </div>
+                    </div>
+                </div>
+                <div [hidden]="!cambiarEncuesta">
+                    <div [hidden]="cambiarPregunta">
+                        <div *ngFor="let p of preguntas">
+                            <button (click)="cambiarPreg(p)">{{p}}</button>
+                        </div>
+                        <div>
+                            <button (click)="borrarEnc()">apagar pesquisa</button>
+                        </div>
+                    </div>
+                    <div [hidden]="!cambiarPregunta">
+                        <input type="text" [(ngModel)]="pregunta">
+                        <button (click)="guardarCambioPreg(p)">salvar mudança</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </ion-content>
+
+<ion-footer>
+    <div *ngIf="idioma == 'espanol'">
+        <ion-toolbar>
+            <button ion-button (click)="volverAlMenu()">Volver al menu</button>
+        </ion-toolbar>
+    </div>
+    <div *ngIf="idioma == 'frances'">
+        <ion-toolbar>
+            <button ion-button (click)="volverAlMenu()">retourner au menu</button>
+        </ion-toolbar>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <ion-toolbar>
+            <button ion-button (click)="volverAlMenu()">back to menu</button>
+        </ion-toolbar>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <ion-toolbar>
+            <button ion-button (click)="volverAlMenu()">вернуться в меню</button>
+        </ion-toolbar>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <ion-toolbar>
+            <button ion-button (click)="volverAlMenu()">Zurück zum Menü</button>
+        </ion-toolbar>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <ion-toolbar>
+            <button ion-button (click)="volverAlMenu()">regressar ao menu</button>
+        </ion-toolbar>
+    </div>
+</ion-footer>

@@ -31,6 +31,8 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Camera } from "@ionic-native/camera";
 import { ChartsModule } from 'ng2-charts';
+import { Geolocation } from '@ionic-native/geolocation';
+import { MapsProvider } from "../provider/maps-provider";
 
 import { FaltasPage } from '../pages/faltas/faltas';
 @NgModule({
@@ -90,7 +92,9 @@ import { FaltasPage } from '../pages/faltas/faltas';
     GooglePlus,
     Facebook,
     Camera,
+    Geolocation,
     AngularFireDatabase,
+    MapsProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

@@ -27,7 +27,7 @@ export class RegistroPage {
   public usuariosObs: Observable<any>;
   public usuarios: Array<any>;
   mostrar: boolean = false;
-
+  idioma = localStorage.getItem("idioma");
   us = {} as Datos;
   validati: string;
 

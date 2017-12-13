@@ -37,6 +37,8 @@ export class AdministracionPage {
   dia: number = 1;
   mes: number = 9;
   desabilitar = false;
+  idioma = localStorage.getItem("idioma");
+  
   constructor(public navCtrl: NavController, public tst: ToastController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
 
   }

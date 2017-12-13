@@ -58,6 +58,7 @@ export class EstadisticasPage {
   public Questions: AngularFireList<any>;
   public quests: Observable<any>;
   listaPreguntas: any[] = new Array<any>();
+  idioma = localStorage.getItem("idioma");
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
     /*var encuesta = this.codigo.split("-");

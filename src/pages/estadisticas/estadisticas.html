@@ -13,27 +13,124 @@
 
 
 <ion-content class="bg-image" padding>
-    <div class="form_wrapper animated slideInUp">
-
-
-
-        <div class="bottom" *ngFor="let item of Encuesta">
-            <button (click)="navegar(item)">{{item}}</button>
-        </div>
-        <div *ngFor="let p of preguntas">
-            <label style="color:white">Pregunta: "{{p}}"</label>
-            <div *ngIf="tipo == 'P'">
-                <div *ngFor="let i of ListaRespuestas">
-                    <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
-                    <label> {{i}}</label>
+    <div *ngIf="idioma == 'espanol'">
+        <div class="form_wrapper animated slideInUp">
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">Pregunta: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                    </canvas>
                 </div>
             </div>
-            <div *ngIf="tipo != 'P'">
-                <canvas id="myChart">
-                     </canvas>
-
+        </div>
+    </div>
+    <div *ngIf="idioma == 'frances'">
+        <div class="form_wrapper animated slideInUp">
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">question: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                    </canvas>
+                </div>
             </div>
         </div>
-
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div class="form_wrapper animated slideInUp">
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">question: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div class="form_wrapper animated slideInUp">
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">вопрос: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div class="form_wrapper animated slideInUp">
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">Frage: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div class="form_wrapper animated slideInUp">
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">questão: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                    </canvas>
+                </div>
+            </div>
+        </div>
     </div>
 </ion-content>

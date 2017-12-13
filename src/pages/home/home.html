@@ -2,42 +2,178 @@
 
 
     <ion-fab top right>
-        <button ion-fab color="light">  <ion-icon name="menu"></ion-icon></button>
+        <button ion-fab color="light">
+            <ion-icon name="menu"></ion-icon>
+        </button>
         <ion-fab-list side="bottom">
-            <button ion-fab color="primary" (click)="ruteo('perfil')">  <ion-icon name="contact"></ion-icon></button>
+            <button ion-fab color="primary" (click)="ruteo('perfil')">
+                <ion-icon name="contact"></ion-icon>
+            </button>
 
         </ion-fab-list>
     </ion-fab>
+    <div *ngIf="idioma == 'espanol'">
+        <div [hidden]="alum" padding class="botones">
+            <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> Encuestas </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
+            <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> Faltas </button>
+        </div>
+        <div [hidden]="prof" padding class="botones">
 
-    <div [hidden]="alum" padding class="botones">
-        <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> Encuestas </button>
-        <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
-        <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> Faltas </button>
+            <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> Gestor de encuestas </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
+
+        </div>
+        <div [hidden]="ad" padding class="botones">
+            <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> Tomar asistencia </button>
+            <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> Administración </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> Archivos </button>
+            <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> Alta alumnos</button>
+
+        </div>
+        <div [hidden]="adm" padding class="botones">
+            <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> Alta alumnos </button>
+            <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> Alta empleados </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> Archivos </button>
+            <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> Tomar asistencia </button>
+            <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> Administración </button>
+        </div>
     </div>
-    <div [hidden]="prof" padding class="botones">
+    <div *ngIf="idioma == 'frances'">
+        <div [hidden]="alum" padding class="botones">
+            <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> sondages </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> stats </button>
+            <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> fautes </button>
+        </div>
+        <div [hidden]="prof" padding class="botones">
 
-        <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> Gestor de encuestas </button>
-        <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> Estadísticas </button>
+            <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> responsable de l'enquête </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> stats </button>
 
+        </div>
+        <div [hidden]="ad" padding class="botones">
+            <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> prends l'assistance </button>
+            <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> administration </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> archives </button>
+            <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> étudiants élevés</button>
+
+        </div>
+        <div [hidden]="adm" padding class="botones">
+            <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> étudiants élevés </button>
+            <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> hauts employés </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> archives </button>
+            <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> prends l'assistance </button>
+            <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> administration </button>
+        </div>
     </div>
-    <div [hidden]="ad" padding class="botones">
-        <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> Tomar asistencia </button>
-        <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> Administración </button>
-        <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> Archivos </button>
-        <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> Alta alumnos</button>
+    <div *ngIf="idioma == 'ingles'">
+        <div [hidden]="alum" padding class="botones">
+            <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> surbeys </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> stats </button>
+            <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> absence </button>
+        </div>
+        <div [hidden]="prof" padding class="botones">
 
-    </div>
-    <div [hidden]="adm" padding class="botones">
-        <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> Alta alumnos </button>
-        <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> Alta empleados </button>
-        <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> Archivos </button>
-        <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> Tomar asistencia </button>
-        <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> Administración </button>
-    </div>
-    <div>
+            <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> survey manager </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> stats </button>
 
-    </div>
+        </div>
+        <div [hidden]="ad" padding class="botones">
+            <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> take assistance </button>
+            <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> administration </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> files </button>
+            <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> register students</button>
 
+        </div>
+        <div [hidden]="adm" padding class="botones">
+            <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> register students </button>
+            <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> register employees </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> files </button>
+            <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> take assistance </button>
+            <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> administration </button>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div [hidden]="alum" padding class="botones">
+            <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> опросы </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> статистика </button>
+            <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> недостатки </button>
+        </div>
+        <div [hidden]="prof" padding class="botones">
+
+            <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> руководитель опроса </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> статистика </button>
+
+        </div>
+        <div [hidden]="ad" padding class="botones">
+            <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> принимать помощь </button>
+            <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> администрация </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> учет </button>
+            <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> высокие студенты</button>
+
+        </div>
+        <div [hidden]="adm" padding class="botones">
+            <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> высокие студенты </button>
+            <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> высокие сотрудники </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> учет </button>
+            <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> принимать помощь </button>
+            <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> администрация </button>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div [hidden]="alum" padding class="botones">
+            <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> Umfragen </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> Statistiken </button>
+            <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> Fehler </button>
+        </div>
+        <div [hidden]="prof" padding class="botones">
+
+            <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> Umfrage-Manager </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> Statistiken </button>
+
+        </div>
+        <div [hidden]="ad" padding class="botones">
+            <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> Hilfe nehmen </button>
+            <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> Verwaltung </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> Archive </button>
+            <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> hohe Schüler</button>
+
+        </div>
+        <div [hidden]="adm" padding class="botones">
+            <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> hohe Schüler </button>
+            <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> hohe Mitarbeiter </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> Archive </button>
+            <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> Hilfe nehmen </button>
+            <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> Verwaltung </button>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div [hidden]="alum" padding class="botones">
+            <button class="animated slideInRight imgbtn2" style=" width: 100%; height: 33%;" (click)="ruteo('encEst')" ion-button> pesquisas </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 33%;" (click)="ruteo('est')" ion-button> estatísticas </button>
+            <button class="animated slideInLeft imgbtn" style=" width: 100%;height: 33%;" (click)="ruteo('fal')" ion-button> falhas </button>
+        </div>
+        <div [hidden]="prof" padding class="botones">
+
+            <button class="animated slideInDown imgbtn2" style=" width: 100%; height: 49%;" (click)="ruteo('enc')" ion-button> gerente de pesquisa </button>
+            <button class="animated slideInLeft imgbtn3" style=" width: 100%;height: 49%;" (click)="ruteo('est')" ion-button> estatísticas </button>
+
+        </div>
+        <div [hidden]="ad" padding class="botones">
+            <button class="animated slideInDown imgbtn" style=" width: 100%;height: 25%;" (click)="ruteo('asist')" ion-button> preste assistência </button>
+            <button class="animated slideInRight imgbtn6" style=" width: 100%;height: 25%;" (click)="ruteo('adm')" ion-button> administração </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 25%;" (click)="ruteo('arch')" ion-button> arquivos </button>
+            <button class="animated slideInUp imgbtn5" style=" width: 100%;height: 25%;" (click)="ruteo('al')" ion-button> estudantes altos</button>
+
+        </div>
+        <div [hidden]="adm" padding class="botones">
+            <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" (click)="ruteo('al')" ion-button> estudantes altos </button>
+            <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" (click)="ruteo('alt')" ion-button> altos empregados </button>
+            <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" (click)="ruteo('arch')" ion-button> arquivos </button>
+            <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" (click)="ruteo('asist')" ion-button> preste assistência </button>
+            <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" (click)="ruteo('adm')" ion-button> administração </button>
+        </div>
+    </div>
 
 
 

@@ -40,6 +40,7 @@ export class AlumnosPage {
   public materia: any[];
   numero:string;
   bandera: boolean = true;
+  idioma = localStorage.getItem("idioma");
   
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
     this.alta.edad = "sin definir";

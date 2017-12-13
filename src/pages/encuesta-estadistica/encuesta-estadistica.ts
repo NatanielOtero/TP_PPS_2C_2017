@@ -46,7 +46,7 @@ export class EncuestaEstadisticaPage {
   encuestasPendientes = false;
   bandera1: boolean = true;
   bandera2: boolean = false;
-
+  idioma = localStorage.getItem("idioma");
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public alertCtrl: AlertController) {

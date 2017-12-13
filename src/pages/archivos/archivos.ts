@@ -43,6 +43,7 @@ export class ArchivosPage {
   public mat2: string;
   public materias: any[];
   i:number = 0;
+  idioma = localStorage.getItem("idioma");
 
   constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase) {
     this.leerDB();

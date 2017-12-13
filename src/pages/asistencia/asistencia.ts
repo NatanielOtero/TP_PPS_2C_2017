@@ -43,6 +43,7 @@ export class AsistenciaPage {
   asist: Array<any> = new Array<any>();
   storage: any;
   boton : boolean = true;
+  idioma = localStorage.getItem("idioma");
 
   constructor(public navCtrl: NavController, private http: Http, private audio : NativeAudio , public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
     //this.leer();

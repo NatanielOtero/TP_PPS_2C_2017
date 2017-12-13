@@ -13,67 +13,406 @@
 </ion-header>
 
 <ion-content class="bg-image">
-    <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
-
-        <form class="login active">
-            <h3>Ingrese su legajo</h3>
-
-            <div>
-                <label>   <ion-icon name="finger-print"></ion-icon>
-                  | Legajo:</label>
-                <input type="number" [(ngModel)]="legajo" name="legajo" />
-            </div>
-            <div>
-                <label>   <ion-icon name="lock"></ion-icon> | Contraseña:                 
+    <div *ngIf="idioma == 'espanol'">
+        <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>Ingrese su legajo</h3>
+                <div>
+                    <label>
+                        <ion-icon name="finger-print"></ion-icon>
+                        | Legajo:</label>
+                    <input type="number" [(ngModel)]="legajo" name="legajo" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Contraseña:
                     </label>
-                <input type="password" [(ngModel)]="pw" name="pw" />
-            </div>
-            <div class="bottom">
+                    <input type="password" [(ngModel)]="pw" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="reg()">
+                        <ion-icon name="contact"></ion-icon> | Completar registro</button>
+                </div>
+            </form>
+        </div>
+        <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>Ingrese sus datos</h3>
+                <div>
+                    <label>
+                        <ion-icon name="mail"></ion-icon> | Correo:</label>
+                    <input type="mail" [(ngModel)]="us.mail" name="mail" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Contraseña:
+                    </label>
+                    <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Repetir Contraseña:
+                    </label>
+                    <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="contacts"></ion-icon>Sexo:</label>
 
-                <button ion-button (click)="reg()">  <ion-icon name="contact"></ion-icon>  |  Completar registro</button>
-
-            </div>
-        </form>
+                    <select [(ngModel)]="us.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">Masculino</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> Femenino</option>
+                    </select>
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Edad:
+                    </label>
+                    <input type="number" [(ngModel)]="us.edad" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
+                        <ion-icon name="contact"></ion-icon> | Finalizar </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
-        <form class="login active">
-            <h3>Ingrese sus datos</h3>
-
-            <div>
-                <label>   <ion-icon name="mail"></ion-icon> | Correo:</label>
-                <input type="mail" [(ngModel)]="us.mail" name="mail" />
-            </div>
-            <div>
-                <label>   <ion-icon name="lock"></ion-icon> | Contraseña:                 
+    <div *ngIf="idioma == 'frances'">
+        <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>entrer un fichier à rechercher</h3>
+                <div>
+                    <label>
+                        <ion-icon name="finger-print"></ion-icon>
+                        | fichier:</label>
+                    <input type="number" [(ngModel)]="legajo" name="legajo" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | passe:
                     </label>
-                <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
-            </div>
-            <div>
-                <label>   <ion-icon name="lock"></ion-icon> | Repetir Contraseña:                 
+                    <input type="password" [(ngModel)]="pw" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="reg()">
+                        <ion-icon name="contact"></ion-icon> | dossier complet</button>
+                </div>
+            </form>
+        </div>
+        <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>entrez vos données</h3>
+                <div>
+                    <label>
+                        <ion-icon name="mail"></ion-icon> | courrier électronique:</label>
+                    <input type="mail" [(ngModel)]="us.mail" name="mail" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | passe:
                     </label>
-                <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
-            </div>
-            <div>
-                <label>
-                    <ion-icon name="contacts"></ion-icon>Sexo:</label>
+                    <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Répéter le mot de passe:
+                    </label>
+                    <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="contacts"></ion-icon>sexe:</label>
 
-                <select [(ngModel)]="us.sexo" name="sexo">
-                    <option value="masculino"><ion-icon name="male">Masculino</ion-icon>
-                    </option>
-                    <option value="femenino">  <ion-icon name="female"></ion-icon> Femenino</option>                 
-                  </select>
-            </div>
-            <div>
-                <label>   <ion-icon name="lock"></ion-icon> | Edad:                 
-                </label>
-                <input type="number" [(ngModel)]="us.edad" name="pw" />
-            </div>
-            <div class="bottom">
+                    <select [(ngModel)]="us.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">Homme</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> féminin</option>
+                    </select>
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | âge:
+                    </label>
+                    <input type="number" [(ngModel)]="us.edad" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
+                        <ion-icon name="contact"></ion-icon> | finition </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>enter a file to be search</h3>
+                <div>
+                    <label>
+                        <ion-icon name="finger-print"></ion-icon>
+                        | file:</label>
+                    <input type="number" [(ngModel)]="legajo" name="legajo" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | password:
+                    </label>
+                    <input type="password" [(ngModel)]="pw" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="reg()">
+                        <ion-icon name="contact"></ion-icon> | complete registration</button>
+                </div>
+            </form>
+        </div>
+        <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>Enter personal information</h3>
+                <div>
+                    <label>
+                        <ion-icon name="mail"></ion-icon> | email:</label>
+                    <input type="mail" [(ngModel)]="us.mail" name="mail" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | password:
+                    </label>
+                    <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | repeat password:
+                    </label>
+                    <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="contacts"></ion-icon>gender:</label>
 
-                <button ion-button (click)="enviar()">  <ion-icon name="contact"></ion-icon>  |  Finalizar </button>
+                    <select [(ngModel)]="us.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">male</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> female</option>
+                    </select>
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | age:
+                    </label>
+                    <input type="number" [(ngModel)]="us.edad" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
+                        <ion-icon name="contact"></ion-icon> | round up </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>введите свой файл</h3>
+                <div>
+                    <label>
+                        <ion-icon name="finger-print"></ion-icon>
+                        | файл:</label>
+                    <input type="number" [(ngModel)]="legajo" name="legajo" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | пароль:
+                    </label>
+                    <input type="password" [(ngModel)]="pw" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="reg()">
+                        <ion-icon name="contact"></ion-icon> | полная запись</button>
+                </div>
+            </form>
+        </div>
+        <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>введите свои данные</h3>
+                <div>
+                    <label>
+                        <ion-icon name="mail"></ion-icon> | почта:</label>
+                    <input type="mail" [(ngModel)]="us.mail" name="mail" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | пароль:
+                    </label>
+                    <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | повторить пароль:
+                    </label>
+                    <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="contacts"></ion-icon>секс:</label>
 
-            </div>
-        </form>
+                    <select [(ngModel)]="us.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">мужчина</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> женщина</option>
+                    </select>
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | возраст:
+                    </label>
+                    <input type="number" [(ngModel)]="us.edad" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
+                        <ion-icon name="contact"></ion-icon> | завершать </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>Gib deine Datei ein</h3>
+                <div>
+                    <label>
+                        <ion-icon name="finger-print"></ion-icon>
+                        | Datei:</label>
+                    <input type="number" [(ngModel)]="legajo" name="legajo" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Passwort:
+                    </label>
+                    <input type="password" [(ngModel)]="pw" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="reg()">
+                        <ion-icon name="contact"></ion-icon> | komplette Aufzeichnung</button>
+                </div>
+            </form>
+        </div>
+        <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>Gib deine Daten ein</h3>
+                <div>
+                    <label>
+                        <ion-icon name="mail"></ion-icon> | E-Mail:</label>
+                    <input type="mail" [(ngModel)]="us.mail" name="mail" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Passwort:
+                    </label>
+                    <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Passwort wiederholen:
+                    </label>
+                    <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="contacts"></ion-icon>Sex:</label>
 
+                    <select [(ngModel)]="us.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">männlich</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> weiblich</option>
+                    </select>
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | Alter:
+                    </label>
+                    <input type="number" [(ngModel)]="us.edad" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
+                        <ion-icon name="contact"></ion-icon> | fertig </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div [hidden]="mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>insira seu arquivo</h3>
+                <div>
+                    <label>
+                        <ion-icon name="finger-print"></ion-icon>
+                        | arquivo:</label>
+                    <input type="number" [(ngModel)]="legajo" name="legajo" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | senha:
+                    </label>
+                    <input type="password" [(ngModel)]="pw" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="reg()">
+                        <ion-icon name="contact"></ion-icon> | registro completo</button>
+                </div>
+            </form>
+        </div>
+        <div [hidden]="!mostrar" id="form_wrapper" class="form_wrapper animated bounceInLeft">
+            <form class="login active">
+                <h3>insira seus dados</h3>
+                <div>
+                    <label>
+                        <ion-icon name="mail"></ion-icon> | mail:</label>
+                    <input type="mail" [(ngModel)]="us.mail" name="mail" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | senha:
+                    </label>
+                    <input type="password" [(ngModel)]="us.pw" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | repetir a senha:
+                    </label>
+                    <input type="password" [(ngModel)]="validati" name="pw" minlength="6" />
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="contacts"></ion-icon>Sexo:</label>
+
+                    <select [(ngModel)]="us.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">masculino</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> feminino</option>
+                    </select>
+                </div>
+                <div>
+                    <label>
+                        <ion-icon name="lock"></ion-icon> | idade:
+                    </label>
+                    <input type="number" [(ngModel)]="us.edad" name="pw" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
+                        <ion-icon name="contact"></ion-icon> | terminar </button>
+                </div>
+            </form>
+        </div>
     </div>
 </ion-content>

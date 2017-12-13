@@ -9,62 +9,364 @@
     </ion-navbar>
 </ion-header>
 <ion-content padding class="bg-image">
-    <div id="form_wrapper" class="form_wrapper animated bounceInUp">
-        <div class="bottom">
-            <div [hidden]="!modificar">
-                <h3>
-                    Datos : {{alum.usuario}}
-                </h3>
-                <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
-                    <div [hidden]="!default">
-                        <button class="imgbtn" (click)="cambiarImagen()"></button>
-                    </div>
-                    <div [hidden]="default">
-                        <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
-                    </div>
+    <div *ngIf="idioma == 'espanol'">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                        Datos : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="!default">
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
 
-                    <div [hidden]="!mostrarCambio">
-                        <div style="text-align:center">
-                            <div *ngFor='let images of imagenes'>
-                                <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <label>| Edad: {{alum.edad}}</label>
-                <label>| Sexo: {{alum.sexo}} </label>
-                <label>| Ocupación: {{alum.tipo}} </label>
-                <label>| Legajo: {{alum.legajo}} </label>
-                <label>
-                    <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
-                        <ion-icon name="camera"></ion-icon>Foto de perfil</button>
-                </label>
-                <div class="bottom">
-                    <button ion-button (click)="mod()">
-                        <ion-icon name="contact"></ion-icon> | Modificar</button>
+                    <label>| Edad: {{alum.edad}}</label>
+                    <label>| Sexo: {{alum.sexo}} </label>
+                    <label>| Ocupación: {{alum.tipo}} </label>
+                    <label>| Legajo: {{alum.legajo}} </label>
+                    <label>
+                        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                            <ion-icon name="camera"></ion-icon>Foto de perfil</button>
+                    </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                            <ion-icon name="contact"></ion-icon> | Modificar</button>
+                    </div>
                 </div>
-            </div>
-            <div [hidden]="modificar">
-                <label>| Nombre: </label>
-                <input type="text" [(ngModel)]="alum.usuario" name="name" />
-                <label>| Edad: </label>
-                <input type="number" [(ngModel)]="alum.edad" name="edad" />
-                <label>| Sexo: </label>
-                <select [(ngModel)]="alum.sexo" name="sexo">
-                    <option value="masculino">
-                        <ion-icon name="male">Masculino</ion-icon>
-                    </option>
-                    <option value="femenino">
-                        <ion-icon name="female"></ion-icon> Femenino</option>
-                </select>
+                <div [hidden]="modificar">
+                    <label>| Nombre: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| Edad: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| Sexo: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">Masculino</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> Femenino</option>
+                    </select>
 
-                <div class="bottom">
-                    <button ion-button (click)="guardar()">
-                        <ion-icon name="contact"></ion-icon> | Guardar</button>
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                            <ion-icon name="contact"></ion-icon> | Guardar</button>
+                    </div>
                 </div>
+                <br>
             </div>
-            <br>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'frances'">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                        données : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="!default">
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
+
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>| âge: {{alum.edad}}</label>
+                    <label>| sexe: {{alum.sexo}} </label>
+                    <label>| occupation: {{alum.tipo}} </label>
+                    <label>| fichier: {{alum.legajo}} </label>
+                    <label>
+                        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                            <ion-icon name="camera"></ion-icon>photo de profil</button>
+                    </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                            <ion-icon name="contact"></ion-icon> | modifier</button>
+                    </div>
+                </div>
+                <div [hidden]="modificar">
+                    <label>| nom: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| âge: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| sexe: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">Homme</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> féminin</option>
+                    </select>
+
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                            <ion-icon name="contact"></ion-icon> | sauvegarder</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                        Data : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="!default">
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
+
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>| age: {{alum.edad}}</label>
+                    <label>| gender: {{alum.sexo}} </label>
+                    <label>| occupation: {{alum.tipo}} </label>
+                    <label>| file: {{alum.legajo}} </label>
+                    <label>
+                        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                            <ion-icon name="camera"></ion-icon>profile picture</button>
+                    </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                            <ion-icon name="contact"></ion-icon> | Modify</button>
+                    </div>
+                </div>
+                <div [hidden]="modificar">
+                    <label>| name: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| age: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| gender: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">male</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> female</option>
+                    </select>
+
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                            <ion-icon name="contact"></ion-icon> | save</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                        данные : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="!default">
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
+
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>| возраст: {{alum.edad}}</label>
+                    <label>| секс: {{alum.sexo}} </label>
+                    <label>| оккупационный: {{alum.tipo}} </label>
+                    <label>| файл: {{alum.legajo}} </label>
+                    <label>
+                        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                            <ion-icon name="camera"></ion-icon>изображение профиля</button>
+                    </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                            <ion-icon name="contact"></ion-icon> | изменение</button>
+                    </div>
+                </div>
+                <div [hidden]="modificar">
+                    <label>| название: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| возраст: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| секс: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">мужчина</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> женщина</option>
+                    </select>
+
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                            <ion-icon name="contact"></ion-icon> | экономить</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                            Daten : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="!default">
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
+
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>| Alter: {{alum.edad}}</label>
+                    <label>| Sex: {{alum.sexo}} </label>
+                    <label>| Beruf: {{alum.tipo}} </label>
+                    <label>| Datei: {{alum.legajo}} </label>
+                    <label>
+                        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                            <ion-icon name="camera"></ion-icon>Profilbild</button>
+                    </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                            <ion-icon name="contact"></ion-icon> | ändern</button>
+                    </div>
+                </div>
+                <div [hidden]="modificar">
+                    <label>| Name: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| Alter: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| Sex: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">männlich</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> weiblich</option>
+                    </select>
+
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                            <ion-icon name="contact"></ion-icon> | speichern</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                        dados : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="!default">
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
+
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>| idade: {{alum.edad}}</label>
+                    <label>| sexo: {{alum.sexo}} </label>
+                    <label>| ocupação: {{alum.tipo}} </label>
+                    <label>| arquivo: {{alum.legajo}} </label>
+                    <label>
+                        <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                            <ion-icon name="camera"></ion-icon>imagem de perfil</button>
+                    </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                            <ion-icon name="contact"></ion-icon> | Modificar</button>
+                    </div>
+                </div>
+                <div [hidden]="modificar">
+                    <label>| nome: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| idade: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| Sexo: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                        <option value="masculino">
+                            <ion-icon name="male">Masculino</ion-icon>
+                        </option>
+                        <option value="femenino">
+                            <ion-icon name="female"></ion-icon> Femenino</option>
+                    </select>
+
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                            <ion-icon name="contact"></ion-icon> | salvar</button>
+                    </div>
+                </div>
+                <br>
+            </div>
         </div>
     </div>
 </ion-content>

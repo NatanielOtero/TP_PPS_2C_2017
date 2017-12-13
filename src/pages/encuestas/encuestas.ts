@@ -68,6 +68,7 @@ export class EncuestasPage {
   preguntaAnterior: string = null;
   usuario: Array<string> = [];
   nombreActual: string = null;
+  idioma = localStorage.getItem("idioma");
 
   constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase, public navParams: NavParams) {
     //this.items = afDB.list('Encuestas').valueChanges();
@@ -271,6 +272,11 @@ export class EncuestasPage {
     this.curso = "";
     this.des = false;
     this.formato = "";
+  }
+
+  volverAlMenu()
+  {
+    this.navCtrl.setRoot(HomePage, { tipo: 'profesor', usuario: this.usuario });
   }
 
 

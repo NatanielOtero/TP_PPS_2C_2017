@@ -27,6 +27,8 @@ export class HomePage {
   tipo: string;
   user: Alta;
   scannedCode = null;
+  idioma = localStorage.getItem("idioma");
+  
   constructor(public alertCtrl: AlertController,private audio : NativeAudio ,public navCtrl: NavController, public navParams: NavParams) {
     this.tipo = navParams.get('tipo');
     this.user = navParams.get('usuario');

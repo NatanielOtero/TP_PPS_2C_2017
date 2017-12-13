@@ -31,27 +31,27 @@ export class LoginPage {
   pw: string;
   user: Alta;
   userProfile: any = null;
-  public usuariosList : AngularFireList<any>;
-  public usuariosObs : Observable<any>;
-  public usuarios : Array<any>;
+  public usuariosList: AngularFireList<any>;
+  public usuariosObs: Observable<any>;
+  public usuarios: Array<any>;
+  idioma = localStorage.getItem("idioma");
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtr: ToastController, public ActCtr: ActionSheetController,
     private aute: AngularFireAuth, private alert: AlertController, public audio: NativeAudio, private googlePlus: GooglePlus,
-    private facebook : Facebook,public afDB: AngularFireDatabase) {
-    this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3'); 
-     
+    private facebook: Facebook, public afDB: AngularFireDatabase) {
+    this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3');
+
   }
-  rapido()
-  {
-     this.email = "admin@admin.com";
-     this.pw = "administrador";
+  rapido() {
+    this.email = "admin@admin.com";
+    this.pw = "administrador";
   }
 
-  async login() {    
+  async login() {
     this.audio.play('btn');
 
-    
+
     if (this.email == null || this.pw == null) {
       let tost = this.toastCtr.create({
         message: 'Error, complete los campos',
@@ -60,76 +60,77 @@ export class LoginPage {
       });
       tost.present();
     }
-    else {     
-        try {
-          var result = this.aute.auth.signInWithEmailAndPassword(this.email, this.pw).then(result => {
-  
-           console.log(" login " + JSON.stringify( this.usuarios));
-           try {
+    else {
+      try {
+        var result = this.aute.auth.signInWithEmailAndPassword(this.email, this.pw).then(result => {
+
+          console.log(" login " + JSON.stringify(this.usuarios));
+          try {
             let privilegio = this.verificarPrivilegio(result.email);
             let user = this.obtenerUsuario(result.email);
             console.log("es :" + privilegio);
             console.log(result);
-            console.log("nombre :" + result.displayName); 
-            console.log(user);                      
-            this.navCtrl.setRoot(HomePage,{
+            console.log("nombre :" + result.displayName);
+            console.log(user);
+
+            this.navCtrl.setRoot(HomePage, {
               tipo: privilegio,
               usuario: user
             });
-           } catch (error ) {
+          } catch (error) {
             let tost = this.toastCtr.create({
               message: error,
               duration: 3000,
               position: 'middle'
             });
             tost.present();
-           }
-          
-          }).catch(error => {
-            console.error(error);
-            let tost = this.toastCtr.create({
-              message: 'Error, usuario invalido',
-              duration: 3000,
-              position: 'middle'
-            });
-            tost.present();
-          });
-          {
-  
           }
-  
-          console.log(result);
-        }
-        catch (error) {
+
+        }).catch(error => {
           console.error(error);
           let tost = this.toastCtr.create({
-            message: error.message,
+            message: 'Error, usuario invalido',
             duration: 3000,
             position: 'middle'
           });
           tost.present();
+        });
+        {
+
         }
 
-      
-     
-     
+        console.log(result);
+      }
+      catch (error) {
+        console.error(error);
+        let tost = this.toastCtr.create({
+          message: error.message,
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+
+
+
+
 
     }
-  } 
+  }
 
   google(): void {
     this.googlePlus.login({
       'webClientId': '269696208664-7vfdsbjccq8l42326l5folj6rh2igu6m.apps.googleusercontent.com',
       'offline': true
-    }).then( res => {
+    }).then(res => {
       firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(res.idToken))
-        .then( success => { 
+        .then(success => {
           try {
             let user = this.obtenerUsuario(success.email);
             let privilegio = this.verificarPrivilegio(success.email);
-            this.navCtrl.setRoot(HomePage,{
-              tipo : privilegio,
-              usuario : user
+            this.navCtrl.setRoot(HomePage, {
+              tipo: privilegio,
+              usuario: user
             });
           } catch (error) {
             let tost = this.toastCtr.create({
@@ -138,27 +139,27 @@ export class LoginPage {
               position: 'middle'
             });
             tost.present();
-          }        
-       
+          }
+
         })
-        .catch( error => alert("Firebase failure: " + JSON.stringify(error)));
-      }).catch(err => alert("Error: " + err));
+        .catch(error => alert("Firebase failure: " + JSON.stringify(error)));
+    }).catch(err => alert("Error: " + err));
   }
 
- 
-  facebookLogin(){
-    this.facebook.login(['email']).then( (response) => {
-        const facebookCredential = firebase.auth.FacebookAuthProvider
-            .credential(response.authResponse.accessToken);
 
-        firebase.auth().signInWithCredential(facebookCredential)
-        .then((success) => {            
+  facebookLogin() {
+    this.facebook.login(['email']).then((response) => {
+      const facebookCredential = firebase.auth.FacebookAuthProvider
+        .credential(response.authResponse.accessToken);
+
+      firebase.auth().signInWithCredential(facebookCredential)
+        .then((success) => {
           try {
             let user = this.obtenerUsuario(success.email);
             let privilegio = this.verificarPrivilegio(success.email);
-            this.navCtrl.setRoot(HomePage,{
-              tipo : privilegio,
-              usuario : user
+            this.navCtrl.setRoot(HomePage, {
+              tipo: privilegio,
+              usuario: user
             });
           } catch (error) {
             let tost = this.toastCtr.create({
@@ -167,51 +168,44 @@ export class LoginPage {
               position: 'middle'
             });
             tost.present();
-          }        
+          }
         })
         .catch((error) => {
-            alert("Firebase failure: " + JSON.stringify(error));
+          alert("Firebase failure: " + JSON.stringify(error));
         });
 
     }).catch((error) => { alert(error) });
-}
+  }
 
-
-
-
-
-ionViewDidLoad() {
-  this.usuariosList = this.afDB.list('/prueba');
-  this.usuariosObs = this.usuariosList.valueChanges();
-  this.usuariosObs.subscribe(
+  ionViewDidLoad() {
+    this.usuariosList = this.afDB.list('/prueba');
+    this.usuariosObs = this.usuariosList.valueChanges();
+    this.usuariosObs.subscribe(
       user => this.usuarios = user,
     );
-    console.log("inicio"+  JSON.stringify( this.usuarios));
-}
-obtenerUsuario(email : string)
-{
-  for (var i = 0; i < this.usuarios.length; i++) {
-    if(email == this.usuarios[i].email)
-    {
-      return this.usuarios[i];
-    }
-    
+    console.log("inicio" + JSON.stringify(this.usuarios));
   }
-  throw new Error("Usuario invalido");
-}
 
-verificarPrivilegio(email : string)
-{
-  for (var i = 0; i < this.usuarios.length; i++) {
-    if(email == this.usuarios[i].email)
-    {
-      return this.usuarios[i].tipo;
+  obtenerUsuario(email: string) {
+    for (var i = 0; i < this.usuarios.length; i++) {
+      if (email == this.usuarios[i].email) {
+        return this.usuarios[i];
+      }
+
     }
-    
+    throw new Error("Usuario invalido");
   }
-  throw new Error("Usuario invalido");
-  
-}
+
+  verificarPrivilegio(email: string) {
+    for (var i = 0; i < this.usuarios.length; i++) {
+      if (email == this.usuarios[i].email) {
+        if (this.usuarios[i].actividad != "inactivo") {
+          return this.usuarios[i].tipo;
+        }
+      }
+    }
+    throw new Error("Usuario invalido");
+  }
 
 
 

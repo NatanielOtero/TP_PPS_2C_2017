@@ -39,12 +39,14 @@ export class EmpleadosPage {
   public cant: Array<any> = new Array<any>();
   bandera: boolean = true;
   numero: string;
+  idioma = localStorage.getItem("idioma");
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http, public toastCtr: ToastController) {
     this.alta.edad = "sin definir";
     this.alta.email = "sin definir";
     this.alta.sexo = "sin definir";
     this.alta.usuario = "sin definir";
+    this.alta.tipo = "profesor";
 
     this.leerDB();
   }
@@ -73,6 +75,7 @@ export class EmpleadosPage {
 
     var lastId = (this.id + 1);
     this.alta.id = lastId;
+    this.alta.actividad = 'activo';
     try {
       for (let i = 0; i < this.numero.length; i++) {
         console.log(this.numero[i]);
@@ -84,7 +87,12 @@ export class EmpleadosPage {
       if (this.bandera) {
         this.alta.legajo = Number(this.numero);
         if (this.alta.legajo == 0) {
-          console.log("introduzca un legajo");
+          let tost = this.toastCtr.create({
+            message: "introduzca un legajo",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
         }
         else {
           for (var i = 0; i < this.cant.length; i++) {
@@ -99,18 +107,33 @@ export class EmpleadosPage {
               itemRef.set(this.alta);
             }
             else {
-              console.log("ingrese un usuario valido con mas de 6 caracteres");
+              let tost = this.toastCtr.create({
+                message: "ingrese un usuario valido con mas de 6 caracteres",
+                duration: 2000,
+                position: 'middle'
+              });
+              tost.present();
             }
           }
           else {
             this.band = false;
-            console.log("ya existe ese legajo");
+            let tost = this.toastCtr.create({
+              message: "ya existe ese legajo",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
           }
         }
       }
       else {
         this.bandera = true;
-        console.log("no es un numero");
+        let tost = this.toastCtr.create({
+          message: "no es un numero",
+          duration: 2000,
+          position: 'middle'
+        });
+        tost.present();
       }
     } catch (error) {
 
@@ -221,5 +244,19 @@ export class EmpleadosPage {
     this.items.subscribe(cantidad => this.cant = cantidad);
   }
 
-
+  delete(id)
+  {
+    if(this.cant[id].actividad == "activo")
+    {
+      this.Items = this.afDB.list("/prueba/" + id);
+      this.Items.set("/actividad", "inactivo");
+      this.leerDB();
+    }
+    else
+    {
+      this.Items = this.afDB.list("/prueba/" + id);
+      this.Items.set("/actividad", "activo");
+      this.leerDB();
+    }
+  }
 }

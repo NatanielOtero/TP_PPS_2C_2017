@@ -1,59 +1,172 @@
 <ion-header>
     <ion-navbar color="dark">
-
     </ion-navbar>
 </ion-header>
-
 <ion-content padding class="bg-image">
-    <div class="form_wrapper animated slideInLeft">
-        <h3>Cargar Listado
-        </h3>
-        <label style="color:white; font-size:15px">Elija la materia</label>
-        <select [(ngModel)]="opcion" (ngModelChange)='f()'>
-            <option value="PPS">PPS</option>
-            <option value="LAB4">LAB4</option>
-        </select>
-        <br>
-        <label style="color:white; font-size:15px">Elija el curso</label>
-        <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
-            <option value="4A">4A</option>
-            <option value="4B">4B</option>
-        </select>
-        <br>
+    <div *ngIf="idioma == 'espanol'">
+        <div class="form_wrapper animated slideInLeft">
+            <h3>Cargar Listado
+            </h3>
+            <label style="color:white; font-size:15px">Elija la materia</label>
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+            <br>
+            <label style="color:white; font-size:15px">Elija el curso</label>
+            <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'frances'">
+        <div class="form_wrapper animated slideInLeft">
+            <h3>liste de chargement
+            </h3>
+            <label style="color:white; font-size:15px">choisissez le matériel</label>
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+            <br>
+            <label style="color:white; font-size:15px">choisissez le cours</label>
+            <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div class="form_wrapper animated slideInLeft">
+            <h3>load list
+            </h3>
+            <label style="color:white; font-size:15px">choose subject</label>
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+            <br>
+            <label style="color:white; font-size:15px">choose the course</label>
+            <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div class="form_wrapper animated slideInLeft">
+            <h3>список загрузки
+            </h3>
+            <label style="color:white; font-size:15px">выбрать материал</label>
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+            <br>
+            <label style="color:white; font-size:15px">выбрать курс</label>
+            <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div class="form_wrapper animated slideInLeft">
+            <h3>Ladeliste
+            </h3>
+            <label style="color:white; font-size:15px">wähle das Material</label>
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+            <br>
+            <label style="color:white; font-size:15px">wähle den Kurs</label>
+            <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            <br>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div class="form_wrapper animated slideInLeft">
+            <h3>lista de carga
+            </h3>
+            <label style="color:white; font-size:15px">escolha o material</label>
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+                <option value="PPS">PPS</option>
+                <option value="LAB4">LAB4</option>
+            </select>
+            <br>
+            <label style="color:white; font-size:15px">escolha o curso</label>
+            <select [(ngModel)]="opcion1" (ngModelChange)='g()'>
+                <option value="4A">4A</option>
+                <option value="4B">4B</option>
+            </select>
+            <br>
+        </div>
     </div>
 
-    <div [hidden]="mostrar">
-        <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
-        <input id="file" type="file" (change)="handleUpload($event)">
-        <button ion-button (click)="readCsvData()">leer csv</button>
-        <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Descargar CSV</button>
 
-        <!-- <thead>
-            <th>Legajo</th>
-            <th>e-mail</th>
-            <th>Usuario</th>
-            <th>ID</th>
-            <th>Borrar</th>
-        </thead>
-        <tbody *ngFor="let item of cant">
-            <td *ngIf="item.actividad == 'activo'">
-                {{item.legajo}}
-            </td>
-            <td *ngIf="item.actividad == 'activo'">
-                {{item.email}}
-            </td>
-            <td *ngIf="item.actividad == 'activo'">
-                {{item.usuario}}
-            </td>
-            <td *ngIf="item.actividad == 'activo'">
-                {{item.id}}
-            </td>
-            <td *ngIf="item.actividad == 'activo'">
-                <button ion-button danger (click)="delete(item.id)">borrar</button>
-            </td>
 
-        </tbody>-->
-         </div>
+
+    <div *ngIf="idioma == 'espanol'">
+        <div [hidden]="mostrar">
+            <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
+                <input id="file" type="file" (change)="handleUpload($event)">
+                <button ion-button (click)="readCsvData()">leer csv</button>
+                <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Descargar CSV</button>
+            </div>
+        </div>
     </div>
-
+    <div *ngIf="idioma == 'frances'">
+        <div [hidden]="mostrar">
+            <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
+                <input id="file" type="file" (change)="handleUpload($event)">
+                <button ion-button (click)="readCsvData()">lire csv</button>
+                <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>télécharger CSV</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ingles'">
+        <div [hidden]="mostrar">
+            <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
+                <input id="file" type="file" (change)="handleUpload($event)">
+                <button ion-button (click)="readCsvData()">read csv</button>
+                <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>download CSV</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'ruso'">
+        <div [hidden]="mostrar">
+            <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
+                <input id="file" type="file" (change)="handleUpload($event)">
+                <button ion-button (click)="readCsvData()">считывание csv</button>
+                <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>скачать CSV</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'aleman'">
+        <div [hidden]="mostrar">
+            <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
+                <input id="file" type="file" (change)="handleUpload($event)">
+                <button ion-button (click)="readCsvData()">lesen csv</button>
+                <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>herunterladen CSV</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="idioma == 'portugues'">
+        <div [hidden]="mostrar">
+            <div [hidden]="mostrar1" class="animated bounceInRight form_wrapper down bottom">
+                <input id="file" type="file" (change)="handleUpload($event)">
+                <button ion-button (click)="readCsvData()">leia csv</button>
+                <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>baixar CSV</button>
+            </div>
+        </div>
+    </div>
 </ion-content>

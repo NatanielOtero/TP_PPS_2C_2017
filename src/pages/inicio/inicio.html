@@ -7,17 +7,81 @@
 
 
 <ion-content padding class="bg-image">
+    <ion-fab top edge left>
+        <button ion-fab>
+            <ion-icon ios="ios-build" md="md-build"></ion-icon>
+        </button>
+        <ion-fab-list side="bottom">
+            <button ion-fab class="ingles" (click)="cambiarIdioma('ingles')"></button>
+            <button ion-fab class="espanol" (click)="cambiarIdioma('espanol')"></button>
+            <button ion-fab class="portugues" (click)="cambiarIdioma('portugues')"></button>
+            <button ion-fab class="frances" (click)="cambiarIdioma('frances')"></button>
+            <button ion-fab class="ruso" (click)="cambiarIdioma('ruso')"></button>
+            <button ion-fab class="aleman" (click)="cambiarIdioma('aleman')"></button>
+            <button ion-fab class="geolocalizacion" (click)="cambiarIdiomaGeo()"></button>
+        </ion-fab-list>
+    </ion-fab>
     <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
 
         <form class="login active">
 
 
             <div class="bottom">
-                <h3>Bienvenido</h3>
-                <button class="animated " ion-button (click)="login()">  <ion-icon name="contact"></ion-icon>  |  Iniciar sesión</button>
-                <br> ¿Primera vez?
-                <br>
-                <button class="animated " ion-button (click)="regis()">  <ion-icon name="contact"></ion-icon>  |  Registrarse</button>
+                <div *ngIf="idioma == 'espanol'">
+                    <h3>Bienvenido</h3>
+                    <button class="animated " ion-button (click)="login()">
+                        <ion-icon name="contact"></ion-icon> | Iniciar sesión</button>
+                    <br> ¿Primera vez?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">
+                        <ion-icon name="contact"></ion-icon> | Registrarse</button>
+                </div>
+                <div *ngIf="idioma == 'ingles'">
+                    <h3>welcome</h3>
+                    <button class="animated " ion-button (click)="login()">
+                        <ion-icon name="contact"></ion-icon> | log in</button>
+                    <br> first time?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">
+                        <ion-icon name="contact"></ion-icon> | sign in</button>
+                </div>
+                <div *ngIf="idioma == 'portugues'">
+                    <h3>seja bem vindo</h3>
+                    <button class="animated " ion-button (click)="login()">
+                        <ion-icon name="contact"></ion-icon> | iniciar sessão</button>
+                    <br> primeira vez?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">
+                        <ion-icon name="contact"></ion-icon> | registre-se</button>
+                </div>
+                <div *ngIf="idioma == 'frances'">
+                    <h3>bienvenue</h3>
+                    <button class="animated " ion-button (click)="login()">
+                        <ion-icon name="contact"></ion-icon> | commencer la session</button>
+                    <br> première fois?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">
+                        <ion-icon name="contact"></ion-icon> | s'inscrire</button>
+                </div>
+                <div *ngIf="idioma == 'ruso'">
+                    <h3>добро пожаловать</h3>
+                    <button class="animated " ion-button (click)="login()">
+                        <ion-icon name="contact"></ion-icon> | начало сеанса</button>
+                    <br> первый раз?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">
+                        <ion-icon name="contact"></ion-icon> | Регистрация</button>
+                </div>
+                <div *ngIf="idioma == 'aleman'">
+                    <h3>willkommen</h3>
+                    <button class="animated " ion-button (click)="login()">
+                        <ion-icon name="contact"></ion-icon> | einloggen</button>
+                    <br> erstes Mal?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">
+                        <ion-icon name="contact"></ion-icon> | registrieren</button>
+                </div>
+
             </div>
         </form>
     </div>

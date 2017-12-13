@@ -40,6 +40,7 @@ export class PerfilPage {
   imagen: string;
   mostrarCambio: boolean = false;
   default : boolean;
+  idioma = localStorage.getItem("idioma");
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public toastCtr: ToastController, private camera: Camera,private loadingCtrl : LoadingController) {
     this.alum = this.navParams.get("usuario");
