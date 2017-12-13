@@ -54,12 +54,61 @@ export class RegistroPage {
           this.mostrar = true;
         }
         else {
-          let tost = this.toastCtr.create({
-            message: "El usuario ya esta activo",
-            duration: 3000,
-            position: 'middle'
-          });
-          tost.present();
+          if(this.idioma == 'espanol')
+          {
+            let tost = this.toastCtr.create({
+              message: "El usuario ya esta activo",
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'frances')
+          {
+            let tost = this.toastCtr.create({
+              message: "L'utilisateur est déjà actif",
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'ingles')
+          {
+            let tost = this.toastCtr.create({
+              message: "The user is already active",
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'ruso')
+          {
+            let tost = this.toastCtr.create({
+              message: "Пользователь уже активен",
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'aleman')
+          {
+            let tost = this.toastCtr.create({
+              message: "Der Benutzer ist bereits aktiv",
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'portugues')
+          {
+            let tost = this.toastCtr.create({
+              message: "O usuário já está ativo",
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          
 
         }
       }
@@ -75,12 +124,61 @@ export class RegistroPage {
     console.log("inicio" + JSON.stringify(this.usuarios));
 
     if (this.us == null || this.us.mail == null || this.us.pw == null)  {
-      let tost = this.toastCtr.create({
-        message: "Complete los campos",
-        duration: 3000,
-        position: 'middle'
-      });
-      tost.present();
+      if(this.idioma == 'espanol')
+      {
+        let tost = this.toastCtr.create({
+          message: "Error, complete los campos",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'frances')
+      {
+        let tost = this.toastCtr.create({
+          message: "Erreur, complétez les champs",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ingles')
+      {
+        let tost = this.toastCtr.create({
+          message: "Error, complete the fields",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ruso')
+      {
+        let tost = this.toastCtr.create({
+          message: "Ошибка, заполните поля",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'aleman')
+      {
+        let tost = this.toastCtr.create({
+          message: "Fehler, füllen Sie die Felder aus",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'portugues')
+      {
+        let tost = this.toastCtr.create({
+          message: "Erro, complete os campos",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      
     }
     else {
       if (this.us.pw == this.validati) {
@@ -110,12 +208,60 @@ export class RegistroPage {
       }
       else
       {
-        let tost = this.toastCtr.create({
-          message: "Las constraseñas no coinciden",
-          duration: 3000,
-          position: 'middle'
-        });
-        tost.present();
+        if(this.idioma == 'espanol')
+        {
+          let tost = this.toastCtr.create({
+            message: "Las constraseñas no coinciden",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'frances')
+        {
+          let tost = this.toastCtr.create({
+            message: "Les mots de passe ne correspondent pas",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'ingles')
+        {
+          let tost = this.toastCtr.create({
+            message: "Passwords do not match",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'ruso')
+        {
+          let tost = this.toastCtr.create({
+            message: "Пароли не совпадают",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'aleman')
+        {
+          let tost = this.toastCtr.create({
+            message: "Passwörter stimmen nicht überein",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'portugues')
+        {
+          let tost = this.toastCtr.create({
+            message: "As senhas não correspondem",
+            duration: 3000,
+            position: 'middle'
+          });
+          tost.present();
+        }
       }
     }
   }

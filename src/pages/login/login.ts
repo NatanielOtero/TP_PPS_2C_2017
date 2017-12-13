@@ -53,12 +53,60 @@ export class LoginPage {
 
 
     if (this.email == null || this.pw == null) {
-      let tost = this.toastCtr.create({
-        message: 'Error, complete los campos',
-        duration: 3000,
-        position: 'middle'
-      });
-      tost.present();
+      if(this.idioma == 'espanol')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Error, complete los campos',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'frances')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Erreur, complétez les champs',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ingles')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Error, complete the fields',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ruso')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Ошибка, заполните поля',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'aleman')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Fehler, füllen Sie die Felder aus',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'portugues')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Erro, complete os campos',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
     }
     else {
       try {
@@ -88,12 +136,60 @@ export class LoginPage {
 
         }).catch(error => {
           console.error(error);
-          let tost = this.toastCtr.create({
-            message: 'Error, usuario invalido',
-            duration: 3000,
-            position: 'middle'
-          });
-          tost.present();
+          if(this.idioma == 'espanol')
+          {
+            let tost = this.toastCtr.create({
+              message: 'Error, usuario invalido',
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'frances')
+          {
+            let tost = this.toastCtr.create({
+              message: 'Erreur, utilisateur invalide',
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'ingles')
+          {
+            let tost = this.toastCtr.create({
+              message: 'Error, invalid user',
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'ruso')
+          {
+            let tost = this.toastCtr.create({
+              message: 'Ошибка, неверный пользователь',
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'aleman')
+          {
+            let tost = this.toastCtr.create({
+              message: 'Fehler, ungültiger Benutzer',
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'portugues')
+          {
+            let tost = this.toastCtr.create({
+              message: 'Erro, usuário inválido',
+              duration: 3000,
+              position: 'middle'
+            });
+            tost.present();
+          }
         });
         {
 

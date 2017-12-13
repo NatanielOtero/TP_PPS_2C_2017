@@ -71,12 +71,60 @@ export class PerfilPage {
   guardar() {
     const itemRef = this.afDB.object('/prueba/' + this.alum.id + "/");
     itemRef.set(this.alum).then(success => {
-      let tost = this.toastCtr.create({
-        message: 'Datos guardados',
-        duration: 3000,
-        position: 'middle'
-      });
-      tost.present();
+      if(this.idioma == 'espanol')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Datos guardados',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'frances')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Données enregistrées',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ingles')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Saved data',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ruso')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Сохраненные данные',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'aleman')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Gespeicherte Daten',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'portugues')
+      {
+        let tost = this.toastCtr.create({
+          message: 'Dados guardados',
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
     }).catch(er => console.error(er));
     this.modificar = true;
 

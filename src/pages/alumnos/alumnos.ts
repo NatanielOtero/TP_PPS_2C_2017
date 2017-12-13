@@ -78,34 +78,6 @@ export class AlumnosPage {
     }
   }
   enviar() {
-
-
-    /*for (var index = 0; index < this.usuarios.length; index++) {
-      var element = this.usuarios[index].id;
-      this.id = element;
-      console.log(element);
-      console.log(this.id);
-    }
-
-    var lastId = (this.id + 1);
-    this.alta.id = lastId;
-
-
-    console.log(this.id);
-    console.log(lastId);
-    console.log(this.alta);
-    console.log("inicio" + JSON.stringify(this.usuarios));
-    try {
-      const itemRef = this.afDB.object('/prueba/' + lastId + "/");
-      itemRef.set(this.alta).then(success => {this.leerDB()}).catch(er => console.error(er));
-    } catch (error) {
-      console.log(error);
-      console.log(this.id);
-      console.log(lastId);
-      console.log(this.alta);
-      console.log("inicio" + JSON.stringify(this.usuarios));
-
-    }*/
     for (var index = 0; index < this.usuarios.length; index++) {
       var element = this.usuarios[index].id;
       this.id = element;

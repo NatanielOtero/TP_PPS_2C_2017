@@ -87,12 +87,61 @@ export class EmpleadosPage {
       if (this.bandera) {
         this.alta.legajo = Number(this.numero);
         if (this.alta.legajo == 0) {
-          let tost = this.toastCtr.create({
-            message: "introduzca un legajo",
-            duration: 2000,
-            position: 'middle'
-          });
-          tost.present();
+          if(this.idioma == 'espanol')
+          {
+            let tost = this.toastCtr.create({
+              message: "introduzca un legajo",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'frances')
+          {
+            let tost = this.toastCtr.create({
+              message: "entrer un fichier",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'ingles')
+          {
+            let tost = this.toastCtr.create({
+              message: "Enter the file",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'ruso')
+          {
+            let tost = this.toastCtr.create({
+              message: "введите файл",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'aleman')
+          {
+            let tost = this.toastCtr.create({
+              message: "Gib eine Datei ein",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          if(this.idioma == 'portugues')
+          {
+            let tost = this.toastCtr.create({
+              message: "insira um arquivo",
+              duration: 2000,
+              position: 'middle'
+            });
+            tost.present();
+          }
+          
         }
         else {
           for (var i = 0; i < this.cant.length; i++) {
@@ -107,33 +156,178 @@ export class EmpleadosPage {
               itemRef.set(this.alta);
             }
             else {
+              if(this.idioma == "espanol")
+              {
+                let tost = this.toastCtr.create({
+                  message: "ingrese un usuario valido con mas de 6 caracteres",
+                  duration: 2000,
+                  position: 'middle'
+                });
+                tost.present();
+              }
+              if(this.idioma == "frances")
+              {
+                let tost = this.toastCtr.create({
+                  message: "entrez un utilisateur valide avec plus de 6 caractères",
+                  duration: 2000,
+                  position: 'middle'
+                });
+                tost.present();
+              }
+              if(this.idioma == "ingles")
+              {
+                let tost = this.toastCtr.create({
+                  message: "enter a valid user with more than 6 characters",
+                  duration: 2000,
+                  position: 'middle'
+                });
+                tost.present();
+              }
+              if(this.idioma == "ruso")
+              {
+                let tost = this.toastCtr.create({
+                  message: "введите действительного пользователя с более чем 6 символами",
+                  duration: 2000,
+                  position: 'middle'
+                });
+                tost.present();
+              }
+              if(this.idioma == "aleman")
+              {
+                let tost = this.toastCtr.create({
+                  message: "Geben Sie einen gültigen Benutzer mit mehr als 6 Zeichen ein",
+                  duration: 2000,
+                  position: 'middle'
+                });
+                tost.present();
+              }
+              if(this.idioma == "portugues")
+              {
+                let tost = this.toastCtr.create({
+                  message: "insira um usuário válido com mais de 6 caracteres",
+                  duration: 2000,
+                  position: 'middle'
+                });
+                tost.present();
+              }
+            }
+          }
+          else {
+            this.band = false;
+            if(this.idioma == 'espanol')
+            {
               let tost = this.toastCtr.create({
-                message: "ingrese un usuario valido con mas de 6 caracteres",
+                message: "ya existe ese legajo",
+                duration: 2000,
+                position: 'middle'
+              });
+              tost.present();
+            }
+            if(this.idioma == 'frances')
+            {
+              let tost = this.toastCtr.create({
+                message: "ce fichier existe déjà",
+                duration: 2000,
+                position: 'middle'
+              });
+              tost.present();
+            }
+            if(this.idioma == 'ingles')
+            {
+              let tost = this.toastCtr.create({
+                message: "that file already exists",
+                duration: 2000,
+                position: 'middle'
+              });
+              tost.present();
+            }
+            if(this.idioma == 'ruso')
+            {
+              let tost = this.toastCtr.create({
+                message: "этот файл уже существует",
+                duration: 2000,
+                position: 'middle'
+              });
+              tost.present();
+            }
+            if(this.idioma == 'aleman')
+            {
+              let tost = this.toastCtr.create({
+                message: "Diese Datei existiert bereits",
+                duration: 2000,
+                position: 'middle'
+              });
+              tost.present();
+            }
+            if(this.idioma == 'portugues')
+            {
+              let tost = this.toastCtr.create({
+                message: "esse arquivo já existe",
                 duration: 2000,
                 position: 'middle'
               });
               tost.present();
             }
           }
-          else {
-            this.band = false;
-            let tost = this.toastCtr.create({
-              message: "ya existe ese legajo",
-              duration: 2000,
-              position: 'middle'
-            });
-            tost.present();
-          }
         }
       }
       else {
         this.bandera = true;
-        let tost = this.toastCtr.create({
-          message: "no es un numero",
-          duration: 2000,
-          position: 'middle'
-        });
-        tost.present();
+        if(this.idioma == 'espanol')
+        {
+          let tost = this.toastCtr.create({
+            message: "no es un numero",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'frances')
+        {
+          let tost = this.toastCtr.create({
+            message: "Ce n'est pas un nombre",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'ingles')
+        {
+          let tost = this.toastCtr.create({
+            message: "It is not a number",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'ruso')
+        {
+          let tost = this.toastCtr.create({
+            message: "Это не число",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'aleman')
+        {
+          let tost = this.toastCtr.create({
+            message: "Es ist keine Nummer",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        if(this.idioma == 'portugues')
+        {
+          let tost = this.toastCtr.create({
+            message: "não é um número",
+            duration: 2000,
+            position: 'middle'
+          });
+          tost.present();
+        }
+        
       }
     } catch (error) {
 

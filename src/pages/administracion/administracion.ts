@@ -76,12 +76,60 @@ export class AdministracionPage {
       this.desabilitar = true;
     }
     else {
-      let tost = this.tst.create({
-        message: "No puede tener menos de 0 faltas",
-        duration: 3000,
-        position: 'middle'
-      });
-      tost.present();
+      if(this.idioma == 'espanol')
+      {
+        let tost = this.tst.create({
+          message: "No puede tener menos de 0 faltas",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'frances')
+      {
+        let tost = this.tst.create({
+          message: "Ne peut pas avoir moins de 0 défauts",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ingles')
+      {
+        let tost = this.tst.create({
+          message: "Can not have less than 0 faults",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'ruso')
+      {
+        let tost = this.tst.create({
+          message: "Не может быть меньше 0 ошибок",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'aleman')
+      {
+        let tost = this.tst.create({
+          message: "Kann nicht weniger als 0 Fehler haben",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == 'portugues')
+      {
+        let tost = this.tst.create({
+          message: "Não pode ter menos de 0 falhas",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
     }
   }
 
@@ -118,12 +166,60 @@ export class AdministracionPage {
 
     }
     else {
-      let tost = this.tst.create({
-        message: "Ingrese el legajo",
-        duration: 3000,
-        position: 'middle'
-      });
-      tost.present();
+      if(this.idioma == "espanol")
+      {
+        let tost = this.tst.create({
+          message: "Ingrese el legajo",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == "frances")
+      {
+        let tost = this.tst.create({
+          message: "Entrez le fichier",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == "ingles")
+      {
+        let tost = this.tst.create({
+          message: "Enter the file",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == "ruso")
+      {
+        let tost = this.tst.create({
+          message: "Введите файл",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == "aleman")
+      {
+        let tost = this.tst.create({
+          message: "Gib die Datei ein",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
+      if(this.idioma == "portugues")
+      {
+        let tost = this.tst.create({
+          message: "Insira o arquivo",
+          duration: 3000,
+          position: 'middle'
+        });
+        tost.present();
+      }
     }
 
   }
