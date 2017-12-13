@@ -1,0 +1,118 @@
+<!--
+  Generated template for the PerfilPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
+    <div class="animated slideInRight" style="height:100%;width:100%">
+
+        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto1">
+            <div class="tutorial">
+
+
+            </div>
+            <div class="down2">
+                <button ion-button full block (click)="tutorial1()">Siguiente</button>
+            </div>
+        </div>
+        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto2">
+            <div class="tutorial2">
+
+
+            </div>
+            <div class="down2">
+                <button ion-button full block (click)="tutorial2()">Siguiente</button>
+            </div>
+        </div>
+        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto3">
+            <div class="tutorial3">
+
+
+            </div>
+            <div class="down2">
+                <button ion-button full block (click)="tutorial3()">Siguiente</button>
+            </div>
+        </div>
+        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto4">
+            <div class="tutorial4">
+
+
+            </div>
+            <div class="down2">
+                <button ion-button full block (click)="tutorial()">Entendido !</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div [hidden]="!tuto" style="height:100%;width:100%">
+    <ion-header>
+        <ion-navbar color="dark">
+
+        </ion-navbar>
+        <ion-fab top right>
+            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+        </ion-fab>
+
+    </ion-header>
+    <ion-content padding class="bg-image">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp">
+            <div class="bottom">
+                <div [hidden]="!modificar">
+                    <h3>
+                        Datos : {{alum.usuario}}
+                    </h3>
+                    <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+                        <div [hidden]="default">
+                            <button class="imgbtn" style="height:200px;width:270px" (click)="cambiarImagen()"></button>
+                        </div>
+                        <div [hidden]="!default">
+                            <img src="{{imagen}}" (click)="cambiarImagen()" alt="">
+                        </div>
+
+                        <div [hidden]="!mostrarCambio">
+                            <div style="text-align:center">
+                                <div *ngFor='let images of imagenes'>
+                                    <img src="{{images}}" (click)="modificarImagen(images)" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <label>| Edad: {{alum.edad}}</label>
+                    <label>| Sexo: {{alum.sexo}} </label>
+                    <label>| Ocupación: {{alum.tipo}} </label>
+                    <label>| Legajo: {{alum.legajo}} </label>
+                    <label>
+                    <button ion-button block large round icon-left color='light' (click)='tomarFoto()'>
+                        <ion-icon name="camera"></ion-icon>Foto de perfil</button>
+                </label>
+                    <div class="bottom">
+                        <button ion-button (click)="mod()">
+                        <ion-icon name="contact"></ion-icon> | Modificar</button>
+                    </div>
+                </div>
+                <div [hidden]="modificar">
+                    <label>| Nombre: </label>
+                    <input type="text" [(ngModel)]="alum.usuario" name="name" />
+                    <label>| Edad: </label>
+                    <input type="number" [(ngModel)]="alum.edad" name="edad" />
+                    <label>| Sexo: </label>
+                    <select [(ngModel)]="alum.sexo" name="sexo">
+                    <option value="masculino">
+                        <ion-icon name="male">Masculino</ion-icon>
+                    </option>
+                    <option value="femenino">
+                        <ion-icon name="female"></ion-icon> Femenino</option>
+                </select>
+
+                    <div class="bottom">
+                        <button ion-button (click)="guardar()">
+                        <ion-icon name="contact"></ion-icon> | Guardar</button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </ion-content>
+</div>

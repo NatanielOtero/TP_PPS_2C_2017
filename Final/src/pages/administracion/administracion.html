@@ -1,0 +1,105 @@
+<!--
+  Generated template for the AdministracionPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
+    <div class="animated slideInRight" style="height:100%;width:100%">
+
+        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto1">
+            <div class="tutorial">
+
+
+            </div>
+            <div class="down2">
+                <button ion-button full block (click)="tutorial1()">Siguiente</button>
+            </div>
+        </div>
+        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto2">
+            <div class="tutorial2">
+
+
+            </div>
+            <div class="down2">
+                <button ion-button full block (click)="tutorial()">Entendido !</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div [hidden]="!tuto" style="height:100%;width:100%">
+    <ion-header>
+        <ion-navbar color="dark">
+
+        </ion-navbar>
+        <ion-fab top right>
+            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+        </ion-fab>
+    </ion-header>
+    <ion-content padding class="bg-image">
+        <div class="form_wrapper animated slideInLeft" [hidden]="busqueda">
+
+
+
+            <form class="login active">
+
+                <div>
+                    <label>
+                          <ion-icon name="mail"></ion-icon> | Ingrese legajo a buscar:</label>
+                    <input type="number" [(ngModel)]="legajo" name="leg" />
+                </div>
+                <div>
+                    <label style="color:black; font-size:15px">Elija la materia</label>
+
+                    <select [(ngModel)]="opcion" (change)='f()' name="algo">
+                    <option value="PPS">PPS</option>
+                    <option value="LAB4">LAB4</option>
+                </select>
+
+                    <div [hidden]="curso">
+                        <label style="color:black; font-size:15px">Elija el curso</label>
+                        <select [(ngModel)]="opcion1" (change)='g()' name="algo2">
+                    <option value="4A">4A</option>
+                    <option value="4B">4B</option>
+                </select>
+                    </div>
+                    <br>
+                </div>
+                <div class="bottom" [hidden]="boton">
+                    <button ion-button (click)="buscar()">
+                          <ion-icon name="contact"></ion-icon> | Buscar </button>
+
+                </div>
+            </form>
+
+        </div>
+
+        <div [hidden]="mostrar" class="animated bounceInRight form_wrapper  bottom">
+            <div class="bottom">
+                <h3>Datos : {{alum.usuario}} </h3>
+                <label>   <ion-icon name="lock"></ion-icon> | Legajo:   {{alum.legajo}}                 
+            </label>
+                <label>   <ion-icon name="lock"></ion-icon> | Faltas:    {{alum.faltas}}                       
+            </label>
+                <label>
+                Días que falto
+            </label>
+                <label *ngFor="let item of alum.diasFaltas">
+                {{item}}
+            </label>
+                <div class="botones">
+                    <button ion-button (click)="remover()" [disabled]="desabilitar">
+                    <ion-icon name="remove" ></ion-icon>  </button>
+                </div>
+            </div>
+            <div class="bottom">
+                <button ion-button (click)="buscarDeNuevo()">
+                      <ion-icon name="contact"></ion-icon> | Otra búsqueda </button>
+
+            </div>
+
+
+        </div>
+
+    </ion-content>
+</div>

@@ -1,0 +1,26 @@
+page-inicio {
+    ion-content {
+        text-align: center;
+    }
+    .down2 {
+        position: relative;
+        top: 90%;
+        transform: translateY(-50%);
+        transform: translateX(30%);
+    }
+    .tutorial {
+        background-image: url("../assets/imgs/inicio.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 92%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        top: 47%;
+        transform: translateY(-50%);
+    }
+}

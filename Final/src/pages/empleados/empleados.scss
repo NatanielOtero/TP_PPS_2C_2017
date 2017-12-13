@@ -1,0 +1,86 @@
+page-empleados {
+    .down2 {
+        position: relative;
+        top: 95%;
+        transform: translateY(-50%);
+    }
+    .tutorial {
+        background-image: url("../assets/imgs/emp1.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 92%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        top: 47%;
+        transform: translateY(-50%);
+    }
+    .tutorial2 {
+        background-image: url("../assets/imgs/emp2.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 92%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        top: 47%;
+        transform: translateY(-50%);
+    }
+    .tutorial3 {
+        background-image: url("../assets/imgs/emp3.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 92%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        top: 47%;
+        transform: translateY(-50%);
+    }
+    .tutorial4 {
+        background-image: url("../assets/imgs/emp4.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100%;
+        height: 92%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        top: 47%;
+        transform: translateY(-50%);
+    }
+    .table {
+        width: 70%;
+        font-size: 18px;
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    }
+    .table thead {
+        background-color: rgb(188, 188, 223);
+    }
+    .table tbody {
+        color: white;
+        tr:hover {
+            background-color: #c8d8f0;
+        }
+    }
+}

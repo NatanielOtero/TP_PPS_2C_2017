@@ -1,0 +1,55 @@
+<!--
+  Generated template for the EstadisticasPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
+    <div class="animated slideInRight" style="height:100%;width:100%">
+
+        <div class="tutorial">
+
+
+        </div>
+        <div class="down2">
+            <button ion-button full block (click)="tutorial()">Entendido !</button>
+        </div>
+    </div>
+</div>
+<div [hidden]="!tuto" style="height:100%;width:100%">
+    <ion-header>
+        <ion-navbar color="dark">
+
+        </ion-navbar>
+        <ion-fab top right>
+            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+        </ion-fab>
+    </ion-header>
+
+
+    <ion-content class="bg-image" padding>
+        <div class="form_wrapper animated slideInUp">
+
+
+
+            <div class="bottom" *ngFor="let item of Encuesta">
+                <button (click)="navegar(item)">{{item}}</button>
+            </div>
+            <div *ngFor="let p of preguntas">
+                <label style="color:white">Pregunta: "{{p}}"</label>
+                <div *ngIf="tipo == 'P'">
+                    <div *ngFor="let i of ListaRespuestas">
+                        <!--<label> {{i.respuesta}} {{i.cantidad}} </label>-->
+                        <label> {{i}}</label>
+                    </div>
+                </div>
+                <div *ngIf="tipo != 'P'">
+                    <canvas id="myChart">
+                     </canvas>
+
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+</div>

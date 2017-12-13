@@ -1,0 +1,43 @@
+<!--
+  Generated template for the InicioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
+    <div class="animated slideInRight" style="height:100%;width:100%">
+
+        <div class="tutorial">
+
+
+        </div>
+        <div class="down2">
+            <button ion-button (click)="tutorial()">Entendido !</button>
+        </div>
+    </div>
+</div>
+<div [hidden]="!tuto" style="height:100%;width:100%">
+    <ion-header>
+
+        <ion-fab top right>
+            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+        </ion-fab>
+    </ion-header>
+    <ion-content padding class="bg-image">
+        <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
+
+            <form class="login active">
+
+
+                <div class="bottom">
+                    <h3>Bienvenido</h3>
+                    <button class="animated " ion-button (click)="login()">  <ion-icon name="contact"></ion-icon>  |  Iniciar sesión</button>
+                    <br> ¿Primera vez?
+                    <br>
+                    <button class="animated " ion-button (click)="regis()">  <ion-icon name="contact"></ion-icon>  |  Registrarse</button>
+                </div>
+            </form>
+        </div>
+    </ion-content>
+</div>
