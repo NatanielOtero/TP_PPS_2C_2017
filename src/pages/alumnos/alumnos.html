@@ -38,7 +38,8 @@
                 <div>
                     <label>
                         <ion-icon name="mail"></ion-icon> | Legajo:</label>
-                    <input [(ngModel)]="numero" type="text" name="mail" />
+                    <!--input [(ngModel)]="numero" type="text" name="mail" /-->
+                    <ion-input [(ngModel)]="numero" type="number" pattern="[0-9]*" name="mail"  ></ion-input>
                 </div>
                 <div>
                     <label>

@@ -40,7 +40,7 @@ export class EmpleadosPage {
   bandera: boolean = true;
   numero: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http,public alertCtrl: AlertController) {
     this.alta.edad = "sin definir";
     this.alta.email = "sin definir";
     this.alta.sexo = "sin definir";
@@ -76,7 +76,7 @@ export class EmpleadosPage {
     try {
       for (let i = 0; i < this.numero.length; i++) {
         console.log(this.numero[i]);
-        if (this.numero[i] == '.' || this.numero[i] == 'e' || this.numero[i] == ',' || this.numero[i] == " ") {
+        if (this.numero[i] == '.' || this.numero[i] == 'e' || this.numero[i] == ',' || this.numero[i] == " " || this.numero[i] == "-") {
           console.log("entre");
           this.bandera = false;
         }
@@ -85,6 +85,7 @@ export class EmpleadosPage {
         this.alta.legajo = Number(this.numero);
         if (this.alta.legajo == 0) {
           console.log("introduzca un legajo");
+          this.mensaje("Error", "Legajo invalido");
         }
         else {
           for (var i = 0; i < this.cant.length; i++) {
@@ -97,20 +98,25 @@ export class EmpleadosPage {
             if (this.alta.usuario != "sin definir" && this.alta.usuario.length >= 6) {
               const itemRef = this.afDB.object('/prueba/' + lastId + "/");
               itemRef.set(this.alta);
+              this.mensaje("Exito", "Usuario guardado con exito");
+
             }
             else {
               console.log("ingrese un usuario valido con mas de 6 caracteres");
+              this.mensaje("Error", "Ingrese un usuario valido con mas de 6 caracteres");
             }
           }
           else {
             this.band = false;
             console.log("ya existe ese legajo");
+            this.mensaje("Error", "Ya existe ese legajo");
           }
         }
       }
       else {
         this.bandera = true;
         console.log("no es un numero");
+        this.mensaje("Error", "Legajo invalido");
       }
     } catch (error) {
 
@@ -221,5 +227,13 @@ export class EmpleadosPage {
     this.items.subscribe(cantidad => this.cant = cantidad);
   }
 
+  mensaje(t, m) {
+    let alert = this.alertCtrl.create({
+      title: t,
+      subTitle: m,
+      buttons: ['Aceptar']
+    });
+    alert.present();
+  }
 
 }

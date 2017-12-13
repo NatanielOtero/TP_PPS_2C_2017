@@ -1,6 +1,6 @@
 import { HomePage } from '../home/home';
 import { Component } from '@angular/core';
-import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
 
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
@@ -69,7 +69,11 @@ export class EncuestasPage {
   usuario: Array<string> = [];
   nombreActual: string = null;
 
-  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase, public navParams: NavParams) {
+
+  public Aux: AngularFireList<any>;
+  public aux: Observable<any>;
+
+  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase, public navParams: NavParams,private toastCtrl: ToastController) {
     //this.items = afDB.list('Encuestas').valueChanges();
     this.usuario = this.navParams.get('usuario');
     this.Items = afDB.list('Encuestas');
@@ -132,18 +136,44 @@ export class EncuestasPage {
   }
 
   cambiarPreg(nombre) {
-    this.cambiarPregunta = true;
-    console.log(nombre);
-    for (let i = 0; i < this.listEncuesta.length; i++) {
-      if (this.listEncuesta[i].Preguntas != undefined) {
-        for (let j = 0; j < this.listEncuesta[i].Preguntas.length; j++) {
-          if (this.listEncuesta[i].Preguntas[j].question == nombre) {
-            this.pregunta = nombre;
-            this.preguntaAnterior = nombre;
+
+    this.Aux = this.afDB.list('Resultados');
+    this.aux = this.Aux.valueChanges();
+    let modificar=true;
+
+    this.aux.forEach(encuestas => {
+      encuestas.forEach(encuesta => {
+        console.log(encuesta);
+        if ((encuesta.encuesta==this.nombreActual)&&(encuesta.alumno!=0)) {
+          modificar=false;
+        }
+      });
+
+    });
+    setTimeout(() => {
+    if (!modificar) {
+      let tost = this.toastCtrl.create({
+        message: 'No puede modificar la encuesta debido a que ya fue contestada',
+        duration: 3000,
+        position: 'middle'
+      }).present();
+    }
+    else {
+      this.cambiarPregunta = true;
+      console.log(nombre);
+      for (let i = 0; i < this.listEncuesta.length; i++) {
+        if (this.listEncuesta[i].Preguntas != undefined) {
+          for (let j = 0; j < this.listEncuesta[i].Preguntas.length; j++) {
+            if (this.listEncuesta[i].Preguntas[j].question == nombre) {
+              this.pregunta = nombre;
+              this.preguntaAnterior = nombre;
+            }
           }
         }
       }
     }
+    }, 300);
+
   }
 
   guardarCambioPreg() {
