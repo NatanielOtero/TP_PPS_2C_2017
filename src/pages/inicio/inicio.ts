@@ -96,8 +96,12 @@ export class InicioPage {
           break;
         case "Estados Unidos":
         case "Reino Unido":
+        case "Australia":
+        case "Nueva Zelanda":
           this.cambiarIdioma('ingles');
           break;
+        default:
+          this.cambiarIdioma('espanol');
       }
     });
 
