@@ -1,124 +1,158 @@
 <?php
 
 /**
-* @api {..} .. Iniciar sesión con AuthModule
+* @api {login()} https://ppstp-8c7f4.firebaseio.com/prueba  Iniciar sesión con AuthModule
+* @apiVersion 0.1.0
 * @APIGroup Login
 * @apidescription Compara el Auth de firebase con los datos de la base de datos para el inicio de sesión del usuario
-* @apiparam {..} .. no tiene parametros
+* @apiparam {string} email correo electronico del usuario
+* @apiparam {string} pw contraseña del usuario
+* @apiparam {string} privilegio nivel de privilegio del usuario en caso de que este registrado
+* @apiSuccess void Inicia sesion al usuario
+ * @apiError CamposVacios los campos no estan completados correctamente
+ * @apiError UsuarioInvalido el usuario no esta registrado en el sistema
 */
 login() {}
 /**
-* @api {..} .. Iniciar sesión con GoogleAuthModule 
-* @APIGroup google
+* @api {google()} firebase.auth.GoogleAuthProvider Iniciar sesión con GoogleAuthModule 
+* @APIGroup Login
 * @apidescription Compara los datos de Google Auth con los datos de la base de datos para el inicio de sesión del usuario
-* @apiparam {..} .. no tiene parametros
+* @apiparam {object} user Objeto con la informacion retornada por el GoogleAuthProvider con la identidad del usuario
+* @apiparam {string} privilegio Nivel de privilegio del usuario en caso de que este registrado
+* @apiSuccess void Inicia sesion al usuario con los datos provistos por Google 
+* @apiError Firebasefailure Error de conexion con firebase
+ * @apiError GoogleError Error en los datos del usuario
 */
 google(){}
 /**
-* @api {..} .. Iniciar sesión con FacebookAuthModule
-* @APIGroup facebookLogin
-* @apidescription Compara los datos de Facebook Auth los datos de la base de datos para el inicio de sesión del usuario
-* @apiparam {..} .. no tiene parametros
+* @api {facebookLogin()} firebase.auth.FacebookAuthProvider Iniciar sesión con FacebookAuthModule
+* @APIGroup Login
+* @apidescription Compara los datos de Facebook Auth con los datos de la base de datos para el inicio de sesión del usuario
+* @apiparam {object} user Objeto con la informacion retornada por el FacebookAuthProvider con la identidad del usuario
+* @apiparam {string} privilegio Nivel de privilegio del usuario en caso de que este registrado
+* @apiSuccess void Inicia sesion al usuario con los datos provistos por Facebook 
+* @apiError Firebasefailure Error de conexion con firebase
+* @apiError FacebookError Error en los datos del usuario
 */
 facebookLogin(){}
 /**
-* @api {..} .. Obtener los datos en la base de datos del usuario actual
-* @APIGroup obtenerUsuario
+* @api {obtenerUsuario($email)} https://ppstp-8c7f4.firebaseio.com/prueba Obtener los datos en la base de datos del usuario actual
+* @APIGroup Login
 * @apidescription Obtiene desde la base de datos todos los datos del usuario actual
 * @apiparam {string} email Correo Electronico del usuario
+* @apiSuccess object devuelve un objeto con la informacion del usuario
 * @apiError UsuarioInvalido El usuario actual no se encuentra en la base de datos
 */
 obtenerUsuario($email){}
 /**
-* @api {..} .. Verificar el tipo de usuario
-* @APIGroup verificarPrivilegio
-* @apidescription Obtiene los datos del usuario desde la base de datos y devuelve el tipo de privilegio del usuario
+* @api {verificarPrivilegio($email)} https://ppstp-8c7f4.firebaseio.com/prueba Verificar el tipo de usuario
+* @APIGroup Login
+* @apidescription Obtiene la información del usuario desde la base de datos y devuelve el tipo de privilegio del usuario
 * @apiparam {string} email Correo Electronico del usuario
+* @apiSuccess string devuelve el nivel de privilegio del usuario
 * @apiError UsuarioInvalido El usuario actual no se encuentra en la base de datos
 */
 verificarPrivilegio($email){} 
 /**
-* @api {..} .. Registrar al usuario en la aplicación
-* @APIGroup registrar
-* @apidescription guarda los datos del usuario en la base de datos y crea una cuenta en AuthFirebase
-* @apiparam {..} .. no tiene parametros
+* @api {registrar()} https://ppstp-8c7f4.firebaseio.com/prueba Registrar al usuario en la aplicación
+* @APIGroup Registro
+* @apidescription Guarda los datos del usuario en la base de datos y crea una cuenta en AuthFirebase
+* @apiparam {object} usuario Objeto con la información del usuario
+* @apiSuccess void registra al usuario en el sistema, a la espera de ser dado de alta por quien corresponda
 */    
 registrar(){}
 /**
-* @api {..} .. Guardar la respuesta a la encuesta
-* @APIGroup responderEncuesta
+* @api {responderEncuesta()} https://ppstp-8c7f4.firebaseio.com/Resultados Guardar la respuesta a la encuesta
+* @APIGroup Encuesta
 * @apidescription guardar la respuesta del usuario actual a la encuesta actual
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {object} respuesta Objeto con la respuesta del usuario
+* @apiSuccess void guarda la respuesta
 */
 responderEncuesta(){} 
 /**
-* @api {..} .. Guardar datos modificados
-* @APIGroup guardarDatos
+* @api {guardarDatos()} https://ppstp-8c7f4.firebaseio.com/prueba Guardar datos modificados
+* @APIGroup Datos
 * @apidescription guarda los datos modificados en el perfil del usuario
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {object} alum informacion del usuario
+* @apiSuccess void guarda los datos actualizados
 */   
 guardarDatos(){}
 /**
-* @api {..} .. Guardar Foto
-* @APIGroup tomarFoto
+* @api {tomarFoto()} ppstp-8c7f4.appspot.com Guardar Foto
+* @APIGroup Fotos
 * @apidescription guarda la foto tomada en el storage de la base de datos
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {object} camera configuracion de la camara
+* @apiSuccess void guarda la foto tomada
 */ 
 tomarFoto(){}
 /**
-* @api {..} .. Obtener Fotos
-* @APIGroup imagenesBD
+* @api {imagenesBD()} ppstp-8c7f4.appspot.com Obtener Fotos
+* @APIGroup Fotos
 * @apidescription Obtiene todas las fotos de la base de datos
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {Array} imagenes arreglo de todas las fotos de la base de datos
+* @apiSuccess void Establece los datos de las imagenes traidas
 */  
 imagenesBD(){}
 /**
-* @api {..} .. Traer Preguntas
-* @APIGroup traerPreguntas
+* @api {traerPreguntas()} https://ppstp-8c7f4.firebaseio.com/Encuestas Traer Preguntas
+* @APIGroup Encuesta
 * @apidescription trae todas las preguntas de la encuesta actual desde la base de datos
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {string} nombre Nombre de la encuesta actual
+* @apiSuccess listaPreguntas Lista de las preguntas
 */ 
 traerPreguntas(){}
 /**
-* @api {..} .. Traer Legajos
-* @APIGroup traerLegajos
+* @api {traerLegajos()} https://ppstp-8c7f4.firebaseio.com/prueba  Traer Legajos
+* @APIGroup Datos
 * @apidescription trae todos los legajos de todos los alumnos desde la base de datos
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {AngularFireList} List lista con los datos de firebase
+* @apiSuccess legajos Lista de legajos
 */      
 traerLegajos() {}
 /**
-* @api {..} .. Traer Encuestas
-* @APIGroup traerEncuestas
+* @api {traerEncuestas()} https://ppstp-8c7f4.firebaseio.com/Encuestas  Traer Encuestas
+* @APIGroup Encuesta
 * @apidescription trae todas las encuestas disponibles para el alumno 
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {AngularFireList} List lista de encuestas de firebase
+* @apiSuccess encuestas Devuelve la Lista de encuestas
 */      
 traerEncuestas() {}
 /**
-* @api {..} .. Guardar cambios en encuesta
-* @APIGroup guardarCambioPreg
+* @api {guardarCambioPreg()} https://ppstp-8c7f4.firebaseio.com/Encuestas  Guardar cambios en encuesta
+* @APIGroup Encuesta
 * @apidescription guarda los cambios en las preguntas de una encuesta
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {AngularFireList} Items datos de encuestas
+* @apiparam {any} ListaEncuestas lista de encuestas
+* @apiSuccess void Guarda los cambios en las preguntas
 */  
 guardarCambioPreg() {}
 /**
-* @api {..} .. Borrar Encuesta
-* @APIGroup borrarEnc
+* @api {borrarEnc()} https://ppstp-8c7f4.firebaseio.com/Encuestas Borrar Encuesta
+* @APIGroup Encuesta
 * @apidescription borra una encuesta de la base de datos
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {AngularFireList} Item lista de las encuestas en firebase
+* @apiparam {any} ListaEncuestas datos de la encuesta a eliminar
+* @apiSuccess void elimina la encuesta indicada
 */     
 borrarEnc() {} 
 /**
-* @api {..} .. Leer base de datos
-* @APIGroup leerDB
+* @api {leerDB()} https://ppstp-8c7f4.firebaseio.com Leer base de datos
+* @APIGroup Datos
 * @apidescription lee la base de datos para obtener informacion de los alumnos y materias
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {AngularFireList} lista lista de firebase a leer
+* @apiSuccess void guarda la respuesta en una lista
 */                 
 leerDB() {}
 /**
-* @api {..} .. Guardar datos de asistencia
-* @APIGroup guardarAsistencia
+* @api {guardarAsistencia()} https://ppstp-8c7f4.firebaseio.com/(Curso) Guardar datos de asistencia
+* @APIGroup Asistencia
 * @apidescription Guarda los datos de asistencia del dia
-* @apiparam {xx} xx no tiene parametros
+* @apiparam {string} opcion Curso a tomar lista
+* @apiparam {AngularFireList} items Datos del curso
+* @apiparam {boolean} tomar boolean que indica si se tomo lista o no ya en ese curso ese dia
+* @apiparam {any} fecha fecha actual
+* @apiparam {boolean} asist boolean que indica si el alumno esta presente o no
+* @apiSuccess void guarda la asistencia
 */
 guardarAsistencia(){}
 
