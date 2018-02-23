@@ -3,41 +3,24 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+
+
+
 -->
-<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
-    <div class="animated slideInRight" style="height:100%;width:100%">
-
-        <div class="tutorial">
 
 
-        </div>
-        <div class="down">
-            <button ion-button full block (click)="tutorial()">Entendido !</button>
-        </div>
-    </div>
-</div>
-<div [hidden]="!tuto" style="height:100%;width:100%">
-    <ion-header>
+<ion-header>
+
+    <ion-fab top right bottom>
+        <button ion-fab color="light" (click)="MostrarTutorial()"><ion-icon ios="ios-help" md="md-help"></ion-icon></button>
+    </ion-fab>
+</ion-header>
 
 
-        <ion-fab down left>
-            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
-        </ion-fab>
-        <ion-fab top right>
-            <button ion-fab color="light">  <ion-icon name="menu"></ion-icon></button>
-            <ion-fab-list side="bottom">
-                <button ion-fab color="primary">  <ion-icon name="contact"></ion-icon></button>
-
-            </ion-fab-list>
-        </ion-fab>
-    </ion-header>
-
-
-    <ion-content padding class="botones">
-        <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" ion-button> Alta alumnos </button>
-        <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" ion-button> Alta empleados </button>
-        <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" ion-button> Archivos </button>
-        <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" ion-button> Tomar asistencia </button>
-        <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" ion-button> Administración </button>
-    </ion-content>
-</div>
+<ion-content padding class="botones">
+    <button class="animated slideInDown imgbtn5" style=" width: 100%;height: 18%;" ion-button> Alta alumnos </button>
+    <button class="animated slideInRight imgbtn4" style=" width: 100%;height: 18%;" ion-button> Alta empleados </button>
+    <button class="animated slideInLeft imgbtn7" style=" width: 100%;height: 18%;" ion-button> Archivos </button>
+    <button class="animated slideInRight imgbtn" style=" width: 100%;height: 18%;" ion-button> Tomar asistencia </button>
+    <button class="animated slideInUp imgbtn6" style=" width: 100%;height: 18%;" ion-button> Administración </button>
+</ion-content>

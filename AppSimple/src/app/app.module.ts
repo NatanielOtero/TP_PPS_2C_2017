@@ -7,12 +7,15 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { MenuPage } from '../pages/menu/menu';
+import { TutorialPage } from '../pages/tutorial/tutorial';
+import { VideoPlayer } from '@ionic-native/video-player';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    MenuPage
+    MenuPage,
+    TutorialPage
   ],
   imports: [
     BrowserModule,
@@ -22,11 +25,13 @@ import { MenuPage } from '../pages/menu/menu';
   entryComponents: [
     MyApp,
     HomePage,
-    MenuPage
+    MenuPage,
+    TutorialPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    VideoPlayer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController,ViewController } from 'ionic-angular';
+import { TutorialPage } from '../tutorial/tutorial';
 
 /**
  * Generated class for the MenuPage page.
@@ -15,7 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MenuPage {
   tuto : boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public popoverCtrl: PopoverController,public viewCtrl: ViewController) {
+  }
+
+  MostrarTutorial(myEvent) {
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/home.png"]},{cssClass: 'contact-popover-Menu'});
+    popover.present({
+      ev: myEvent
+    });
   }
 
   ionViewDidLoad() {
