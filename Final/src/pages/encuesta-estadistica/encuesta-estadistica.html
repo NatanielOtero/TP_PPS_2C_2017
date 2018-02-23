@@ -1,54 +1,30 @@
-<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
-    <div class="animated slideInRight" style="height:100%;width:100%">
+<ion-header>
+    <ion-navbar color="dark">
 
-        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto1">
-            <div class="tutorial">
-
-
-            </div>
-            <div class="down2">
-                <button ion-button full block (click)="tutorial1()">Siguiente</button>
-            </div>
-        </div>
-        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto2">
-            <div class="tutorial2">
-
-
-            </div>
-            <div class="down2">
-                <button ion-button full block (click)="tutorial()">Entendido !</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div [hidden]="!tuto" style="height:100%;width:100%">
-    <ion-header>
-        <ion-navbar color="dark">
-
-        </ion-navbar>
-        <ion-fab top right>
-            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
-        </ion-fab>
-    </ion-header>
-    <ion-content class="bg-image" padding>
-        <div class="form_wrapper animated bounceInLeft" [hidden]="contestando">
-            <div [hidden]="encuestasPendientes">
-                <h3>Tiene las siguientes encuestas disponibles</h3>
-                <div *ngFor="let item of encues">
-                    <div *ngIf="item != ''">
-                        <button (click)="responder(item)">{{item}}</button>
-                    </div>
+    </ion-navbar>
+    <ion-fab top right>
+        <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+    </ion-fab>
+</ion-header>
+<ion-content class="bg-image" padding>
+    <div class="form_wrapper animated bounceInLeft" [hidden]="contestando">
+        <div [hidden]="encuestasPendientes">
+            <h3>Tiene las siguientes encuestas disponibles</h3>
+            <div *ngFor="let item of encues">
+                <div *ngIf="item != ''">
+                    <button (click)="responder(item)">{{item}}</button>
                 </div>
             </div>
-            <div [hidden]="!encuestasPendientes" class="bottom">
-                <label>No tiene encuestas pendientes</label>
-                <br>
-
-            </div>
+        </div>
+        <div [hidden]="!encuestasPendientes" class="bottom">
+            <label>No tiene encuestas pendientes</label>
+            <br>
 
         </div>
 
-        <!--<div class="form_wrapper animated bounceInRight" [hidden]="!contestando">
+    </div>
+
+    <!--<div class="form_wrapper animated bounceInRight" [hidden]="!contestando">
 
         <br>
         <div [hidden]="P">
@@ -76,7 +52,7 @@
 
             </div>
         </div>-->
-        <!-- <div *ngIf="alumno.tipo == 'P'">
+    <!-- <div *ngIf="alumno.tipo == 'P'">
 
         </div>
         <div *ngIf="alumno.tipo == 'P'">
@@ -100,5 +76,4 @@
         </div>-->
 
 
-    </ion-content>
-</div>
+</ion-content>

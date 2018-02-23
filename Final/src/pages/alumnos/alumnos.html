@@ -5,68 +5,34 @@
   Ionic pages and navigation.
 
 -->
-<div [hidden]="tuto" class="bg-image" style="height:100%;width:100%">
-    <div class="animated slideInRight" style="height:100%;width:100%">
-
-        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto1">
-            <div class="tutorial">
 
 
-            </div>
-            <div class="down2">
-                <button ion-button full block (click)="tutorial1()">Siguiente</button>
-            </div>
-        </div>
-        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto2">
-            <div class="tutorial2">
+<ion-header>
+    <ion-navbar color="dark">
 
 
-            </div>
-            <div class="down2">
-                <button ion-button full block (click)="tutorial2()">Siguiente</button>
-            </div>
-        </div>
-        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto3">
-            <div class="tutorial3">
-
-
-            </div>
-            <div class="down2">
-                <button ion-button full block (click)="tutorial3()">Siguiente</button>
-            </div>
-        </div>
-        <div class="animated slideInRight" style="height:100%;width:100%" [hidden]="tuto4">
-            <div class="tutorial4">
-
-
-            </div>
-            <div class="down2">
-                <button ion-button full block (click)="tutorial()">Entendido !</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div [hidden]="!tuto" style="height:100%;width:100%">
-    <ion-header>
-        <ion-navbar color="dark">
-
-        </ion-navbar>
-        <ion-fab top right>
-            <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
-        </ion-fab>
-
-    </ion-header>
+    </ion-navbar>
 
 
 
-    <ion-content padding class="bg-image">
-        <div class="form_wrapper animated slideInLeft" [hidden]="mostrar">
-
-            <div>
-                <label style="color:white; font-size:15px">Elija el método</label>
+    <ion-fab top right>
+        <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+    </ion-fab>
 
 
-                <select [(ngModel)]="opcion" (ngModelChange)='f()'>
+
+</ion-header>
+
+
+
+<ion-content padding class="bg-image">
+    <div class="form_wrapper animated slideInLeft" [hidden]="mostrar">
+
+        <div>
+            <label style="color:white; font-size:15px">Elija el método</label>
+
+
+            <select [(ngModel)]="opcion" (ngModelChange)='f()'>
                 <option value="uno">Cargar 1</option>
                 <option value="var">Cargar Listado</option>
             </select>
@@ -75,61 +41,60 @@
 
 
 
-                <br>
-            </div>
+            <br>
+        </div>
 
-            <div [hidden]="uno" style="height:70%">
+        <div [hidden]="uno" style="height:70%">
 
-                <form class="login active">
+            <form class="login active">
 
-                    <div>
-                        <label>
+                <div>
+                    <label>
                         <ion-icon name="mail"></ion-icon> | Legajo:</label>
-                        <input [(ngModel)]="numero" type="text" name="mail" />
-                    </div>
-                    <div>
-                        <label>
+                    <input [(ngModel)]="numero" type="text" name="mail" />
+                </div>
+                <div>
+                    <label>
                         <ion-icon name="mail"></ion-icon> | Usuario:</label>
-                        <input [(ngModel)]="alta.usuario" type="text" name="text" />
-                    </div>
-                    <div class="bottom">
-                        <button ion-button (click)="enviar()">
+                    <input [(ngModel)]="alta.usuario" type="text" name="text" />
+                </div>
+                <div class="bottom">
+                    <button ion-button (click)="enviar()">
                         <ion-icon name="contact"></ion-icon> | Agregar </button>
 
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
+    </div>
 
 
-        <div [hidden]="varios" class="animated bounceInRight form_wrapper  bottom">
+    <div [hidden]="varios" class="animated bounceInRight form_wrapper  bottom">
 
 
 
 
-            <input id="file" type="file" (change)="handleUpload($event)">
-            <button ion-button (click)="readCsvData()">leer csv</button>
-            <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Descargar CSV</button>
-        </div>
-        <div class="table">
-            <thead>
-                <th>Legajo</th>
-                <th>Usuario</th>
-                <th>Borrar</th>
-            </thead>
-            <tbody *ngFor="let item of cant">
-                <tr *ngIf="item.tipo == 'alumno'">
-                    <td *ngIf="item.actividad == 'activo'">
-                        {{item.legajo}}
-                    </td>
-                    <td *ngIf="item.actividad == 'activo'">
-                        {{item.usuario}}
-                    </td>
-                    <td *ngIf="item.actividad == 'activo'">
-                        <button ion-button danger (click)="delete(item.id)">borrar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </div>
-    </ion-content>
-</div>
+        <input id="file" type="file" (change)="handleUpload($event)">
+        <button ion-button (click)="readCsvData()">leer csv</button>
+        <button ion-button (click)='downloadCSV({ filename: "stock-data.csv" });'>Descargar CSV</button>
+    </div>
+    <div class="table">
+        <thead>
+            <th>Legajo</th>
+            <th>Usuario</th>
+            <th>Borrar</th>
+        </thead>
+        <tbody *ngFor="let item of cant">
+            <tr *ngIf="item.tipo == 'alumno'">
+                <td *ngIf="item.actividad == 'activo'">
+                    {{item.legajo}}
+                </td>
+                <td *ngIf="item.actividad == 'activo'">
+                    {{item.usuario}}
+                </td>
+                <td *ngIf="item.actividad == 'activo'">
+                    <button ion-button danger (click)="delete(item.id)">borrar</button>
+                </td>
+            </tr>
+        </tbody>
+    </div>
+</ion-content>

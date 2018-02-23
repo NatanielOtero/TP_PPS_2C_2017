@@ -3,7 +3,7 @@ import { isEmpty } from 'rxjs/operator/isEmpty';
 import { Asistencia } from '../../entidades/asist';
 import { Alumno } from '../../entidades/alumnos';
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { LoadingController, IonicPage, NavController, NavParams, PopoverController, ViewController } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Http } from '@angular/http';
@@ -12,6 +12,8 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 import { storage, initializeApp } from "firebase";
 import { DateTimeData } from 'ionic-angular/util/datetime-util';
 import { ToastController } from 'ionic-angular';
+import { TutorialPage } from '../tutorial/tutorial';
+
 
 /**
  * Generated class for the AsistenciaPage page.
@@ -47,43 +49,24 @@ export class AsistenciaPage {
   tuto1 : boolean = true;
   tuto2 : boolean = true;
   tuto3 : boolean = true;
-  constructor(public navCtrl: NavController, private http: Http, private audio : NativeAudio , public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, private loadingCtrl: LoadingController, public toastCtr: ToastController) {
+  constructor(public navCtrl: NavController, private http: Http, private audio : NativeAudio , public afDB: AngularFireDatabase, private camera: Camera, public navParams: NavParams, private toastCtrl: ToastController, public popoverCtrl : PopoverController,public viewCtrl : ViewController , private loadingCtrl: LoadingController, public toastCtr: ToastController) {
     //this.leer();
     this.fecha = new Date().toLocaleDateString().toString();
     this.fecha = this.fecha.split('/');
     console.log(this.fecha);
     this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3')
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
   }
 
-  tutorial()
+  tutorial(myEvent)
   {
-    this.tuto1 = false;
-    this.tuto2 = true;
-    this.tuto3 = true;
-   
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes": ["../../assets/imgs/list1.png","../../assets/imgs/list2.png","../../assets/imgs/list3.png","../../assets/imgs/list4.png","../../assets/imgs/list5.png"]},{cssClass: 'contact-popover-Asis'});
+    popover.present({
+      ev: myEvent
+    });  
   } 
-  tutorial1()
-  {
-   this.tuto1 = true;
-   this.tuto2 = false;
-   this.tuto3 = true;
-  
-  } 
-  tutorial2()
-  {
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = false;
-    
-  } 
+ 
   
  
   async leerDB() {

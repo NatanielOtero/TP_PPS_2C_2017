@@ -64,7 +64,7 @@
                     </h3>
                     <div id="form_wrapper" class="form_wrapper animated bounceInUp down">
                         <div [hidden]="default">
-                            <button class="imgbtn" style="height:200px;width:270px" (click)="cambiarImagen()"></button>
+                            <button class="imgbtn" (click)="cambiarImagen()"></button>
                         </div>
                         <div [hidden]="!default">
                             <img src="{{imagen}}" (click)="cambiarImagen()" alt="">

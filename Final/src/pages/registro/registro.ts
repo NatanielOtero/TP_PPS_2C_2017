@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { NativeAudio } from '@ionic-native/native-audio';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController, ViewController, PopoverController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 
 import { Datos } from '../../entidades/datos';
+import { TutorialPage } from '../tutorial/tutorial';
 
 /**
  * Generated class for the RegistroPage page.
@@ -35,31 +36,19 @@ export class RegistroPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtr: ToastController, public ActCtr: ActionSheetController,
     private aute: AngularFireAuth, private alert: AlertController, public audio: NativeAudio,
-    public afDB: AngularFireDatabase) {
+    public afDB: AngularFireDatabase, private popoverCtrl : PopoverController) {
+      this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
   }
 
-  tutorial()
+  tutorial(myEvent)
   {
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
-  } 
-  tutorial2()
-  {
-    if(this.tuto2==true)
-    {
-      this.tuto2 = false;
-    }
-    else
-    {
-      this.tuto2 = true;
-    }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/reg1.png","../../assets/imgs/reg2.png"]},{cssClass: 'contact-popover-Reg'});
+    popover.present({
+      ev: myEvent
+    });
   }
+ 
   ionViewDidLoad() {
     this.usuariosList = this.afDB.list('/prueba');
     this.usuariosObs = this.usuariosList.valueChanges();

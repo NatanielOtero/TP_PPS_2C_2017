@@ -10,9 +10,10 @@ import { AsistenciaPage } from '../asistencia/asistencia';
 import { PerfilPage } from '../perfil/perfil';
 import { Alta } from "../../entidades/alta";
 import { Component, PACKAGE_ROOT_URL } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,PopoverController,ViewController } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
 import { FaltasPage } from '../faltas/faltas';
+import { TutorialPage } from '../tutorial/tutorial';
 
 @Component({
   selector: 'page-home',
@@ -26,12 +27,13 @@ export class HomePage {
   prof: boolean = true;
   tipo: string;
   user: Alta;
+  imgs :any[];
   scannedCode = null;
-  constructor(public alertCtrl: AlertController,private audio : NativeAudio ,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public popoverCtrl: PopoverController,public viewCtrl: ViewController,public alertCtrl: AlertController,private audio : NativeAudio ,public navCtrl: NavController, public navParams: NavParams) {
     this.tipo = navParams.get('tipo');
     this.user = navParams.get('usuario');
     this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3')
-
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
     switch (this.tipo) {
       case "alumno":
         this.alum = false;
@@ -54,16 +56,31 @@ export class HomePage {
 
   }
   tuto : boolean = true;
-  tutorial()
+  tutorial(myEvent)
   {
-    if(this.tuto==true)
-    {
-      this.tuto = false;
+    this.audio.play('help');
+
+    switch (this.tipo) {
+      case "alumno":
+      this.imgs = ["../../assets/imgs/menuAl.png"];
+        break;
+      case "profesor":
+      this.imgs = ["../../assets/imgs/menuProfe.png"];
+        break;
+      case "administrativo":
+      this.imgs = ["../../assets/imgs/menuAd.png"];
+        break;
+      case "administrador":
+      this.imgs = ["../../assets/imgs/menu.png"];
+        break;
+      default:
+        this.imgs = ["../../assets/imgs/menu.png"];
+        break;
     }
-    else
-    {
-      this.tuto = true;
-    }
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes": this.imgs},{cssClass: 'contact-popover-Menu'});
+    popover.present({
+      ev: myEvent
+    });
   } 
   ruteo(pagina: string) {
     this.audio.play('btn');

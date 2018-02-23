@@ -6,6 +6,9 @@ import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
+import { TutorialPage } from '../tutorial/tutorial';
 
 /**
  * Generated class for the AdministracionPage page.
@@ -40,29 +43,17 @@ export class AdministracionPage {
   tuto : boolean = true;
   tuto1 : boolean = true;
   tuto2 : boolean = true;
-  constructor(public navCtrl: NavController, public tst: ToastController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
+  constructor(public navCtrl: NavController, private audio : NativeAudio , public popoverCtrl : PopoverController , public tst: ToastController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
 
   }
-  tutorial()
+  tutorial(myEvent)
   {
-    this.tuto1 = false;
-    this.tuto2 = true;
-   
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes": ["../../assets/imgs/adm1.png","../../assets/imgs/adm2.png","../../assets/imgs/adm3.png","../../assets/imgs/adm4.png"]},{cssClass: 'contact-popover-Adm'});
+    popover.present({
+      ev: myEvent
+    });
   } 
-  tutorial1()
-  {
-   this.tuto1 = true;
-   this.tuto2 = false;
-  
-  }  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdministracionPage');

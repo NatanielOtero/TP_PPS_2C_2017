@@ -8,6 +8,9 @@ import { AngularFireList } from 'angularfire2/database';
 import { Chart } from 'chart.js';
 
 import { Materia } from '../../entidades/materia';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
+import { TutorialPage } from '../tutorial/tutorial';
 
 @IonicPage()
 @Component({
@@ -59,7 +62,9 @@ export class EstadisticasPage {
   public quests: Observable<any>;
   listaPreguntas: any[] = new Array<any>();
   tuto : boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public audio : NativeAudio,public popoverCtrl : PopoverController ,public navParams: NavParams, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase) {
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
+   
     /*var encuesta = this.codigo.split("-");
     this.Encuesta = encuesta[0];
     this.usuarioActual = JSON.parse(localStorage.getItem("usuario"));
@@ -116,17 +121,14 @@ export class EstadisticasPage {
     this.traerPreguntas();
 
   }
-  tutorial()
+  tutorial(myEvent)
   {
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
-  } 
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/est1.png","../../assets/imgs/est2.png"]},{cssClass: 'contact-popover-Est'});
+    popover.present({
+      ev: myEvent
+    });
+  }
   navegar(donde: any) {
 
     for (var i = 0; i < this.listEncuesta.length; i++) {

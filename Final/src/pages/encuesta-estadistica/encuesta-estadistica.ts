@@ -7,6 +7,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AlertController } from 'ionic-angular';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
+import { TutorialPage } from '../tutorial/tutorial';
 
 /**
  * Generated class for the EncuestaPage page.
@@ -51,9 +54,10 @@ export class EncuestaEstadisticaPage {
   tuto1 : boolean = true;
   tuto2 : boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public audio: NativeAudio,public popoverCtrl : PopoverController ,public afDB: AngularFireDatabase, public alertCtrl: AlertController) {
     this.usuarioActual = this.navParams.get("usuario");
     //console.log("usuario",this.usuarioActual);
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
     this.encontrarAlumno();
     this.Items = afDB.list('Encuestas');
     this.Results = afDB.list('Resultados');
@@ -141,26 +145,15 @@ export class EncuestaEstadisticaPage {
     //console.log(this.encues);
   }
 
-  tutorial()
+  tutorial(myEvent)
   {
-    this.tuto1 = false;
-    this.tuto2 = true;
-   
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
-  } 
-  tutorial1()
-  {
-   this.tuto1 = true;
-   this.tuto2 = false;
-  
-  }  
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/resp1.png","../../assets/imgs/resp2.png"]},{cssClass: 'contact-popover-resp'});
+    popover.present({
+      ev: myEvent
+    });
+  }
+
   averiguar() {
 
   }

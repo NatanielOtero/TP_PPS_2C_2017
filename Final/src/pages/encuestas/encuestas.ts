@@ -5,6 +5,9 @@ import { ActionSheetController, IonicPage, NavController, NavParams } from 'ioni
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireList } from 'angularfire2/database';
+import { NativeAudio } from '@ionic-native/native-audio';
+import { PopoverController } from 'ionic-angular/components/popover/popover-controller';
+import { TutorialPage } from '../tutorial/tutorial';
 
 
 
@@ -77,8 +80,9 @@ export class EncuestasPage {
   tuto6 : boolean = true;
   tuto7 : boolean = true;
   tuto8 : boolean = true;
-  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public audio : NativeAudio, public popoverCtrl : PopoverController ,public actionSheetCtrl: ActionSheetController, public afDB: AngularFireDatabase, public navParams: NavParams) {
     //this.items = afDB.list('Encuestas').valueChanges();
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
     this.usuario = this.navParams.get('usuario');
     this.Items = afDB.list('Encuestas');
     this.items = this.Items.valueChanges();
@@ -98,104 +102,22 @@ export class EncuestasPage {
 
     this.traerEncuestas();
   }
-  tutorial()
+  tutorial1(myEvent)
   {
-    this.tuto1 = false;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = true;
-    this.tuto5 = true;
-    this.tuto6 = true;
-    this.tuto7 = true;
-    this.tuto8 = true;
-   
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/encu.png","../../assets/imgs/enc1.png","../../assets/imgs/enc2.png","../../assets/imgs/enc3.png"]},{cssClass: 'contact-popover-Encuesta'});
+    popover.present({
+      ev: myEvent
+    });
   } 
-  tutorial1()
+  tutorial2(myEvent2)
   {
-    console.log(1);
-   this.tuto1 = true;
-   this.tuto2 = false;
-   this.tuto3 = true;
-   this.tuto4 = true;
-   this.tuto5 = true;
-   this.tuto6 = true;
-   this.tuto7 = true;   
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/encu.png","../../assets/imgs/mod1.png","../../assets/imgs/mod2.png","../../assets/imgs/mod3.png"]},{cssClass: 'contact-popover-Login'});
+    popover.present({
+      ev: myEvent2
+    });
   } 
-  tutorial2()
-  {
-    console.log(2);
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = false;
-    this.tuto4 = true;
-    this.tuto5 = true;
-    this.tuto6 = true;
-    this.tuto7 = true;
-  } 
-  tutorial3()
-  {
-    console.log(3);
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = false;
-    this.tuto5 = true;
-    this.tuto6 = true;
-    this.tuto7 = true;
-  }
-  tutorial4()
-  {
-    console.log(4);
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = true;
-    this.tuto5 = false;
-    this.tuto6 = true;
-    this.tuto7 = true;
-  }
-  tutorial5()
-  {
-    console.log(5);
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = true;
-    this.tuto5 = true;
-    this.tuto6 = false;
-    this.tuto7 = true;
-  }
-  tutorial6()
-  {
-    console.log(6);
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = true;
-    this.tuto5 = true;
-    this.tuto6 = true;
-    this.tuto7 = false;
-  }
-  tutorial7()
-  {
-    console.log(6);
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = true;
-    this.tuto5 = true;
-    this.tuto6 = true;
-    this.tuto7 = true;
-    this.tuto8 = false;
-  }
   
 
   traerEncuestas() {

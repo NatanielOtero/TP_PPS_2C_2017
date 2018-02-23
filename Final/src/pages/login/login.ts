@@ -1,7 +1,7 @@
 import { HomePage } from '../home/home';
 import { Component } from '@angular/core';
 import { PerfilPage } from '../perfil/perfil';
-import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController,PopoverController,ViewController } from 'ionic-angular';
 import { AngularFireDatabaseModule, AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { AngularFireAuth, AngularFireAuthProvider, AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
@@ -13,6 +13,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { Facebook } from '@ionic-native/facebook';
 import { Observable } from 'rxjs/Rx';
 import { Alta } from '../../entidades/alta';
+import { TutorialPage } from '../tutorial/tutorial';
 /**
  * Generated class for the LoginPage page.
  *
@@ -39,20 +40,19 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     public toastCtr: ToastController, public ActCtr: ActionSheetController,
     private aute: AngularFireAuth, private alert: AlertController, public audio: NativeAudio, private googlePlus: GooglePlus,
-    private facebook: Facebook, public afDB: AngularFireDatabase) {
+    private facebook: Facebook, public afDB: AngularFireDatabase,public popoverCtrl: PopoverController,public viewCtrl: ViewController) {
     this.audio.preloadSimple('btn', 'assets/sounds/btn.mp3');
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
+    
 
   }
-  tutorial()
+  tutorial(myEvent)
   {
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes":["../../assets/imgs/login.png"]},{cssClass: 'contact-popover-Login'});
+    popover.present({
+      ev: myEvent
+    });
   } 
   rapido() {
     this.email = "admin@admin.com";

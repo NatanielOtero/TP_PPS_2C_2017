@@ -4,18 +4,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  
+
     <ion-navbar color="dark">
-      <ion-title>{{nombreEnc}}</ion-title>
+        <ion-title>{{nombreEnc}}</ion-title>
     </ion-navbar>
-  
-  </ion-header>
-  
-  
-  <ion-content class="bg-image" padding>
-    
-   
-     <!--ion-item style="text-align: center;">
+    <ion-fab top right>
+        <button ion-fab color="light" (click)="tutorial()"> <ion-icon name="help"></ion-icon></button>
+    </ion-fab>
+</ion-header>
+
+
+<ion-content class="bg-image" padding>
+
+
+    <!--ion-item style="text-align: center;">
       <h2><label>Estadisticas de: <br> "{{nombreEnc}}"</label></h2>
       <h4><label>Pregunta:<br> "{{pregunta}}"</label></h4>
      </ion-item>
@@ -30,30 +32,25 @@
    </canvas-->
 
 
-   <ion-slides *ngIf="ok">
-      <ion-slide   *ngFor="let res of preguntas ; let j = index"   >
-  
-              <ion-card style="opacity: 0.7">
+    <ion-slides *ngIf="ok">
+        <ion-slide *ngFor="let res of preguntas ; let j = index">
+
+            <ion-card style="opacity: 0.7">
                 <ion-card-header>
                     {{res.question}}
                 </ion-card-header>
                 <ion-card-content>
                     <div style="display: block">
-                        <canvas baseChart
-                                    [data]="doughnutChartData[j]"
-                                    [labels]="doughnutChartLabels[j]"
-                                    [chartType]="doughnutChartType"
-                                    (chartHover)="chartHovered($event)"
-                                    (chartClick)="chartClicked($event)"></canvas>
-                      </div>
+                        <canvas baseChart [data]="doughnutChartData[j]" [labels]="doughnutChartLabels[j]" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                    </div>
                 </ion-card-content>
-              </ion-card>
-  
-      
-  
-      </ion-slide>
+            </ion-card>
+
+
+
+        </ion-slide>
     </ion-slides>
-  </ion-content>
-  <!--ion-fab left bottom>
+</ion-content>
+<!--ion-fab left bottom>
       <button ion-fab color="dark" (click)="presentActionSheet()"><ion-icon ios="ios-menu" md="md-menu"></ion-icon></button>
   </ion-fab-->

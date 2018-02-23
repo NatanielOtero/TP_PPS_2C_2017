@@ -33,6 +33,7 @@ import { Camera } from "@ionic-native/camera";
 import { ChartsModule } from 'ng2-charts';
 
 import { FaltasPage } from '../pages/faltas/faltas';
+import { TutorialPage } from '../pages/tutorial/tutorial';
 @NgModule({
   declarations: [
     MyApp,
@@ -51,7 +52,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
     EncuestaEstadisticaPage,
     ResponderPage,
     VerEstadisticaPage,
-    FaltasPage
+    FaltasPage,
+    TutorialPage
   ],
   imports: [
     BrowserModule,
@@ -81,7 +83,8 @@ import { FaltasPage } from '../pages/faltas/faltas';
     EncuestaEstadisticaPage,
     ResponderPage,
     VerEstadisticaPage,
-    FaltasPage
+    FaltasPage,
+    TutorialPage
   ],
   providers: [
     StatusBar,

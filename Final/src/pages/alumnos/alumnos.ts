@@ -2,12 +2,14 @@ import { Alta } from '../../entidades/alta';
 import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, ToastController,PopoverController,ViewController } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 import { Http } from '@angular/http';
 import * as baby from 'babyparse';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
+import { TutorialPage } from '../tutorial/tutorial';
+import { NativeAudio } from '@ionic-native/native-audio';
 
 /**
  * Generated class for the AlumnosPage page.
@@ -44,55 +46,25 @@ export class AlumnosPage {
   public materia: any[];
   numero:string;
   bandera: boolean = true;
-  tuto : boolean = true;
-  tuto1 : boolean = true;
-  tuto2 : boolean = true;
-  tuto3 : boolean = true;
-  tuto4 : boolean = true;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http) {
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public afDB: AngularFireDatabase, private http: Http, private popoverCtrl: PopoverController, private audio : NativeAudio) {
     this.alta.edad = "sin definir";
     this.alta.email = "sin definir";
     this.alta.sexo = "sin definir";
     this.alta.tipo = "alumno";
     this.alta.actividad = "activo";
     this.leerDB();
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
   }
-  tutorial()
+  tutorial(myEvent)
   {
-    this.tuto1 = false;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = true;
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes": ["../../assets/imgs/alta1.png","../../assets/imgs/alta2.png","../../assets/imgs/alta3.png","../../assets/imgs/alta4.png"]},{cssClass: 'contact-popover-Alu'});
+    popover.present({
+      ev: myEvent
+    });
   } 
-  tutorial1()
-  {
-   this.tuto1 = true;
-   this.tuto2 = false;
-   this.tuto3 = true;
-   this.tuto4 = true;
-  } 
-  tutorial2()
-  {
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = false;
-    this.tuto4 = true;
-  } 
-  tutorial3()
-  {
-    this.tuto1 = true;
-    this.tuto2 = true;
-    this.tuto3 = true;
-    this.tuto4 = false;
-  } 
+  
   f() {
     switch (this.opcion) {
       case "uno":

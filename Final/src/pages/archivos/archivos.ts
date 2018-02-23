@@ -1,6 +1,6 @@
 import { zip } from 'rxjs/observable/zip';
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController,PopoverController,ViewController } from 'ionic-angular';
 import { Http } from '@angular/http';
 import * as baby from 'babyparse';
 import 'rxjs/add/operator/map';
@@ -8,6 +8,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import firebase from "firebase";
+import { NativeAudio } from '@ionic-native/native-audio';
+import { TutorialPage } from '../tutorial/tutorial';
 
 
 declare var jquery: any;
@@ -45,21 +47,19 @@ export class ArchivosPage {
   i:number = 0;
   tuto : boolean = true;
 
-  constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase) {
+  constructor(public navCtrl: NavController, private http: Http, public afDB: AngularFireDatabase, private audio : NativeAudio, private popoverCtrl : PopoverController) {
     this.leerDB();
     this.materias = new Array<any>();
+    this.audio.preloadSimple('help', 'assets/sounds/idea.mp3');
   }
-  tutorial()
+  tutorial(myEvent)
   {
-    if(this.tuto==true)
-    {
-      this.tuto = false;
-    }
-    else
-    {
-      this.tuto = true;
-    }
-  }
+    this.audio.play('help');
+    let popover = this.popoverCtrl.create(TutorialPage,{"imagenes": ["../../assets/imgs/arc1.png","../../assets/imgs/arc2.png"]},{cssClass: 'contact-popover-Arc'});
+    popover.present({
+      ev: myEvent
+    });
+  } 
 
   f() {
     this.mostrar = false;
